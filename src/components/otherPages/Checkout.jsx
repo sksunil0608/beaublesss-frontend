@@ -1,0 +1,604 @@
+import { useContextElement } from "@/context/Context";
+
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import useAuthorization from "@/hooks/userAuthorization";
+import { getUserData } from "@/api/auth";
+import parseJwt from "@/utlis/jwt";
+import { createOrder } from "@/api/order";
+import { coupons, shippingInfo } from "@/data/coupons";
+
+export default function Checkout() {
+  const [paymentMethods] = useState(["PhonePe", "COD"]);
+  const [paymentMethod, setPaymentMethod] = useState("COD");
+  const [activeDiscountIndex, setActiveDiscountIndex] = useState(1);
+  const navigate = useNavigate();
+  const {
+    cartProducts,
+    setCartProducts,
+    totalPrice,
+    isAddedToCartProducts,
+    minThresholdFreeDelivery,
+    discountDetails,
+    setDiscountDetails,
+    applyCoupon,
+    activeCoupon,
+    setActiveCoupon,
+    selectedShippingOption,
+    setSelectedShippingOption,
+  } = useContextElement();
+  const isAuthorized = useAuthorization();
+  const [userData, setUserData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const token = localStorage.getItem("authToken");
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (token) {
+        const decodedToken = parseJwt(token);
+        if (decodedToken && decodedToken._id) {
+          const user = await getUserData(token);
+          setUserData(user);
+        }
+      }
+      setIsLoading(false);
+    };
+
+    fetchUserData();
+  }, [token]);
+
+  // Pre-fill form data once userData is available
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    country: "",
+    city: "",
+    state: "",
+    street: "",
+    postalCode: "",
+    note: "",
+  });
+  useEffect(() => {
+    if (isAuthorized && userData) {
+      setFormData((prevData) => ({
+        ...prevData, // Preserve any existing manual inputs
+        firstName: userData.firstName || prevData.firstName || "",
+        lastName: userData.lastName || prevData.lastName || "",
+        email: userData.email || prevData.email || "",
+        phone: userData.phone || prevData.phone || "",
+        country: userData.country || prevData.country || "",
+        city: userData.city || prevData.city || "",
+        state: userData.state || prevData.state || "",
+        houseNo: userData.houseNo || prevData.houseNo || "",
+        street: userData.street || prevData.street || "",
+        postalCode: userData.postalCode || prevData.postalCode || "",
+        note: prevData.note || "", // Allow user to enter note manually
+      }));
+    }
+  }, [isAuthorized, userData]);
+
+  // Handle Input Changes
+  const handleInputChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handlePaymentChange = (event) => {
+    setPaymentMethod(event.target.value);
+  };
+
+  const handleCheckout = async (formData) => {
+    try {
+      let userId = isAuthorized
+        ? localStorage.getItem("userId")
+        : `guest_${Date.now()}`;
+      let email =
+        formData.email ||
+        (isAuthorized ? localStorage.getItem("userEmail") : null);
+
+      if (!email) {
+        alert("Please provide a valid email address to proceed.");
+        return;
+      }
+
+      // Create order data with email as the unique order key
+      const orderPayload = {
+        email, // Email as the key identifier
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        phone: formData.phone,
+        address: {
+          country: formData.country,
+          city: formData.city,
+          state: formData.state,
+          houseNo: formData.houseNo,
+          street: formData.street,
+          postalCode: formData.postalCode,
+        },
+        cartProducts,
+        totalPrice: totalPrice
+          ? (selectedOption.charges + totalPrice).toFixed(2)
+          : "0",
+        note: formData.note || "",
+        paymentMethod,
+        activeCoupon,
+        discountDetails,
+        selectedShippingOption,
+      };
+
+      const orderData = await createOrder(orderPayload);
+      if (orderData.success) {
+        if (orderData.paymentUrl) {
+          window.location.href = orderData.paymentUrl;
+        } else {
+          alert("Order placed successfully! Pay on delivery.");
+          navigate("/order-success");
+        }
+      } else {
+        alert("Order Failed");
+        navigate("/order-failed");
+      }
+    } catch (error) {
+      console.error("Checkout Error:", error);
+      alert("Something went wrong. Please try again.");
+    }
+  };
+
+  const [couponCode, setCouponCode] = useState("");
+  const [selectedOption, setSelectedOption] = useState(shippingInfo[0]);
+
+  return (
+    <section>
+      <div className="container">
+        <div className="row">
+          <div className="col-xl-6">
+            <div className="flat-spacing tf-page-checkout">
+              <div className="wrap">
+                <div className="title-login">
+                  <p>Already have an account?</p>{" "}
+                  <Link to={`/login`} className="text-button">
+                    Login here
+                  </Link>
+                </div>
+                <form
+                  className="login-box"
+                  onSubmit={(e) => e.preventDefault()}
+                >
+                  <div className="grid-2">
+                    <input type="text" placeholder="Your name/Email" />
+                    <input type="password" placeholder="Password" />
+                  </div>
+                  <button className="tf-btn" type="submit">
+                    <span className="text">Login</span>
+                  </button>
+                </form>
+              </div>
+              <div className="wrap">
+                <h5 className="title">Information</h5>
+                <form className="info-box" onSubmit={(e) => e.preventDefault()}>
+                  <div className="grid-2">
+                    <input
+                      type="text"
+                      name="firstName"
+                      placeholder="First Name*"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                    />
+                    <input
+                      type="text"
+                      name="lastName"
+                      placeholder="Last Name*"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="grid-2">
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email Address*"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                    />
+                    <input
+                      type="text"
+                      name="phone"
+                      placeholder="Phone Number*"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="tf-select">
+                    <select
+                      className="text-title"
+                      name="country"
+                      value={formData.country}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">Choose Country/Region</option>
+                      <option value="India">India</option>
+                      {/* <option value="USA">USA</option>
+                      <option value="UK">UK</option> */}
+                    </select>
+                  </div>
+                  <div className="grid-2">
+                    <input
+                      type="text"
+                      name="city"
+                      placeholder="Town/City*"
+                      value={formData.city}
+                      onChange={handleInputChange}
+                    />
+                    <input
+                      type="text"
+                      name="street"
+                      placeholder="Street, House No..."
+                      value={formData.street}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="grid-2">
+                    <div className="tf-select">
+                      <select
+                        className="text-title"
+                        name="state"
+                        value={formData.state}
+                        onChange={handleInputChange}
+                      >
+                        <option value="">Choose State</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">
+                          Arunachal Pradesh
+                        </option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">
+                          Himachal Pradesh
+                        </option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                      </select>
+                    </div>
+                    <input
+                      type="text"
+                      name="postalCode"
+                      placeholder="Postal Code*"
+                      value={formData.postalCode}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <textarea
+                    name="note"
+                    placeholder="Write note..."
+                    value={formData.note}
+                    onChange={handleInputChange}
+                  />
+                </form>
+              </div>
+              <div className="wrap">
+                <h5 className="title">Choose Payment Option:</h5>
+                <form
+                  className="form-payment"
+                  onSubmit={(e) => e.preventDefault()}
+                >
+                  <div className="payment-box" id="payment-box">
+                    {/* Cash on Delivery */}
+                    <div className="payment-item">
+                      <label
+                        htmlFor="cod-method"
+                        className="payment-header collapsed"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#cod-payment"
+                        aria-controls="cod-payment"
+                      >
+                        <input
+                          type="radio"
+                          name="payment-method"
+                          className="tf-check-rounded"
+                          id="cod-method"
+                          value="COD"
+                          checked={paymentMethod === "COD"}
+                          onChange={handlePaymentChange}
+                        />
+                        <span className="text-title">Cash on Delivery</span>
+                      </label>
+                      <div
+                        id="cod-payment"
+                        className="collapse"
+                        data-bs-parent="#payment-box"
+                      />
+                    </div>
+
+                    {/* PhonePe */}
+                    <div className="payment-item">
+                      <label
+                        htmlFor="phonepe-method"
+                        className="payment-header collapsed"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#phonepe-payment"
+                        aria-controls="phonepe-payment"
+                      >
+                        <input
+                          type="radio"
+                          name="payment-method"
+                          className="tf-check-rounded"
+                          id="phonepe-method"
+                          value="PhonePe"
+                          checked={paymentMethod === "PhonePe"}
+                          onChange={handlePaymentChange}
+                        />
+                        <span className="text-title">
+                          <img
+                            alt="PhonePe"
+                            src="/images/payment/phonepe.png"
+                            width={30}
+                            height={18}
+                          />
+                          PhonePe
+                        </span>
+                      </label>
+                      <div
+                        id="phonepe-payment"
+                        className="collapse"
+                        data-bs-parent="#payment-box"
+                      />
+                    </div>
+
+                    {/* PayPal */}
+                    {/* <div className="payment-item">
+                      <label
+                        htmlFor="paypal-method"
+                        className="payment-header collapsed"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#paypal-payment"
+                        aria-controls="paypal-payment"
+                      >
+                        <input
+                          type="radio"
+                          name="payment-method"
+                          className="tf-check-rounded"
+                          id="paypal-method"
+                          value="PayPal"
+                          checked={paymentMethod === "PayPal"}
+                          onChange={handlePaymentChange}
+                        />
+                        <span className="paypal-title">
+                          <img
+                            alt="PayPal"
+                            src="/images/payment/paypal.png"
+                            width={90}
+                            height={23}
+                          />
+                        </span>
+                      </label>
+                      <div
+                        id="paypal-payment"
+                        className="collapse"
+                        data-bs-parent="#payment-box"
+                      />
+                    </div> */}
+                  </div>
+
+                  {/* Checkout Button */}
+                  <button
+                    onClick={() =>
+                      handleCheckout({ ...formData, paymentMethod })
+                    }
+                    className="tf-btn btn-reset"
+                  >
+                    Payment
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div className="col-xl-1">
+            <div className="line-separation" />
+          </div>
+          <div className="col-xl-5">
+            <div className="flat-spacing flat-sidebar-checkout">
+              <div className="sidebar-checkout-content">
+                <h5 className="title">Shopping Cart</h5>
+                <div className="list-product">
+                  {cartProducts.map((product, i) => (
+                    <div key={i} className="item-product">
+                      <Link
+                        to={`/products/${product.slug}`}
+                        className="img-product"
+                      >
+                        <img
+                          alt="img-product"
+                          src={product.images[0]}
+                          width={600}
+                          height={800}
+                        />
+                      </Link>
+                      <div className="content-box">
+                        <div className="info">
+                          <Link
+                            to={`/products/${product.slug}`}
+                            className="name-product link text-title"
+                          >
+                            {product.name}
+                          </Link>
+                          {/* <div className="variant text-caption-1 text-secondary">
+                            <span className="size">XL</span>/
+                            <span className="color">Blue</span>
+                          </div> */}
+                        </div>
+                        <div className="total-price text-button">
+                          <span className="count">{product.quantity}</span>X
+                          <span className="price">
+                            ₹{product.offerPrice.toFixed(2)}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="sec-discount">
+                  <Swiper
+                    dir="ltr"
+                    className="swiper tf-sw-categories"
+                    slidesPerView={2.25} // data-preview="2.25"
+                    breakpoints={{
+                      1024: {
+                        slidesPerView: 2.25, // data-tablet={3}
+                      },
+                      768: {
+                        slidesPerView: 3, // data-tablet={3}
+                      },
+                      640: {
+                        slidesPerView: 2.5, // data-mobile-sm="2.5"
+                      },
+                      0: {
+                        slidesPerView: 1.2, // data-mobile="1.2"
+                      },
+                    }}
+                    spaceBetween={20}
+                  >
+                    {coupons.map((item, index) => (
+                      <SwiperSlide key={index}>
+                        <div
+                          className={`box-discount ${
+                            activeDiscountIndex === index ? "active" : ""
+                          }`}
+                          onClick={() => setActiveDiscountIndex(index)}
+                        >
+                          <div className="discount-top">
+                            <div className="discount-off">
+                              <div className="text-caption-1">{item.title}</div>
+                              <span className="sale-off text-btn-uppercase">
+                                {item.discount}
+                                {item.type === "percentage" ? "%" : "₹"}
+                              </span>
+                            </div>
+                            <div className="discount-from">
+                              <p className="text-caption-1">{item.details}</p>
+                            </div>
+                          </div>
+                          <div className="discount-bot">
+                            <span className="text-btn-uppercase">
+                              {item.code}
+                            </span>
+                            <button
+                              className="tf-btn"
+                              onClick={() => setActiveCoupon(item)}
+                            >
+                              <span className="text">Apply Code</span>
+                            </button>
+                          </div>
+                        </div>{" "}
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                  <div className="ip-discount-code">
+                    <input
+                      type="text"
+                      placeholder="Add voucher discount"
+                      value={activeCoupon.code || couponCode}
+                      onChange={(e) => setCouponCode(e.target.value)}
+                    />
+                    <button
+                      className="tf-btn"
+                      onClick={() => applyCoupon(activeCoupon)}
+                    >
+                      <span className="text">Apply Code</span>
+                    </button>
+                  </div>
+                  {/* <p>
+                    Discount code is only used for orders with a total value of
+                    products over ₹500.00
+                  </p> */}
+                </div>
+                <div className="wrap">
+                  <div className="ship">
+                    <h5 className="title">Shipping:</h5>
+                    <div className="flex-grow-1">
+                      {shippingInfo.map((option) => (
+                        <fieldset
+                          key={option.id}
+                          className="ship-item d-flex justify-content-left  align-items-center"
+                        >
+                          <input
+                            type="radio"
+                            name="ship-check"
+                            className="tf-check-rounded"
+                            id={option.id}
+                            checked={selectedOption === option}
+                            onChange={() => setSelectedOption(option)}
+                          />
+                          <label htmlFor={option.id} className="mx-2">
+                            <span>{option.name}</span> <span> - </span>
+                            <span className="price">
+                              ₹{option.charges.toFixed(2)}
+                            </span>
+                          </label>
+                        </fieldset>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="sec-total-price">
+                  <div className="top">
+                    <div className="item d-flex align-items-center justify-content-between text-button">
+                      <span>Discounts</span>
+                      <p className="tf-totals-total-value">
+                        {discountDetails.length > 0
+                          ? discountDetails
+                              .map((item) =>
+                                item.discountType === "percentage"
+                                  ? `${item.discount}`
+                                  : `₹${item.discount} `
+                              )
+                              .join(", ")
+                          : "₹ 0"}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="bottom">
+                    <h5 className="d-flex justify-content-between">
+                      <span>Total</span>
+                      <span className="total-price-checkout">
+                        ₹{" "}
+                        {totalPrice
+                          ? (selectedOption.charges + totalPrice).toFixed(2)
+                          : 0}
+                      </span>
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
