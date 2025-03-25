@@ -25,7 +25,7 @@ export default function RegisterPage() {
         <div className="container-full">
           <div className="row">
             <div className="col-12">
-              <h3 className="heading text-center">Login</h3>
+              <h3 className="heading text-center">Register</h3>
               <ul className="breadcrumbs d-flex align-items-center justify-content-center">
                 <li>
                   <Link className="link" to={`/`}>

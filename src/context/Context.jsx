@@ -121,6 +121,7 @@ export default function Context({ children }) {
     isModal = true
   ) => {
     const item = {
+      productId: product._id,
       id: product._id,
       ...product,
       activeSize: activeSize || "",
@@ -177,7 +178,6 @@ export default function Context({ children }) {
   };
 
   const removeFromWishlist = async (id) => {
-    console.log("Calld");
     if (wishList.includes(id)) {
       setWishList((pre) => [...pre.filter((elm) => elm != id)]);
       if (isAuthorized && userId) {

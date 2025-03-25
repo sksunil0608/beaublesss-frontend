@@ -39,7 +39,7 @@ export default function Checkout() {
         const decodedToken = parseJwt(token);
         if (decodedToken && decodedToken._id) {
           const user = await getUserData(token);
-          setUserData(user);
+          setUserData(user.user);
         }
       }
       setIsLoading(false);
@@ -58,23 +58,26 @@ export default function Checkout() {
     city: "",
     state: "",
     street: "",
-    postalCode: "",
+    pincode: "",
     note: "",
   });
   useEffect(() => {
     if (isAuthorized && userData) {
+      console.log(userData);
+      const defaultAddress =
+        userData.addresses?.length > 0 ? userData.addresses[0] : {}; // Select first address or empty object
       setFormData((prevData) => ({
         ...prevData, // Preserve any existing manual inputs
         firstName: userData.firstName || prevData.firstName || "",
         lastName: userData.lastName || prevData.lastName || "",
         email: userData.email || prevData.email || "",
         phone: userData.phone || prevData.phone || "",
-        country: userData.country || prevData.country || "",
-        city: userData.city || prevData.city || "",
-        state: userData.state || prevData.state || "",
-        houseNo: userData.houseNo || prevData.houseNo || "",
-        street: userData.street || prevData.street || "",
-        postalCode: userData.postalCode || prevData.postalCode || "",
+        country: defaultAddress?.country || prevData.country || "",
+        city: defaultAddress?.city || prevData.city || "",
+        state: defaultAddress?.state || prevData.state || "",
+        houseNo: defaultAddress?.houseNo || prevData.houseNo || "",
+        street: defaultAddress?.street || prevData.street || "",
+        pincode: defaultAddress?.pincode || prevData.pincode || "",
         note: prevData.note || "", // Allow user to enter note manually
       }));
     }
@@ -118,7 +121,7 @@ export default function Checkout() {
           state: formData.state,
           houseNo: formData.houseNo,
           street: formData.street,
-          postalCode: formData.postalCode,
+          pincode: formData.pincode,
         },
         cartProducts,
         totalPrice: totalPrice
@@ -158,26 +161,65 @@ export default function Checkout() {
         <div className="row">
           <div className="col-xl-6">
             <div className="flat-spacing tf-page-checkout">
-              <div className="wrap">
-                <div className="title-login">
-                  <p>Already have an account?</p>{" "}
-                  <Link to={`/login`} className="text-button">
-                    Login here
-                  </Link>
-                </div>
-                <form
-                  className="login-box"
-                  onSubmit={(e) => e.preventDefault()}
-                >
-                  <div className="grid-2">
-                    <input type="text" placeholder="Your name/Email" />
-                    <input type="password" placeholder="Password" />
+              {/* If User Not Logged in */}
+              {!isAuthorized ? (
+                <div className="wrap">
+                  <div className="title-login">
+                    <p>Already have an account?</p>{" "}
+                    <Link to={`/login`} className="text-button">
+                      Login here
+                    </Link>
                   </div>
-                  <button className="tf-btn" type="submit">
-                    <span className="text">Login</span>
-                  </button>
-                </form>
-              </div>
+                  <form
+                    className="login-box"
+                    onSubmit={(e) => e.preventDefault()}
+                  >
+                    <div className="grid-2">
+                      <input type="text" placeholder="Your name/Email" />
+                      <input type="password" placeholder="Password" />
+                    </div>
+                    <button className="tf-btn" type="submit">
+                      <span className="text">Login</span>
+                    </button>
+                  </form>
+                </div>
+              ) : (
+                <div className="wrap">
+                  {userData && (
+                    <h3 className="heading mb-3">Hello, {userData.name}</h3>
+                  )}
+                  <h5 className="title">Please Select Your Address</h5>
+                  {userData && (
+                    <div className="tf-select">
+                      <select
+                        className="text-title"
+                        name="selectedAddress"
+                        onChange={(e) => {
+                          const selectedIndex = e.target.value;
+                          const selectedAddress =
+                            (userData && userData.addresses[selectedIndex]) ||
+                            {};
+                          setFormData((prevData) => ({
+                            ...prevData,
+                            country: selectedAddress.country || "",
+                            city: selectedAddress.city || "",
+                            state: selectedAddress.state || "",
+                            street: selectedAddress.street || "",
+                            pincode: selectedAddress.pincode || "",
+                          }));
+                        }}
+                      >
+                        {userData.addresses?.map((address, index) => (
+                          <option key={address._id} value={index}>
+                            {address.street}, {address.city}, {address.state}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
+                </div>
+              )}
+
               <div className="wrap">
                 <h5 className="title">Information</h5>
                 <form className="info-box" onSubmit={(e) => e.preventDefault()}>
@@ -287,9 +329,9 @@ export default function Checkout() {
                     </div>
                     <input
                       type="text"
-                      name="postalCode"
+                      name="pincode"
                       placeholder="Postal Code*"
-                      value={formData.postalCode}
+                      value={formData.pincode}
                       onChange={handleInputChange}
                     />
                   </div>

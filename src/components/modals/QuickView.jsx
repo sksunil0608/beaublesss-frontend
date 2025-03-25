@@ -136,6 +136,7 @@ export default function QuickView() {
                   activeColor={activeColor}
                   setActiveColor={setActiveColor}
                 /> */}
+
                 <SizeSelect
                   activeSize={activeSize}
                   setActiveSize={setActiveSize}
@@ -169,7 +170,7 @@ export default function QuickView() {
                     onClick={() => addToCompareItem(quickViewItem._id)}
                     data-bs-toggle="offcanvas"
                     aria-controls="compare"
-                    className="box-icon hover-tooltip compare btn-icon-action show-compare mt-4"
+                    className=" mt-4 box-icon hover-tooltip compare btn-icon-action show-compare mt-4"
                   >
                     <span className="icon icon-gitDiff" />
                     <span className="tooltip text-caption-2">
@@ -181,7 +182,7 @@ export default function QuickView() {
                   </a>
                   <a
                     onClick={() => addToWishlist(quickViewItem._id)}
-                    className={`box-icon hover-tooltip text-caption-2 wishlist btn-icon-action ${
+                    className={`mt-4 box-icon hover-tooltip text-caption-2 wishlist btn-icon-action ${
                       wishList && wishList.includes(quickViewItem._id)
                         ? "bg-red text-white"
                         : ""
@@ -234,13 +235,29 @@ export default function QuickView() {
                       <span className="tf-qty-price total-price">
                         ₹
                         {isAddedToCartProducts(quickViewItem._id)
-                          ? (
-                              quickViewItem.offerPrice *
-                              cartProducts.filter(
-                                (elm) => elm.id == quickViewItem._id
-                              )[0]?.quantity
-                            ).toFixed(2)
-                          : (quickViewItem.offerPrice * quantity).toFixed(2)}
+                          ? (() => {
+                              const cartItem = cartProducts.find(
+                                (elm) => elm._id == quickViewItem._id
+                              );
+                              return cartItem
+                                ? (
+                                    cartItem.offerPrice * cartItem.quantity
+                                  ).toFixed(2)
+                                : "0.00";
+                            })()
+                          : (() => {
+                              const activeVariant = filterSizes.find(
+                                (item) => item.variantId === activeSize
+                              );
+
+                              return activeVariant
+                                ? (
+                                    activeVariant.offerPrice * (quantity || 1)
+                                  ).toFixed(2)
+                                : (
+                                    quickViewItem.offerPrice * (quantity || 1)
+                                  ).toFixed(2);
+                            })()}
                       </span>
                     </a>
                   </div>

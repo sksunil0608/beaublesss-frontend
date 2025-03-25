@@ -7,14 +7,7 @@ export default function SizeSelect({
   filterSizes = [],
   productId = "",
 }) {
-  const {
-    addProductToCart,
-    isAddedToCartProducts,
-
-    cartProducts,
-    updateQuantity,
-  } = useContextElement();
-
+  const { cartProducts } = useContextElement();
   const handleChange = (variantId) => {
     setActiveSize(variantId);
   };
@@ -38,12 +31,12 @@ export default function SizeSelect({
   return (
     <div className="variant-picker-item">
       <div className="d-flex justify-content-between mb_12">
-        {/* <div className="variant-picker-label">
+        <div className="variant-picker-label">
           Selected Size:
           <span className="text-title variant-picker-label-value">
             {getSelectedSize()}
           </span>
-        </div> */}
+        </div>
       </div>
 
       <div className="variant-picker-values gap12">

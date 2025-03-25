@@ -36,6 +36,8 @@ export const products = prodArray.map((prod) => {
   return {
     _id: prod._id,
     id: prod._id,
+    variants,
+    productType: prod.productType,
     productId:prod._id,
     title: prod.name,
     name: prod.name,
@@ -72,7 +74,6 @@ export const products = prodArray.map((prod) => {
     createdAt: prod.createdAt || "",
     updatedAt: prod.updatedAt || "",
     discount: prod.discount || { percentage: 0, validUntil: null },
-    variants: isVariantProduct ? prod.variants || [] : [],
 
     // Ratings and Reviews
     ratings: {

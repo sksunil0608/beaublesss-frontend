@@ -35,7 +35,8 @@ const indianStates = [
 
 export default function Register() {
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -76,7 +77,7 @@ export default function Register() {
 
     try {
       const data = await registerUser(formData);
-      if (data.response.status == "201") {
+      if (data.success) {
         setSuccess("Registration successful! Redirecting to login...");
         setTimeout(() => {
           window.location.href = "/login";
@@ -85,7 +86,11 @@ export default function Register() {
         setError(data.message);
       }
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      if (err.response && err.response.status === 409) {
+        setError("User already registered, please log in.");
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
     }
   };
 
@@ -104,9 +109,19 @@ export default function Register() {
                 <fieldset>
                   <input
                     type="text"
-                    placeholder="Full Name*"
-                    name="name"
-                    value={formData.name}
+                    placeholder="FirstName*"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    required
+                  />
+                </fieldset>
+                <fieldset>
+                  <input
+                    type="text"
+                    placeholder="LastName*"
+                    name="lastName"
+                    value={formData.lastName}
                     onChange={handleChange}
                     required
                   />

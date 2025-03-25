@@ -31,6 +31,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v1.0.9  | Cart and Order Management System                 | Sunil   |
 | v2.0.0  | Updated                                          | Sunil   |
 | v2.0.1  | Loader Applied                                   | Sunil   |
+| v2.0.1  | Order System Corrected                           | Sunil   |
 
 ## Installation
 
@@ -44,4 +45,5 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 # beaubless-cosmetic
 
 # beaubless-cosmetic
+
 # beaublesss-frontend
