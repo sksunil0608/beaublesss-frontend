@@ -1,19 +1,15 @@
-import { StrictMode, useEffect } from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
+import { ToastProvider } from "./context/ToastContext"; // ✅ Import ToastProvider
 
 const RootComponent = () => {
-  useEffect(() => {
-    const preloader = document.getElementById("preloader");
-    if (preloader) {
-      preloader.style.display = "none";
-    }
-  }, []); // Runs only once after component mounts
-
   return (
     <BrowserRouter>
-      <App />
+      <ToastProvider>
+        <App />
+      </ToastProvider>
     </BrowserRouter>
   );
 };

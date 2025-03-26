@@ -142,7 +142,7 @@ export default function ProductCard1({ product, gridClass = "" }) {
             <span className="on-sale-item">
               <p className="font-2 text-btn-uppercase fw-6 text-white">
                 {product.discount?.validUntil ? (
-                  <span>-{product.discount.percentage}% OFF</span>
+                  <span>{product.discount.percentage}% OFF</span>
                 ) : null}
               </p>
             </span>

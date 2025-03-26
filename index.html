@@ -36,56 +36,42 @@
 
       /* Spinner Outline */
       /* Preloader Styling */
-     .spinner {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80px;
-  height: 80px;
-  background: url("/buebless-logo.png") no-repeat center center;
-  background-size: 60%; /* Adjust logo size */
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+      .spinner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+        background: url("/buebless-logo.png") no-repeat center center;
+        background-size: 60%; /* Adjust logo size */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-/* Rotating border */
-.spinner::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border: 4px solid #663399; /* Outer static border */
-  border-top: 4px solid #ff69b4; /* Active moving part (Pink) */
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
+      /* Rotating border */
+      .spinner::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 4px solid #663399; /* Outer static border */
+        border-top: 4px solid #ff69b4; /* Active moving part (Pink) */
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(720deg);
-  }
-}
-
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(720deg);
+        }
+      }
     </style>
-    <script>
-  window.addEventListener("DOMContentLoaded", () => {
-    if (localStorage.getItem("loaded")) {
-      document.getElementById("preloader").style.display = "none";
-    } else {
-      setTimeout(() => {
-        document.getElementById("preloader").style.display = "none";
-        localStorage.setItem("loaded", "true");
-      }, 500);
-    }
-  });
-</script>
-
   </head>
   <body>
     <!-- Preloader with Logo -->

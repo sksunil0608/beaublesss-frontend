@@ -1,13 +1,15 @@
 import { useContextElement } from "@/context/Context";
 
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import useAuthorization from "@/hooks/userAuthorization";
-import { getUserData } from "@/api/auth";
+import { getUserData, loginUser } from "@/api/auth";
 import parseJwt from "@/utlis/jwt";
 import { createOrder } from "@/api/order";
 import { coupons, shippingInfo } from "@/data/coupons";
+import ToastNotification from "../modals/ToastNotification";
+import { useToast } from "@/context/ToastContext";
 
 export default function Checkout() {
   const [paymentMethods] = useState(["PhonePe", "COD"]);
@@ -16,10 +18,7 @@ export default function Checkout() {
   const navigate = useNavigate();
   const {
     cartProducts,
-    setCartProducts,
-    totalPrice,
-    isAddedToCartProducts,
-    minThresholdFreeDelivery,
+    finalOrderTotal,
     discountDetails,
     setDiscountDetails,
     applyCoupon,
@@ -27,11 +26,19 @@ export default function Checkout() {
     setActiveCoupon,
     selectedShippingOption,
     setSelectedShippingOption,
+    setFinalOrderTotal,
+    totalPrice,
   } = useContextElement();
   const isAuthorized = useAuthorization();
   const [userData, setUserData] = useState(null);
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [isLoading, setIsLoading] = useState(true);
   const token = localStorage.getItem("authToken");
+  const [loginError, setLoginError] = useState("");
+  const [error, setError] = useState("");
+  const [passwordType, setPasswordType] = useState("password");
+
+  const { showToast } = useToast();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -48,6 +55,39 @@ export default function Checkout() {
     fetchUserData();
   }, [token]);
 
+  // ---------------Handle Login-------------------
+  const togglePassword = () => {
+    setPasswordType(passwordType === "password" ? "text" : "password");
+  };
+
+  // Handle Input Change
+  const handleLoginChange = (e) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+  };
+  // Handle Login Submission
+  const handleLogin = async (e) => {
+    e.preventDefault(); // Ensure form doesn't reload
+    setLoginError(""); // Clear previous errors
+
+    if (!loginData.email || !loginData.password) {
+      setLoginError("Please enter both email and password.");
+      return;
+    }
+    try {
+      const response = await loginUser(loginData); // Call API
+      if (response && response.token) {
+        localStorage.setItem("authToken", response.token); // Store token
+        window.location.reload();
+      } else {
+        throw new Error("Invalid response from server.");
+      }
+    } catch (error) {
+      setLoginError("Invalid email or password. Please try again.");
+    }
+  };
+
+  // ---------------Handle Login End -------------------
+
   // Pre-fill form data once userData is available
   const [formData, setFormData] = useState({
     firstName: "",
@@ -63,7 +103,6 @@ export default function Checkout() {
   });
   useEffect(() => {
     if (isAuthorized && userData) {
-      console.log(userData);
       const defaultAddress =
         userData.addresses?.length > 0 ? userData.addresses[0] : {}; // Select first address or empty object
       setFormData((prevData) => ({
@@ -124,9 +163,7 @@ export default function Checkout() {
           pincode: formData.pincode,
         },
         cartProducts,
-        totalPrice: totalPrice
-          ? (selectedOption.charges + totalPrice).toFixed(2)
-          : "0",
+        finalOrderTotal: finalOrderTotal ? finalOrderTotal.toFixed(2) : "0",
         note: formData.note || "",
         paymentMethod,
         activeCoupon,
@@ -139,21 +176,30 @@ export default function Checkout() {
         if (orderData.paymentUrl) {
           window.location.href = orderData.paymentUrl;
         } else {
-          alert("Order placed successfully! Pay on delivery.");
-          navigate("/order-success");
+          localStorage.removeItem("cartList");
+          showToast("success", "Order placed successfully! Pay on delivery.");
+
+          // Wait for 5 seconds (5000ms) before redirecting
+          setTimeout(() => {
+            navigate("/order-success");
+          }, 5000);
+          // Optional: Cleanup timeout if component unmounts (for reliability)
+          return () => clearTimeout(timeoutId);
         }
       } else {
-        alert("Order Failed");
+        showToast("error", "Order Failed");
         navigate("/order-failed");
       }
     } catch (error) {
-      console.error("Checkout Error:", error);
-      alert("Something went wrong. Please try again.");
+      showToast(
+        "error",
+        error.response?.data?.message || "Something went wrong."
+      );
     }
   };
 
   const [couponCode, setCouponCode] = useState("");
-  const [selectedOption, setSelectedOption] = useState(shippingInfo[0]);
+  const [selectedOption, setSelectedOption] = useState([]);
 
   return (
     <section>
@@ -170,13 +216,41 @@ export default function Checkout() {
                       Login here
                     </Link>
                   </div>
-                  <form
-                    className="login-box"
-                    onSubmit={(e) => e.preventDefault()}
-                  >
+                  {loginError && (
+                    <p className="error-message text-danger">{loginError}</p>
+                  )}{" "}
+                  {/* Show error message */}
+                  <form className="login-box" onSubmit={handleLogin}>
                     <div className="grid-2">
-                      <input type="text" placeholder="Your name/Email" />
-                      <input type="password" placeholder="Password" />
+                      <input
+                        type="email"
+                        placeholder="Username or email address*"
+                        name="email"
+                        autoComplete="email"
+                        value={loginData.email}
+                        onChange={handleLoginChange}
+                        required
+                      />
+                      <input
+                        className="input-password"
+                        type={passwordType}
+                        placeholder="Password*"
+                        name="password"
+                        value={loginData.password}
+                        onChange={handleLoginChange}
+                        required
+                        autoComplete="current-password"
+                      />
+                      <span
+                        className="toggle-password"
+                        onClick={togglePassword}
+                      >
+                        <i
+                          className={`icon-eye-${
+                            passwordType === "password" ? "hide" : "show"
+                          }-line`}
+                        />
+                      </span>
                     </div>
                     <button className="tf-btn" type="submit">
                       <span className="text">Login</span>
@@ -186,7 +260,9 @@ export default function Checkout() {
               ) : (
                 <div className="wrap">
                   {userData && (
-                    <h3 className="heading mb-3">Hello, {userData.name}</h3>
+                    <h3 className="heading mb-3">
+                      Hello, {userData.firstName}
+                    </h3>
                   )}
                   <h5 className="title">Please Select Your Address</h5>
                   {userData && (
@@ -219,7 +295,8 @@ export default function Checkout() {
                   )}
                 </div>
               )}
-
+              {/* Bootstrap Toast for Error Message */}
+              Toast
               <div className="wrap">
                 <h5 className="title">Information</h5>
                 <form className="info-box" onSubmit={(e) => e.preventDefault()}>
@@ -594,7 +671,19 @@ export default function Checkout() {
                             className="tf-check-rounded"
                             id={option.id}
                             checked={selectedOption === option}
-                            onChange={() => setSelectedOption(option)}
+                            onChange={() => {
+                              setSelectedOption(option);
+                              setSelectedShippingOption(option);
+                              // Start from the already discounted price, then add the new shipping charge
+                              setFinalOrderTotal(
+                                Math.max(
+                                  totalPrice -
+                                    (discountDetails[0]?.value || 0) +
+                                    option.charges,
+                                  0
+                                )
+                              );
+                            }}
                           />
                           <label htmlFor={option.id} className="mx-2">
                             <span>{option.name}</span> <span> - </span>
@@ -628,10 +717,7 @@ export default function Checkout() {
                     <h5 className="d-flex justify-content-between">
                       <span>Total</span>
                       <span className="total-price-checkout">
-                        ₹{" "}
-                        {totalPrice
-                          ? (selectedOption.charges + totalPrice).toFixed(2)
-                          : 0}
+                        ₹{finalOrderTotal ? finalOrderTotal.toFixed(2) : 0}
                       </span>
                     </h5>
                   </div>

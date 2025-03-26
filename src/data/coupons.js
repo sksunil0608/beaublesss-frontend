@@ -1,7 +1,7 @@
-import { getAllCoupons } from "@/api/coupans"
+import { getAllCoupons, getAllShippingOptions } from "@/api/coupans"
 
 const couponCodes = await getAllCoupons();
-
+const shippingOptions = await getAllShippingOptions();
 export const coupons = couponCodes.coupons.map((coupon) => ({
       id: coupon._id,
       code: coupon.code,
@@ -17,9 +17,12 @@ export const coupons = couponCodes.coupons.map((coupon) => ({
       expireDate: coupon.expireDate,
     }));
 
-  export const shippingInfo =[
-    { id: 1, type: "express", charges: 100, name: "Express Delivery" },
-    { id: 2, type: "normal", charges: 50, name: "Standard Delivery" },
-    { id: 3, type: "free", charges: 1, name: "Free Delivery" }
-    ];
+  export const shippingInfo =shippingOptions.data.map ((option)=>(
+    {
+      id:option._id,
+      type:option.type,
+      charges:option.charges,
+      name:option.name
+    }
+  ))
   

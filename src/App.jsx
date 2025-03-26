@@ -1,5 +1,5 @@
 import "./styles/style.scss";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Context from "@/context/Context";
 import CartModal from "@/components/modals/CartModal";
@@ -84,6 +84,7 @@ import { collections } from "./data/collections";
 
 function App() {
   const { pathname } = useLocation();
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Import the script only on the client side

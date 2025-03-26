@@ -71,4 +71,60 @@ export const applyCoupon = async (couponCode) => {
   }
 };
 
+// ✅ Create a new shipping option
+export const createShipping = async (shippingData) => {
+  try {
+    const response = await api.post("/coupon/shipping-options", shippingData);
+    return response.data;
+  } catch (error) {
+    console.error("Error creating shipping option:", error);
+    throw error;
+  }
+};
+
+// ✅ Get all shipping options
+export const getAllShippingOptions = async () => {
+  try {
+    const response = await api.get("/coupon/shipping-options/all");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching shipping options:", error);
+    throw error;
+  }
+};
+
+// ✅ Get shipping option by ID
+export const getShippingById = async (shippingId) => {
+  try {
+    const response = await api.get(`/coupon/shipping-options/${shippingId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching shipping option by ID:", error);
+    throw error;
+  }
+};
+
+// ✅ Update a shipping option
+export const updateShipping = async (shippingId, updatedData) => {
+  try {
+    const response = await api.put(`/coupon/shipping-options/${shippingId}`, updatedData);
+    return response.data;
+  } catch (error) {
+    console.error("Error updating shipping option:", error);
+    throw error;
+  }
+};
+
+// ✅ Delete a shipping option
+export const deleteShipping = async (shippingId) => {
+  try {
+    const response = await api.delete(`/coupon/shipping-options/${shippingId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting shipping option:", error);
+    throw error;
+  }
+};
+
+
 export default api;

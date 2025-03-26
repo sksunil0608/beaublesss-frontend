@@ -11,7 +11,7 @@ import parseJwt from "@/utlis/jwt";
 
 export default function ShopCart() {
   const [activeDiscountIndex, setActiveDiscountIndex] = useState(1);
-  const [selectedOption, setSelectedOption] = useState(shippingInfo[0]);
+  const [selectedOption, setSelectedOption] = useState([]);
   const {
     cartProducts,
     setCartProducts,
@@ -25,6 +25,8 @@ export default function ShopCart() {
     setActiveCoupon,
     selectedShippingOption,
     setSelectedShippingOption,
+    finalOrderTotal,
+    setFinalOrderTotal,
   } = useContextElement();
   const [userId, setUserId] = useState(null);
   const token = localStorage.getItem("authToken");
@@ -394,7 +396,19 @@ export default function ShopCart() {
                             className="tf-check-rounded"
                             id={option.id}
                             checked={selectedOption === option}
-                            onChange={() => setSelectedOption(option)}
+                            onChange={() => {
+                              setSelectedOption(option);
+                              setSelectedShippingOption(option);
+                              // Start from the already discounted price, then add the new shipping charge
+                              setFinalOrderTotal(
+                                Math.max(
+                                  totalPrice -
+                                    (discountDetails[0]?.value || 0) +
+                                    option.charges,
+                                  0
+                                )
+                              );
+                            }}
                           />
                           <label htmlFor={option.id}>
                             <span className="text-black">{option.name}</span>
@@ -409,10 +423,7 @@ export default function ShopCart() {
                   <h5 className="total-order d-flex justify-content-between align-items-center">
                     <span>Total</span>
                     <span className="total">
-                      ₹
-                      {totalPrice
-                        ? (selectedOption.charges + totalPrice).toFixed(2)
-                        : 0}
+                      ₹{finalOrderTotal ? finalOrderTotal.toFixed(2) : 0}
                     </span>
                   </h5>
                   <div className="box-progress-checkout">

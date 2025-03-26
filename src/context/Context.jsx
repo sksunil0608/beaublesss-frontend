@@ -5,6 +5,7 @@ import {
   removeWishlistItemBackend,
   updateCartItem,
 } from "@/api/cart";
+import ToastNotification from "@/components/modals/ToastNotification";
 import { shippingInfo } from "@/data/coupons";
 import { allProducts, products } from "@/data/products";
 import useAuthorization from "@/hooks/userAuthorization";
@@ -15,6 +16,7 @@ import { openWistlistModal } from "@/utlis/openWishlist";
 import React, { useEffect } from "react";
 import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { useToast } from "./ToastContext";
 const dataContext = React.createContext();
 export const useContextElement = () => {
   return useContext(dataContext);
@@ -28,7 +30,7 @@ export default function Context({ children }) {
   const [quickViewItem, setQuickViewItem] = useState(products[0]);
   const [quickAddItem, setQuickAddItem] = useState(products[0].id);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [finalOrderTotal, setFinalOrderTotal] = useState(0);
+
   const [minThresholdFreeDelivery, setMinThresholdFreeDelivery] = useState(999);
   const [activeCoupon, setActiveCoupon] = useState("");
   const [orderNote, setOrderNote] = useState(null);
@@ -36,7 +38,10 @@ export default function Context({ children }) {
   const [selectedShippingOption, setSelectedShippingOption] = useState(
     shippingInfo[0]
   );
+  const [finalOrderTotal, setFinalOrderTotal] = useState(0);
+  // Add this state when initializing your component
 
+  const { showToast } = useToast(); // ✅ Access toast function
   const [userId, setUserId] = useState(null);
   const token = localStorage.getItem("authToken");
   useEffect(() => {
@@ -53,61 +58,60 @@ export default function Context({ children }) {
     fetchUserData();
   }, [token]);
 
-  const applyCoupon = (coupon) => {
-    let discountedPrice = totalPrice;
-    let discountArray = [];
-    if (coupon) {
-      if (coupon.discountType === "flat") {
-        discountedPrice -= coupon.discountValue;
-        discountArray.push({
-          type: "Coupon",
-          code: coupon.code,
-          discount: `₹${coupon.discountValue} off`,
-        });
-      }
-      if (coupon.discountType === "percentage") {
-        const discountAmount = (totalPrice * coupon.discountValue) / 100;
-        const finalDiscount = Math.min(
-          discountAmount,
-          coupon.maxDiscount || discountAmount
-        );
-        discountedPrice -= finalDiscount;
-
-        discountArray.push({
-          type: "Coupon",
-          code: coupon.code,
-          discount: `${coupon.discountValue}% off (₹${finalDiscount})`,
-          discountType: coupon.discountType,
-        });
-      }
-
-      if (coupon.isFreeShipping) {
-        setSelectedShippingOption({
-          ...shippingInfo,
-          type: "free",
-          charges: 0,
-        });
-        discountArray.push({
-          type: "Shipping",
-          discount: "Free Shipping",
-        });
-      }
-    }
-    // Update the discount details array
-    setDiscountDetails(discountArray);
-
-    // Update the final total price
-    setTotalPrice(discountedPrice > 0 ? discountedPrice : 0);
-    setFinalOrderTotal(discountedPrice > 0 ? discountedPrice : 0);
-  };
-
   useEffect(() => {
     const subtotal = cartProducts.reduce((accumulator, product) => {
       return accumulator + product.quantity * product.offerPrice;
     }, 0);
     setTotalPrice(subtotal);
-    setFinalOrderTotal(subtotal);
+    setFinalOrderTotal(subtotal + selectedShippingOption?.charges);
   }, [cartProducts]);
+
+  const applyCoupon = (coupon) => {
+    if (!coupon) return;
+
+    // Start fresh from the original total price
+    let discountedPrice = totalPrice;
+
+    let discountArray = []; // Clear previous coupons, only store the new one
+
+    if (coupon.discountType === "flat") {
+      discountedPrice -= coupon.discountValue;
+      discountArray.push({
+        value: coupon.discountValue,
+        type: "Coupon",
+        code: coupon.code,
+        discount: `₹${coupon.discountValue} off`,
+      });
+    }
+    if (coupon.discountType === "percentage") {
+      const discountAmount = (totalPrice * coupon.discountValue) / 100;
+      const finalDiscount = Math.min(
+        discountAmount,
+        coupon.maxDiscount || discountAmount
+      );
+      discountedPrice -= finalDiscount;
+
+      discountArray.push({
+        value: (totalPrice * coupon.discountValue) / 100,
+        type: "Coupon",
+        code: coupon.code,
+        discount: `${coupon.discountValue}% off (₹${finalDiscount.toFixed(2)})`,
+      });
+    }
+
+    // Apply free shipping
+    if (coupon.isFreeShipping) {
+      showToast("success", "Free Shipping Applied");
+    }
+
+    // Update state with only the new coupon
+    setDiscountDetails(discountArray);
+    setFinalOrderTotal(Math.max(discountedPrice, 0));
+
+    // Clear previous active coupon and set the new one
+    setActiveCoupon(coupon);
+    showToast("success", `Coupon ${coupon.code} Applied Successfully!`);
+  };
 
   const isAddedToCartProducts = (id) => {
     return cartProducts.some((item) => item._id === id);
@@ -264,6 +268,7 @@ export default function Context({ children }) {
     orderNote,
     setSelectedShippingOption,
     selectedShippingOption,
+    setFinalOrderTotal,
   };
   return (
     <dataContext.Provider value={contextElement}>
