@@ -28,6 +28,7 @@ export default function Checkout() {
     setSelectedShippingOption,
     setFinalOrderTotal,
     totalPrice,
+    setCartProducts,
   } = useContextElement();
   const isAuthorized = useAuthorization();
   const [userData, setUserData] = useState(null);
@@ -176,7 +177,7 @@ export default function Checkout() {
         if (orderData.paymentUrl) {
           window.location.href = orderData.paymentUrl;
         } else {
-          localStorage.removeItem("cartList");
+          setCartProducts([]);
           showToast("success", "Order placed successfully! Pay on delivery.");
 
           // Wait for 5 seconds (5000ms) before redirecting

@@ -82,9 +82,20 @@ import CheckoutPage from "./pages/products/checkout";
 import OrderSuccessPage from "./pages/other-pages/order-success";
 import { collections } from "./data/collections";
 
-function App() {
+function App({ setIsLoading }) {
   const { pathname } = useLocation();
+  useEffect(() => {
+    // Simulate API call or content loading check
+    const checkAppReady = async () => {
+      // Simulate delay for data fetching (Replace with actual API calls)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
+      // Hide loader once content is ready
+      setIsLoading(false);
+    };
+
+    checkAppReady();
+  }, [setIsLoading]);
   useEffect(() => {
     if (typeof window !== "undefined") {
       // Import the script only on the client side
