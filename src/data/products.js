@@ -1,4 +1,3 @@
-import { getAllCategories } from "@/api/category";
 import { getAllProducts } from "@/api/product";
 const myproducts = await getAllProducts();
 const prodArray = myproducts.products; // Get product array

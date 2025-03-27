@@ -1,24 +1,28 @@
-import { StrictMode, useState } from "react";
+import { StrictMode, useState, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
-import { ToastProvider } from "./context/ToastContext"; // ✅ Import ToastProvider
+import { ToastProvider } from "./context/ToastContext";
 
 const RootComponent = () => {
-  const [isLoading, setIsLoading] = useState(true); // Control loader visibility
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading delay (Replace with actual API call)
+    setTimeout(() => {
+      setIsLoading(false);
+      // Hide the preloader when React is ready
+      const preloader = document.getElementById("preloader");
+      if (preloader) {
+        preloader.style.display = "none";
+      }
+    }, 1000); // Adjust timing as needed
+  }, []);
 
   return (
     <BrowserRouter>
       <ToastProvider>
-        {isLoading && (
-          // Show loader only if App is not ready
-          <div id="preloader" className="preload-container">
-            <div className="loader-wrapper">
-              <div className="spinner"></div>
-            </div>
-          </div>
-        )}
-        <App setIsLoading={setIsLoading} /> {/* Pass setIsLoading to App */}
+        {isLoading ? null : <App setIsLoading={setIsLoading} />}
       </ToastProvider>
     </BrowserRouter>
   );

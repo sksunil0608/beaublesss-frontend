@@ -80,18 +80,45 @@ import ShippingPage from "./pages/other-pages/shipping";
 import ContactPage from "./pages/other-pages/contact";
 import CheckoutPage from "./pages/products/checkout";
 import OrderSuccessPage from "./pages/other-pages/order-success";
-import { collections } from "./data/collections";
 
 function App({ setIsLoading }) {
   const { pathname } = useLocation();
+  const [collections, setCollections] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCollections = async () => {
+      try {
+        const response = await getAllCategories();
+        const collectionArray = response.categories || [];
+
+        setCollections(
+          collectionArray.map((item, index) => ({
+            id: item._id,
+            imgSrc: item.image[0],
+            alt: item.name,
+            title: item.name,
+            slug: slugify(item.name, { lower: true }),
+            subtitle: item.name,
+            delay: `${index * 0.1}s`,
+          }))
+        );
+      } catch (error) {
+        console.error("Error fetching collections:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCollections();
+  }, []);
+
   useEffect(() => {
     // Simulate API call or content loading check
     const checkAppReady = async () => {
       // Simulate delay for data fetching (Replace with actual API calls)
       await new Promise((resolve) => setTimeout(resolve, 1000));
-
       // Hide loader once content is ready
-      setIsLoading(false);
     };
 
     checkAppReady();

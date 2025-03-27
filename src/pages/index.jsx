@@ -31,17 +31,11 @@ const metadata = {
 
 // Full-page Loader
 const FullPageLoader = () => (
-  <div className="full-page-loader">
-    <span className="loader"></span>
-  </div>
+  <div className="full-page-loader">Loading....</div>
 );
 
 // Inline Section Loader
-const Loader = () => (
-  <div className="loader-container">
-    <span className="loader"></span>
-  </div>
-);
+const Loader = () => <div className="loader-container">Loading...</div>;
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true);
