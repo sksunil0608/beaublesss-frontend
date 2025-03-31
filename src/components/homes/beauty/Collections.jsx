@@ -67,7 +67,7 @@ export default function Collections() {
                       height={819}
                     />
                   </Link>
-                  <div className="content">
+                  /* <div className="content">
                     <h4 className="title">
                       <Link
                         to={`/shop-default-grid`}
@@ -88,6 +88,7 @@ export default function Collections() {
                       </Link>
                     </div>
                   </div>
+                  */
                 </div>
               </SwiperSlide>
             ))}
