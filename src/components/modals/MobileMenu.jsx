@@ -65,8 +65,8 @@ export default function MobileMenu() {
             </form>
             <ul className="nav-ul-mb" id="wrapper-menu-navigation">
               <li className="nav-mb-item active">
-                <a
-                  href="/"
+                <Link
+                  to="/"
                   className={`collapsed mb-menu-link ${
                     [...HomeMenu].some(
                       (elm) => elm.href.split("/")[1] == pathname.split("/")[1]
@@ -79,11 +79,11 @@ export default function MobileMenu() {
                 >
                   <span>Home</span>
                   <span className="btn-open-sub" />
-                </a>
+                </Link>
               </li>
               <li className="nav-mb-item">
-                <a
-                  href="/products"
+                <Link
+                  to="/products"
                   className={`collapsed mb-menu-link ${
                     [...shopMenu].some(
                       (elm) => elm.href.split("/")[1] == pathname.split("/")[1]
@@ -97,7 +97,7 @@ export default function MobileMenu() {
                 >
                   <span>Shop</span>
                   <span className="btn-open-sub" />
-                </a>
+                </Link>
                 <div id="dropdown-menu-two" className="collapse">
                   <ul className="sub-nav-menu">
                     {shopMenu.map((link, i) => (
@@ -118,8 +118,8 @@ export default function MobileMenu() {
                 </div>
               </li>
               <li className="nav-mb-item">
-                <a
-                  href="/collections"
+                <Link
+                  to="/collections"
                   className={`collapsed mb-menu-link ${
                     [...shop_by_price, ...shopByUse, ...shopByMaterial].some(
                       (elm) => elm.href.split("/")[1] == pathname.split("/")[1]
@@ -133,12 +133,12 @@ export default function MobileMenu() {
                 >
                   <span>Categories</span>
                   <span className="btn-open-sub" />
-                </a>
+                </Link>
                 <div id="dropdown-menu-three" className="collapse">
                   <ul className="sub-nav-menu">
                     <li>
-                      <a
-                        href="#sub-product-one"
+                      <Link
+                        to="#sub-product-one"
                         className={`sub-nav-link collapsed ${
                           [...shop_by_price].some(
                             (elm) =>
@@ -153,7 +153,7 @@ export default function MobileMenu() {
                       >
                         <span>By Price</span>
                         <span className="btn-open-sub" />
-                      </a>
+                      </Link>
                       <div id="sub-product-one" className="collapse">
                         <ul className="sub-nav-menu sub-menu-level-2">
                           {shop_by_price.map((link, i) => (
@@ -175,8 +175,8 @@ export default function MobileMenu() {
                       </div>
                     </li>
                     <li>
-                      <a
-                        href="#sub-product-two"
+                      <Link
+                        to="#sub-product-two"
                         className={`sub-nav-link collapsed ${
                           [...shopByUse].some(
                             (elm) =>
@@ -191,7 +191,7 @@ export default function MobileMenu() {
                       >
                         <span>By Use</span>
                         <span className="btn-open-sub" />
-                      </a>
+                      </Link>
                       <div id="sub-product-two" className="collapse">
                         <ul className="sub-nav-menu sub-menu-level-2">
                           {shopByUse.map((link, i) => (
@@ -213,8 +213,8 @@ export default function MobileMenu() {
                       </div>
                     </li>
                     <li>
-                      <a
-                        href="#sub-product-three"
+                      <Link
+                        to="#sub-product-three"
                         className={`sub-nav-link collapsed ${
                           [...shopByMaterial].some(
                             (elm) =>
@@ -229,7 +229,7 @@ export default function MobileMenu() {
                       >
                         <span>By Materials</span>
                         <span className="btn-open-sub" />
-                      </a>
+                      </Link>
                       <div id="sub-product-three" className="collapse">
                         <ul className="sub-nav-menu sub-menu-level-2">
                           {shopByMaterial.map((link, i) => (
@@ -254,8 +254,8 @@ export default function MobileMenu() {
                 </div>
               </li>
               <li className="nav-mb-item">
-                <a
-                  href="/blogs"
+                <Link
+                to="/blogs"
                   className={`collapsed mb-menu-link ${
                     [...blogMenu].some(
                       (elm) => elm.href.split("/")[1] == pathname.split("/")[1]
@@ -269,7 +269,7 @@ export default function MobileMenu() {
                 >
                   <span>Blogs</span>
                   <span className="btn-open-sub" />
-                </a>
+                </Link>
                 <div id="dropdown-menu-four" className="collapse">
                   <ul className="sub-nav-menu">
                     {blogMenu.map((link, i) => (
@@ -290,8 +290,8 @@ export default function MobileMenu() {
                 </div>
               </li>
               <li className="nav-mb-item">
-                <a
-                  href="#dropdown-menu-five"
+                <Link
+                  to="#dropdown-menu-five"
                   className={`collapsed mb-menu-link ${
                     [...PolicyPages].some(
                       (elm) => elm.href.split("/")[1] == pathname.split("/")[1]
@@ -305,7 +305,7 @@ export default function MobileMenu() {
                 >
                   <span>Privacy Policy</span>
                   <span className="btn-open-sub" />
-                </a>
+                </Link>
                 <div id="dropdown-menu-five" className="collapse">
                   <ul className="sub-nav-menu">
                     {PolicyPages.map((link, i) => (
