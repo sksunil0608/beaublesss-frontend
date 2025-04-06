@@ -68,21 +68,10 @@ export default function Collections() {
                     />
                   </Link>
                   <div className="content">
-                    {/* <h4 className="title">
-                      <Link
-                        to={`/shop-default-grid`}
-                        className="link text-white"
-                      >
-                        {item.title}
-                      </Link>
-                    </h4>
-                    <span className="text-title text-white">
-                      {item.subtitle}
-                    </span> */}
                     <div>
                       <Link
                         to={`/collections/${item.slug}`}
-                        className="btn-line style-white"
+                        className="btn-line style-white text-white"
                       >
                         {item.title}
                       </Link>
@@ -94,16 +83,15 @@ export default function Collections() {
           </Swiper>
         )}
         <div
-                className="sec-btn text-center pt-2 pb-2 rounded mt-5"
-                style={{
-                  background:
-                    "linear-gradient(81deg, #5e0d8b 1% 37.5%, #9268aa 91.5%)",
-                }}
-              >
-                 <Link to={`/products`} className="text-white">
-                  View All Products
-                </Link>
-              </div>
+          className="sec-btn text-center pt-2 pb-2 rounded mt-5"
+          style={{
+            background: "#5e0d8b",
+          }}
+        >
+          <Link to="/products" className="text-white">
+            View All Products &gt;
+          </Link>
+        </div>
       </div>
     </section>
   );

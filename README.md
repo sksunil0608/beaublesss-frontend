@@ -37,6 +37,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v2.0.5  | After Order Empty Cart from LocalStorage and Cart | Sunil   |
 | v2.0.6  | Loader Updated                                    | Sunil   |
 | v2.0.7  | Frontend UI Changed                               | Sunil   |
+| v2.0.8  | UI By Vijay                               | Sunil   |
 
 ## Installation
 

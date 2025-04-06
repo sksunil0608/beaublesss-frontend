@@ -1,7 +1,7 @@
-import ProductCard1 from "@/components/productCards/ProductCard1";
-import { products } from "@/data/products";
+import { products42 } from "@/data/products";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import KoreanProductCard from "../productCards/KoreanProductCard";
 
 export default function KoreanInspired() {
   return (
@@ -18,7 +18,7 @@ export default function KoreanInspired() {
       </div>
 
       {/* Image + Slider */}
-      <div className="position-relative" style={{ height: "650px" }}>
+      <div className="position-relative" style={{ height: "1000px" }}>
         {/* Background Image */}
         <img
           src="/images/banner/Korean.png"
@@ -28,22 +28,22 @@ export default function KoreanInspired() {
         />
 
         {/* Slider Section overlayed at the bottom */}
-        <div className=" position-absolute bottom-0 w-100 px-10 pb-5">
+        <div className=" position-absolute bottom-0 w-100 px-md-10 px-3 pb-5">
           <div
-            className="bg-white rounded shadow p-3"
+            className="p-3"
             style={{
-              maxHeight: "280px",
+              maxHeight: "500px",
               overflow: "hidden",
             }}
           >
             <Swiper
               className="swiper tf-sw-latest"
               dir="ltr"
-              spaceBetween={15}
+              spaceBetween={5}
               breakpoints={{
-                0: { slidesPerView: 2, spaceBetween: 15 },
-                768: { slidesPerView: 3, spaceBetween: 30 },
-                1200: { slidesPerView: 4, spaceBetween: 30 },
+                0: { slidesPerView: 1, spaceBetween: 5 },
+                768: { slidesPerView: 3, spaceBetween: 10 },
+                1200: { slidesPerView: 3, spaceBetween: 20 },
               }}
               modules={[Pagination]}
               pagination={{
@@ -51,13 +51,28 @@ export default function KoreanInspired() {
                 el: ".spd6",
               }}
             >
-              {products.map((product, i) => (
-                <SwiperSlide key={i} className="swiper-slide p-2">
-                  <div style={{ height: "220px" }}>
-                    <ProductCard1 product={product} />
-                  </div>
-                </SwiperSlide>
-              ))}
+              {products42.map((product, i) => {
+                const middleIndex = Math.floor(products42.length / 2);
+                const slideClass =
+                  i === 0
+                    ? "first-slide"
+                    : i === products42.length - 1
+                    ? "last-slide"
+                    : i === middleIndex
+                    ? "middle-slide"
+                    : "regular-slide";
+
+                return (
+                  <SwiperSlide
+                    key={i}
+                    className={`swiper-slide p-2 ${slideClass}`}
+                  >
+                    <div className="position-relative">
+                      <KoreanProductCard key={i} product={product} />
+                    </div>
+                  </SwiperSlide>
+                );
+              })}
             </Swiper>
             <div className="sw-pagination-latest spd6 sw-dots type-circle justify-content-center mt-2" />
           </div>

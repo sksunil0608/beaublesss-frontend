@@ -148,28 +148,33 @@ export const testimonials5 = [
   {
     id: 1,
     author: "Ananya Mehra",
-    text: `"I have sensitive skin, and Beaubless products work like magic! My skin has never felt this soft and healthy. It’s become an essential part of my daily routine."`,
-    avatar: "/images/avatar/user-default.jpg",
+    location: "New Delhi, India",
+    text: `"As someone with extremely sensitive skin, finding skincare that doesn’t cause breakouts or irritation has always been a challenge—until I found Beaubless. Their Hydrating Aloe Vera Gel has completely transformed my routine. It feels light, absorbs quickly, and instantly soothes any redness or dryness. I even use it under makeup and it keeps my skin calm all day. I’ve never felt more confident in my bare skin!"`,
+    avatar: "/images/avatar/user-1.jpg",
     product: "Hydrating Aloe Vera Gel",
     price: "₹349.00",
   },
   {
     id: 2,
     author: "Ritika Sharma",
-    text: `"Beaubless is a blessing for my skin! I used to struggle with dryness and irritation, but their products feel so gentle and soothing. Love the glow it gives!"`,
-    avatar: "/images/avatar/user-default.jpg",
+    location: "Jaipur, Rajasthan",
+    text: `"Beaubless is honestly a skin savior! My skin used to feel rough, dull, and dehydrated, especially during winters. But ever since I started using the Rose & Vitamin C Serum, the difference is amazing. My skin glows naturally now, and it feels so nourished and plump. What I love most is how gentle and non-sticky it is—even my mom uses it now! Highly recommend this to anyone looking for an everyday glow-up."`,
+    avatar: "/images/avatar/user-1.jpg",
     product: "Rose & Vitamin C Serum",
     price: "₹499.00",
   },
   {
     id: 3,
     author: "Priya Nair",
-    text: `"I’ve tried many brands but nothing feels as natural and effective as Beaubless. My skin looks visibly clearer and feels refreshed every day!"`,
-    avatar: "/images/avatar/user-default.jpg",
+    location: "Kochi, Kerala",
+    text: `"I’ve been on a clean beauty journey for years and tried dozens of so-called ‘natural’ products, but nothing felt as genuine as Beaubless. Their Gentle Foaming Face Wash is a dream come true—soft on the skin, smells refreshing, and leaves my face feeling clean without stripping away moisture. I’ve seen a visible reduction in breakouts and my complexion looks brighter and more balanced."`,
+    avatar: "/images/avatar/user-1.jpg",
     product: "Gentle Foaming Face Wash",
     price: "₹299.00",
   },
 ];
+
+
 
 
 export const testimonials6 = [

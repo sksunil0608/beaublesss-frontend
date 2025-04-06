@@ -14,7 +14,7 @@ export default function Testimonials3() {
           </p>
         </div>
         <Swiper
-          className="swiper tf-sw-testimonial wow fadeInUp"
+          className="swiper tf-sw-testimonial wow fadeInUp custom-swiper-wrapper"
           data-wow-delay="0.1s"
           spaceBetween={15} // data-space
           slidesPerView={3} // data-preview
@@ -31,19 +31,20 @@ export default function Testimonials3() {
           {testimonials5.map((testimonial) => (
             <SwiperSlide className="swiper-slide" key={testimonial.id}>
               <div className="testimonial-item style-2 style-3 bg-primary">
+              {testimonial.id === 1  && <img className="quote-mark" src="/images/logo/quote_icon.png" alt="" />}
               <div className="box-avt">
-                  <div className="avatar avt-60 round">
+                  <div className="avatar avt-80 round ms-3">
                     <img
                       alt="avt"
                       src={testimonial.avatar}
-                      width={90}
-                      height={91}
+                      width={130}
+                      height={130}
                     />
                   </div>
                   <div className="box-price">
                     <div className="box-rate-author">
                     <div className="box-author">
-                      <div className="text-title author text-white">
+                      <div className="text-testimonial author text-white">
                         {testimonial.author}
                       </div>
                       <svg
@@ -83,20 +84,20 @@ export default function Testimonials3() {
                       </svg>
                     </div>
                   </div>
-                    <div className="text-button text-white">{testimonial.product}</div>
+                    <div className="text-caption-1 fst-italic text-white">{testimonial.location}</div>
                   </div>
                 </div>
-                <div className="content-top pt-2">
+                <div className="content-top pt-4">
                  
                   <p className="text-secondary">{testimonial.text}</p>
                  
-                  <div className="list-star-default">
+                  {/* <div className="list-star-default">
                     <i className="icon icon-star" />
                     <i className="icon icon-star" />
                     <i className="icon icon-star" />
                     <i className="icon icon-star" />
                     <i className="icon icon-star" />
-                  </div>
+                  </div> */}
                 </div>
                 
               </div>

@@ -9121,10 +9121,7 @@ fieldset:disabled .btn {
     padding-left: 3rem !important
 }
 
-.px-10 {
-    padding-right: 10rem !important;
-    padding-left: 10rem !important
-}
+
 
 .py-0 {
     padding-top: 0 !important;
@@ -9180,6 +9177,10 @@ fieldset:disabled .btn {
     padding-top: 3rem !important
 }
 
+.pt-10 {
+    padding-top: 6rem !important
+}
+
 .pe-0 {
     padding-right: 0 !important
 }
@@ -9227,6 +9228,7 @@ fieldset:disabled .btn {
 .pb-5 {
     padding-bottom: 3rem !important
 }
+
 
 .ps-0 {
     padding-left: 0 !important
@@ -11410,6 +11412,10 @@ fieldset:disabled .btn {
     .px-md-5 {
         padding-right: 3rem !important;
         padding-left: 3rem !important
+    }
+    .px-md-10 {
+        padding-right: 10rem !important;
+        padding-left: 10rem !important
     }
 
     .py-md-0 {

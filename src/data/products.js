@@ -139,7 +139,26 @@ export const products7 = prodArray.map((prod) => ({
   filterBrands: ["Hermes"],
   inStock: false,
 }));
-export const products42 = [];
+export const products42 = [
+  {
+    id: 1,
+    imgSrc: "/images/products/Rice Water Niacinamide.png",
+    title: "Rice Water Niacinamide",
+    slug: "rice-water-niacinamide",
+  },{
+    id: 2,
+    imgSrc: "/images/products/Rice Water Toner & Vitamin C.png",
+    title: "Rice Water Toner & Vitamin C",  
+    slug: "rice-water-toner",
+  },
+{
+  id: 3,
+  imgSrc: "/images/products/Rice Water Toner.png",
+  title: "Rice Water Toner",
+  slug: "rice-water-serum",
+}
+  
+];
 
 export const products3 = [
   {

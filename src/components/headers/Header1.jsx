@@ -43,37 +43,7 @@ export default function Header1({ fullWidth = false }) {
           </div>
           <div className="col-xl-3 col-md-4 col-3">
             <ul className="nav-icon d-flex justify-content-end align-items-center">
-              <li className="nav-search">
-                <a
-                  href="#search"
-                  data-bs-toggle="modal"
-                  className="nav-icon-item"
-                >
-                  <svg
-                    className="icon"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
-                      stroke="#181818"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M21.35 21.0004L17 16.6504"
-                      stroke="#181818"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </li>
+              
               <li className="nav-account">
                 <a href="#" className="nav-icon-item">
                   <svg
@@ -128,6 +98,14 @@ export default function Header1({ fullWidth = false }) {
                     <span className="body-text-">Support</span>
                   </div> */}
                 </div>
+              </li>
+              <li className="nav-tracking">
+                <Link
+                  to={`/order-tracking`}
+                  className="nav-icon-item"
+                >
+                  <img src="images/icons/tracking.png" alt="Tracking" width={35} height={35} />
+                </Link>
               </li>
               <li className="nav-wishlist">
                 <Link to={`/wish-list`} className="nav-icon-item">
@@ -188,7 +166,7 @@ export default function Header1({ fullWidth = false }) {
             <fieldset className="text">
               <input
                 type="text"
-                placeholder="Searching..."
+                placeholder="Search for Rice Water Toner"
                 
               />
             </fieldset>
