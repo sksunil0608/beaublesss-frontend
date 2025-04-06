@@ -229,10 +229,21 @@ export default function ProductCard1({ product, gridClass = "" }) {
       </div>
       <div className="card-product-info">
         <Link to={`/products/${product.slug}`} className="title link">
-          {product?.title?.length > 16
-            ? product.title.slice(0, 16) + "..."
+          {product?.title?.length > 100
+            ? product.title.slice(0, 100) + "..."
             : product.title}
         </Link>
+        <p className="text-secondary-2">{product?.shortDescription?.length > 100
+            ? product.shortDescription.slice(0, 100) + "..."
+            : product.shortDescription}</p>
+        {/* Product Price */}
+        <span className="price">
+          {product.finalPrice && (
+            <span className="old-price">₹{product.finalPrice.toFixed(2)}</span>
+          )}{" "}
+          ₹{product.offerPrice?.toFixed(2)}
+        </span>
+        {/* Product Ratings */}
         <div className="sub d-md-flex">
           <div className="tf-product-info-rate d-flex">
             <div className="list-star d-flex">
@@ -255,12 +266,7 @@ export default function ProductCard1({ product, gridClass = "" }) {
           </div>
         </div>
 
-        <span className="price">
-          {product.finalPrice && (
-            <span className="old-price">₹{product.finalPrice.toFixed(2)}</span>
-          )}{" "}
-          ₹{product.offerPrice?.toFixed(2)}
-        </span>
+        
         {product.colors && (
           <ul className="list-color-product">
             {product.colors.map((color, index) => (

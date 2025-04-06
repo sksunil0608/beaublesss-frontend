@@ -4,7 +4,8 @@ import LanguageSelect from "../common/LanguageSelect";
 import CurrencySelect from "../common/CurrencySelect";
 export default function Topbar() {
   return (
-    <div className="tf-topbar bg-primary">
+    <>
+      {/* <div className="tf-topbar bg-primary">
       <div className="container">
         <div className="tf-topbar_wrap d-flex align-items-center justify-content-center justify-content-xl-between">
           <ul className="topbar-left">
@@ -34,6 +35,7 @@ export default function Topbar() {
           </div>
         </div>
       </div>
-    </div>
+    </div> */}
+    </>
   );
 }

@@ -4,7 +4,10 @@ import Topbar from "@/components/headers/Topbar";
 import Hero from "@/components/homes/cosmetic/Hero";
 import MetaComponent from "@/components/common/MetaComponent";
 import { lazy, Suspense, useState, useEffect } from "react";
-
+import Testimonials2 from "@/components/common/Testimonials2";
+import Testimonials3 from "@/components/common/Testimonials3";
+import BannerTab from "@/components/common/BannerTab";
+import KoreanInspired from "@/components/common/KoreanInspired";
 const BannerCollection = lazy(() =>
   import("@/components/homes/home-1/BannerCollection")
 );
@@ -62,42 +65,44 @@ export default function HomePage() {
       <Suspense fallback={<Loader />}>
         <Collections />
       </Suspense>
-
+      
       <Suspense fallback={<Loader />}>
         <Products3 />
       </Suspense>
 
-      <Suspense fallback={<Loader />}>
+      <Hero />
+
+      {/* <Suspense fallback={<Loader />}>
         <BannerCountdown />
-      </Suspense>
+      </Suspense> */}
 
       <Suspense fallback={<Loader />}>
         <Products />
       </Suspense>
 
-      <Suspense fallback={<Loader />}>
+      {/* <Suspense fallback={<Loader />}>
         <Lookbook />
-      </Suspense>
+      </Suspense> */}
 
       <Suspense fallback={<Loader />}>
         <BannerCollection />
       </Suspense>
 
-      <Suspense fallback={<Loader />}>
+      {/* <Suspense fallback={<Loader />}>
         <Tiktok />
+      </Suspense> */}
+      <KoreanInspired/>
+      <Suspense fallback={<Loader />}>
+        <Testimonials3 />
       </Suspense>
 
-      <Suspense fallback={<Loader />}>
-        <Testimonials />
-      </Suspense>
-
-      <Suspense fallback={<Loader />}>
+      {/* <Suspense fallback={<Loader />}>
         <Features />
       </Suspense>
 
       <Suspense fallback={<Loader />}>
         <ShopGram />
-      </Suspense>
+      </Suspense> */}
 
       <Footer1 />
     </>

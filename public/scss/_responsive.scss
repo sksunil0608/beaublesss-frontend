@@ -82,7 +82,7 @@
   }
   .tf-product-info-list {
     max-width: 615px;
-    margin-left: auto;
+    // margin-left: auto;
   }
   .canvas-mb {
     width: 100% !important;
@@ -2675,13 +2675,18 @@
   .heading-section,
   .heading-section-2 {
     h3 {
-      font-size: 24px;
+      font-size: 24px!important;
+      font-weight: 600;
       line-height: 30px;
+      
     }
   }
   .heading-section {
     h3 {
+      text-transform: uppercase;
       margin-bottom: 8px;
+      
+      
     }
   }
   .heading-section-2 {

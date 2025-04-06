@@ -102,9 +102,9 @@ export const products = prodArray.map((prod) => {
 
     // Tab Filters
     tabFilterOptions2: [
-      prod.isNewArrival ? "New Arrivals" : null,
+      prod.isNewArrival ? "NEW LAUNCHES" : null,
       prod.isOnSale ? "On Sale" : null,
-      prod.isFeatured ? "Best Seller" : null,
+      prod.isFeatured ? "BESTSELLERS" : null,
     ].filter(Boolean), // Remove null values
 
     tabFilterOptions: [prod.category?.name || "All"],

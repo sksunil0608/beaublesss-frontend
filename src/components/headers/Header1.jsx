@@ -28,7 +28,7 @@ export default function Header1({ fullWidth = false }) {
               <img
                 alt="logo"
                 className="logo"
-                src="/images/logo/Beaubless_Logo_PNG-04.png"
+                src="/images/logo/beaubless_logo_black.png"
                 width={444}
                 height={35}
               />
@@ -179,6 +179,47 @@ export default function Header1({ fullWidth = false }) {
             </ul>
           </div>
         </div>
+        <div className="pb-3">
+          <div  href="#search"
+                  data-bs-toggle="modal">
+          <form
+            className="form-search"
+          >
+            <fieldset className="text">
+              <input
+                type="text"
+                placeholder="Searching..."
+                
+              />
+            </fieldset>
+            <button type="submit">
+              <svg
+                className="icon"
+                width={20}
+                height={20}
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
+                  stroke="#181818"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M21.35 21.0004L17 16.6504"
+                  stroke="#181818"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </form>
+          </div>
+        </div>
+                    
       </div>
     </header>
   );

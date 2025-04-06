@@ -148,21 +148,29 @@
   background: linear-gradient(81deg, #5e0d8b 1% 37.5%, #9268aa 91.5%);
 }
 .inactive-tab {
-  border: 2px solid #5e0d8b;
+  // border: 2px solid #5e0d8b;
   color: #5e0d8b !important; /* Purple text when active */
   background: white;
   transition: all 0.3s ease-in-out;
+  font-size: 20px;
 }
 .inactive-tab:hover {
   color: white;
 }
 
 .active-tab {
-  background: linear-gradient(81deg, #5e0d8b 1% 37.5%, #9268aa 91.5%);
+  // background: linear-gradient(81deg, #5e0d8b 1% 37.5%, #9268aa 91.5%);
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 600;
+  
 }
 
 .active-tab a {
-  color: var(--white);
+  // color: var(--white);
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .active-tab a:hover {

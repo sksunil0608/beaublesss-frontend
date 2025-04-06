@@ -67,7 +67,7 @@
         letter-spacing: 1px;
         text-transform: capitalize;
         position: relative;
-        background-color: var(--critical);
+        background-color: black;
         color: var(--white);
         border-radius: 144px;
       }
@@ -411,10 +411,10 @@
     align-items: center;
     gap: 2px;
     .icon {
-      font-size: 16px;
+      font-size: 14px;
       color: var(--line);
       &:not(:last-child) {
-        color: var(--yellow);
+        color: var(--black);
       }
     }
   }

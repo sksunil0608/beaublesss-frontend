@@ -37,12 +37,12 @@ export default function Hero() {
           <SwiperSlide key={index}>
             <div className="wrap-slider">
               <a href="/products">
-                <img
-                  alt={`fashion-slideshow-${index}`}
-                  src={slide.imgSrc}
-                  width={1920}
-                  height={550}
-                />
+              <img
+              alt={`fashion-slideshow-${index}`}
+              src={slide.imgSrc}
+              className="img-fluid w-100 d-block"
+            />
+
               </a>
               <div className="box-content">
                 <div className="container">

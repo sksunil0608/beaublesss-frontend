@@ -9,7 +9,7 @@ import ScrollTop from "../common/ScrollTop";
 import { footerLinks, socialLinks } from "@/data/footerLinks";
 export default function Footer1({
   border = true,
-  dark = false,
+  dark = true,
   hasPaddingBottom = false,
 }) {
   const [success, setSuccess] = useState(true);
@@ -80,7 +80,7 @@ export default function Footer1({
     <>
       <footer
         id="footer"
-        className={`footer ${dark ? "bg-main" : ""} ${
+        className={`footer ${dark ? "bg-black" : ""} ${
           hasPaddingBottom ? "has-pb" : ""
         } `}
       >
@@ -96,36 +96,17 @@ export default function Footer1({
                           alt=""
                           src={
                             dark
-                              ? "/images/logo/Beaubless_Logo_PNG-04.png"
+                              ? "/images/logo/beaubless_logo_black.png"
                               : "/images/logo/Beaubless_Logo_PNG-04.png"
                           }
+                          width={300}
                         />
                       </Link>
                     </div>
-                    <div className="footer-address">
-                      <p className="text-main">Delhi , INDIA</p>
-                      <Link
-                        to={`/contact-us`}
-                        className={`tf-btn-default fw-6 ${
-                          dark ? "style-white" : ""
-                        } `}
-                      >
-                        GET DIRECTION
-                        <i className="icon-arrowUpRight" />
-                      </Link>
-                    </div>
-                    <ul className="footer-info">
-                      <li>
-                        <i className="icon-mail" />
-                        <p className="text-main">care@beaubless.com</p>
-                      </li>
-                      <li>
-                        <i className="icon-phone" />
-                        <p className="text-main">+91 9990531210</p>
-                      </li>
-                    </ul>
+                   
+
                     <ul
-                      className={`tf-social-icon  ${
+                      className={`tf-social-icon mt-3 ${
                         dark ? "style-white" : ""
                       } `}
                     >
@@ -143,7 +124,11 @@ export default function Footer1({
                   <div className="footer-menu">
                     {footerLinks.map((section, sectionIndex) => (
                       <div className="footer-col-block" key={sectionIndex}>
-                        <div className="footer-heading text-button footer-heading-mobile">
+                        <div
+                          className={`text-main ${
+                            dark ? "text-white" : ""
+                          } footer-heading text-button footer-heading-mobile`}
+                        >
                           {section.heading}
                         </div>
                         <div className="tf-collapse-content">
@@ -153,7 +138,9 @@ export default function Footer1({
                                 {item.isLink ? (
                                   <Link
                                     to={item.href}
-                                    className="footer-menu_item text-main"
+                                    className={`text-main ${
+                                      dark ? "text-white" : ""
+                                    } footer-menu_item`}
                                   >
                                     {item.label}
                                   </Link>
@@ -175,29 +162,48 @@ export default function Footer1({
                 </div>
                 <div className="col-lg-4">
                   <div className="footer-col-block">
-                    <div className="footer-heading text-button footer-heading-mobile">
-                      Newletter
+                    <div
+                      className={`text-main ${
+                        dark ? "text-white" : ""
+                      } footer-heading text-button footer-heading-mobile`}
+                    >
+                      Contact Us
                     </div>
-                    <div className="tf-collapse-content">
-                      <div className="footer-newsletter">
-                        <p className="text-caption-1 text-main">
-                          Sign up for our newsletter and get 10% off your first
-                          purchase
+                    {/* <div className="footer-address">
+                      <p className={`text-main ${dark ? "text-white" : ""}`}>
+                        Delhi , INDIA
+                      </p>
+                      <Link
+                        to={`/contact-us`}
+                        className={`tf-btn-default fw-6 ${
+                          dark ? "style-white" : ""
+                        } `}
+                      >
+                        GET DIRECTION
+                        <i className="icon-arrowUpRight" />
+                      </Link>
+                    </div> */}
+                    <ul className="footer-info">
+                      <li className={dark ? "text-white" : ""}>
+                        <i
+                          className={`icon-mail ${dark ? "text-white" : ""}`}
+                        />
+                        <p className={`text-main ${dark ? "text-white" : ""}`}>
+                          care@beaubless.com
                         </p>
-                        <div
-                          className={`tfSubscribeMsg  footer-sub-element ${
-                            showMessage ? "active" : ""
-                          }`}
-                        >
-                          {success ? (
-                            <p style={{ color: "rgb(52, 168, 83)" }}>
-                              You have successfully subscribed.
-                            </p>
-                          ) : (
-                            <p style={{ color: "red" }}>Something went wrong</p>
-                          )}
-                        </div>
-                        <form
+                      </li>
+                      <li className={dark ? "text-white" : ""}>
+                        <i
+                          className={`icon-phone ${dark ? "text-white" : ""}`}
+                        />
+                        <p className={`text-main ${dark ? "text-white" : ""}`}>
+                          +91 9990531210
+                        </p>
+                      </li>
+                    </ul>
+                    <div className="tf-collapse-content mt-3">
+                      <div className="footer-newsletter">
+                      <form
                           onSubmit={sendEmail}
                           className={`form-newsletter subscribe-form ${
                             dark ? "style-black" : ""
@@ -225,7 +231,29 @@ export default function Footer1({
                           </div>
                           <div className="subscribe-msg" />
                         </form>
-                        <div className="tf-cart-checkbox">
+                        <p
+                          className={` text-caption-1text-main ${
+                            dark ? "text-white" : ""
+                          }`}
+                        >
+                          Sign up for our newsletter and get 10% off your first
+                          purchase
+                        </p>
+                        <div
+                          className={`tfSubscribeMsg  footer-sub-element ${
+                            showMessage ? "active" : ""
+                          }`}
+                        >
+                          {success ? (
+                            <p style={{ color: "rgb(52, 168, 83)" }}>
+                              You have successfully subscribed.
+                            </p>
+                          ) : (
+                            <p style={{ color: "red" }}>Something went wrong</p>
+                          )}
+                        </div>
+                       
+                        {/* <div className="tf-cart-checkbox">
                           <div className="tf-checkbox-wrapp">
                             <input
                               className=""
@@ -238,20 +266,32 @@ export default function Footer1({
                             </div>
                           </div>
                           <label
-                            className="text-caption-1 text-primary"
+                            className={`text-primary text-caption-1 ${
+                              dark ? "text-white" : ""
+                            }`}
                             htmlFor="footer-Form_agree"
                           >
                             By clicking subcribe, you agree to the{" "}
-                            <Link className="fw-6 link" to={`/term-of-use`}>
+                            <Link
+                              className={`fw-6 link ${
+                                dark ? "text-white" : ""
+                              }`}
+                              to={`/term-of-use`}
+                            >
                               Terms of Service
                             </Link>{" "}
                             and{" "}
-                            <a className="fw-6 link" to={`/privacy-policy`}>
+                            <a
+                              className={`fw-6 link ${
+                                dark ? "text-white" : ""
+                              }`}
+                              to={`/privacy-policy`}
+                            >
                               Privacy Policy
                             </a>
                             .
                           </label>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -259,7 +299,7 @@ export default function Footer1({
               </div>
             </div>
           </div>
-          <div className="footer-bottom">
+          {/* <div className="footer-bottom">
             <div className="container">
               <div className="row">
                 <div className="col-12">
@@ -340,6 +380,28 @@ export default function Footer1({
                           />
                         </li>
                       </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> */}
+          <div className={`footer-bottom ${
+                          dark ? "bg-white" : ""
+                        }`}>
+            <div className="container">
+              <div className="d-flex justify-content-center align-items-center">
+                <div className="col-12 text-center">
+                  <div className="py-3 text-center">
+                    <div className="d-flex justify-content-center align-items-center">
+                      <p
+                        className={`text-black m-0 text-center ${
+                          dark ? "text-black" : ""
+                        }`}
+                      >
+                        ©{new Date().getFullYear()} Beaubless Cosmetics. All
+                        Rights Reserved.
+                      </p>
                     </div>
                   </div>
                 </div>

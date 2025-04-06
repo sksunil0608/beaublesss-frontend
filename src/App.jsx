@@ -83,36 +83,6 @@ import OrderSuccessPage from "./pages/other-pages/order-success";
 
 function App({ setIsLoading }) {
   const { pathname } = useLocation();
-  const [collections, setCollections] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchCollections = async () => {
-      try {
-        const response = await getAllCategories();
-        const collectionArray = response.categories || [];
-
-        setCollections(
-          collectionArray.map((item, index) => ({
-            id: item._id,
-            imgSrc: item.image[0],
-            alt: item.name,
-            title: item.name,
-            slug: slugify(item.name, { lower: true }),
-            subtitle: item.name,
-            delay: `${index * 0.1}s`,
-          }))
-        );
-      } catch (error) {
-        console.error("Error fetching collections:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCollections();
-  }, []);
-
   useEffect(() => {
     // Simulate API call or content loading check
     const checkAppReady = async () => {
@@ -276,7 +246,7 @@ function App({ setIsLoading }) {
               <Route path="collections" element={<ShopCollectionPage />} />
               <Route
                 path="collections/:slug"
-                element={<ShopCategoriesTopPage1 collections={collections} />}
+                element={<ShopCategoriesTopPage1  />}
               />
               {/* Shop End */}
 

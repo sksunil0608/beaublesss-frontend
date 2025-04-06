@@ -9,7 +9,7 @@ export default function Products5() {
       <div className="container">
         <div className="heading-section wow fadeInUp text-center">
           <h3 className="heading text-primary">
-            Discover Your Skincare Ritual
+          Glow More, Spend Less!
           </h3>
           <p className="subheading">
             From frizz-free hair to radiant, protected skin, we bring you gentle

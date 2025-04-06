@@ -5,13 +5,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 export default function Testimonials3() {
   return (
-    <section className="flat-spacing bg-surface">
+    <section className="flat-spacing  mb-5">
       <div className="container">
-        <div className="heading-section text-center wow fadeInUp">
-          <h3 className="heading">Customer Say!</h3>
+        <div className="heading-section wow fadeInUp text-center">
+          <h3 className="heading text-primary">What Our Customers Are Saying</h3>
           <p className="subheading">
-            Our customers adore our products, and we constantly aim to delight
-            them.
+          Your Skin, Our Promise – Proven Results!
           </p>
         </div>
         <Swiper
@@ -31,19 +30,20 @@ export default function Testimonials3() {
         >
           {testimonials5.map((testimonial) => (
             <SwiperSlide className="swiper-slide" key={testimonial.id}>
-              <div className="testimonial-item style-2 style-3">
-                <div className="content-top">
-                  <div className="list-star-default">
-                    <i className="icon icon-star" />
-                    <i className="icon icon-star" />
-                    <i className="icon icon-star" />
-                    <i className="icon icon-star" />
-                    <i className="icon icon-star" />
+              <div className="testimonial-item style-2 style-3 bg-primary">
+              <div className="box-avt">
+                  <div className="avatar avt-60 round">
+                    <img
+                      alt="avt"
+                      src={testimonial.avatar}
+                      width={90}
+                      height={91}
+                    />
                   </div>
-                  <p className="text-secondary">{testimonial.text}</p>
-                  <div className="box-rate-author">
+                  <div className="box-price">
+                    <div className="box-rate-author">
                     <div className="box-author">
-                      <div className="text-title author">
+                      <div className="text-title author text-white">
                         {testimonial.author}
                       </div>
                       <svg
@@ -83,23 +83,22 @@ export default function Testimonials3() {
                       </svg>
                     </div>
                   </div>
-                </div>
-                <div className="box-avt">
-                  <div className="avatar avt-60 round">
-                    <img
-                      alt="avt"
-                      src={testimonial.avatar}
-                      width={90}
-                      height={91}
-                    />
-                  </div>
-                  <div className="box-price">
-                    <p className="text-title text-line-clamp-1">
-                      {testimonial.product}
-                    </p>
-                    <div className="text-button price">{testimonial.price}</div>
+                    <div className="text-button text-white">{testimonial.product}</div>
                   </div>
                 </div>
+                <div className="content-top pt-2">
+                 
+                  <p className="text-secondary">{testimonial.text}</p>
+                 
+                  <div className="list-star-default">
+                    <i className="icon icon-star" />
+                    <i className="icon icon-star" />
+                    <i className="icon icon-star" />
+                    <i className="icon icon-star" />
+                    <i className="icon icon-star" />
+                  </div>
+                </div>
+                
               </div>
             </SwiperSlide>
           ))}

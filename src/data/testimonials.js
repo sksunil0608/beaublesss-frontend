@@ -147,37 +147,30 @@ export const testimonials4 = [
 export const testimonials5 = [
   {
     id: 1,
-    author: "Sybil Sharp",
-    text: `"Fantastic shop! Great selection, fair prices, and friendly staff. Highly recommended. The quality of the products is exceptional, and the prices are very reasonable!"`,
-    avatar: "/images/avatar/user-4.jpg",
-    product: "Contrasting sheepskin sweatshirt",
-    price: "₹60.00",
+    author: "Ananya Mehra",
+    text: `"I have sensitive skin, and Beaubless products work like magic! My skin has never felt this soft and healthy. It’s become an essential part of my daily routine."`,
+    avatar: "/images/avatar/user-default.jpg",
+    product: "Hydrating Aloe Vera Gel",
+    price: "₹349.00",
   },
   {
     id: 2,
-    author: "Mark G.",
-    text: `"I absolutely love this shop! The products are high-quality and the customer service is excellent. I always leave with exactly what I need and a smile on my face."`,
-    avatar: "/images/avatar/user-5.jpg",
-    product: "Contrasting sheepskin sweatshirt",
-    price: "₹60.00",
+    author: "Ritika Sharma",
+    text: `"Beaubless is a blessing for my skin! I used to struggle with dryness and irritation, but their products feel so gentle and soothing. Love the glow it gives!"`,
+    avatar: "/images/avatar/user-default.jpg",
+    product: "Rose & Vitamin C Serum",
+    price: "₹499.00",
   },
   {
     id: 3,
-    author: "Emily S.",
-    text: `"I love this shop! The products are always top-quality, and the staff is incredibly friendly and helpful. They go out of their way to make sure that I'm satisfied with my purchase.”`,
-    avatar: "/images/avatar/user-6.jpg",
-    product: "Contrasting sheepskin sweatshirt",
-    price: "₹60.00",
-  },
-  {
-    id: 4,
-    author: "Sybil Sharp",
-    text: `"Fantastic shop! Great selection, fair prices, and friendly staff. Highly recommended. The quality of the products is exceptional, and the prices are very reasonable!"`,
-    avatar: "/images/avatar/user-4.jpg",
-    product: "Contrasting sheepskin sweatshirt",
-    price: "₹60.00",
+    author: "Priya Nair",
+    text: `"I’ve tried many brands but nothing feels as natural and effective as Beaubless. My skin looks visibly clearer and feels refreshed every day!"`,
+    avatar: "/images/avatar/user-default.jpg",
+    product: "Gentle Foaming Face Wash",
+    price: "₹299.00",
   },
 ];
+
 
 export const testimonials6 = [
   {

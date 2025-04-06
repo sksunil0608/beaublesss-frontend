@@ -6,7 +6,7 @@ export default function BannerCollection() {
     <section className="flat-spacing">
       <div className="">
         <img
-          className="lazyload"
+          className="lazyload d-block w-100"
           data-src="/images/banner/Offer.png"
           alt="banner-cls"
           src="/images/banner/Offer.png"
