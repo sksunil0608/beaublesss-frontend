@@ -125,7 +125,7 @@ footer {
         }
         .footer-heading-mobile::after,
         .footer-heading-mobile::before {
-            background-color: var(--white);
+            background-color: white; 
         }
     }
     &.has-pb {

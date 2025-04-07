@@ -13,31 +13,32 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 
 ## Version History
 
-| Version | Description                                       | Author  |
-| ------- | ------------------------------------------------- | ------- |
-| v0.0.1  | Initial release with images and content           | Sunil   |
-| v0.0.2  | Bug fixes and performance improvements            | Sunil   |
-| v0.0.7  | Updated images and content                        | Sunil   |
-| v1.0.0  | Updated Home Page Enabled Some Dynamic Content    | Sunil   |
-| v1.0.1  | Built Error Solved                                | Sunil   |
-| v1.0.2  | Built Error Solved Successfully                   | Rishabh |
-| v1.0.3  | Built Error Solved Successfully Finally           | Rishabh |
-| v1.0.4  | Fixed Home and About Us page & Product page UI    | Rishabh |
-| v1.0.5  | Fixing the Home Page UI                           | Sunil   |
-| v1.0.5  | Improved Home Page UI Further. Moving to Dynamic  | Sunil   |
-| v1.0.6  | Mazor Change in UI Structure                      | Sunil   |
-| v1.0.7  | Image Url Updated                                 | Rishabh |
-| v1.0.8  | Products 11 and Products14 Working                | Sunil   |
-| v1.0.9  | Cart and Order Management System                  | Sunil   |
-| v2.0.0  | Updated                                           | Sunil   |
-| v2.0.1  | Loader Applied                                    | Sunil   |
-| v2.0.2  | Order System Corrected                            | Sunil   |
-| v2.0.3  | Cart and Order                                    | Sunil   |
-| v2.0.4  | Correcte the Server Url                           | Sunil   |
-| v2.0.5  | After Order Empty Cart from LocalStorage and Cart | Sunil   |
-| v2.0.6  | Loader Updated                                    | Sunil   |
-| v2.0.7  | Frontend UI Changed                               | Sunil   |
-| v2.0.8  | UI By Vijay                               | Sunil   |
+| Version | Description                                                              | Author  |
+| ------- | ------------------------------------------------------------------------ | ------- |
+| v0.0.1  | Initial release with images and content                                  | Sunil   |
+| v0.0.2  | Bug fixes and performance improvements                                   | Sunil   |
+| v0.0.7  | Updated images and content                                               | Sunil   |
+| v1.0.0  | Updated Home Page Enabled Some Dynamic Content                           | Sunil   |
+| v1.0.1  | Built Error Solved                                                       | Sunil   |
+| v1.0.2  | Built Error Solved Successfully                                          | Rishabh |
+| v1.0.3  | Built Error Solved Successfully Finally                                  | Rishabh |
+| v1.0.4  | Fixed Home and About Us page & Product page UI                           | Rishabh |
+| v1.0.5  | Fixing the Home Page UI                                                  | Sunil   |
+| v1.0.5  | Improved Home Page UI Further. Moving to Dynamic                         | Sunil   |
+| v1.0.6  | Mazor Change in UI Structure                                             | Sunil   |
+| v1.0.7  | Image Url Updated                                                        | Rishabh |
+| v1.0.8  | Products 11 and Products14 Working                                       | Sunil   |
+| v1.0.9  | Cart and Order Management System                                         | Sunil   |
+| v2.0.0  | Updated                                                                  | Sunil   |
+| v2.0.1  | Loader Applied                                                           | Sunil   |
+| v2.0.2  | Order System Corrected                                                   | Sunil   |
+| v2.0.3  | Cart and Order                                                           | Sunil   |
+| v2.0.4  | Correcte the Server Url                                                  | Sunil   |
+| v2.0.5  | After Order Empty Cart from LocalStorage and Cart                        | Sunil   |
+| v2.0.6  | Loader Updated                                                           | Sunil   |
+| v2.0.7  | Frontend UI Changed                                                      | Sunil   |
+| v2.0.8  | UI By Vijay                                                              | Sunil   |
+| v2.0.9  | Navigation Changed, Korean Section Image, Footer Image and Style Changed | Sunil   |
 
 ## Installation
 
@@ -48,8 +49,3 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 
 # beaubless-cosmetic
 
-# beaubless-cosmetic
-
-# beaubless-cosmetic
-
-# beaublesss-frontend

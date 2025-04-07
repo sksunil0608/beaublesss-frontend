@@ -13,11 +13,12 @@ import Products3 from "@/components/common/Products3";
 import Products11 from "@/components/products/Products11";
 import Products14 from "@/components/products/Products14";
 import Products15 from "@/components/products/Products15";
+import { collections } from "@/data/collections";
 const metadata = {
   title: "Shop Collections || Beaubless",
   description: "Shop Collections",
 };
-export default function ShopCategoriesTopPage1({ collections }) {
+export default function ShopCategoriesTopPage1() {
   // Check if slug exists in collection
   const { slug } = useParams();
   const collection = collections.find((item) => item.slug === slug);

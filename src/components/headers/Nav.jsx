@@ -19,13 +19,28 @@ export default function Nav() {
   const { pathname } = useLocation();
   return (
     <>
-      <li className={`menu-item ${pathname === "/" ? "active" : ""}`}>
-        <Link to="/" className="item-link">
-          Home
+      <li className={`menu-item ${pathname === "skin-care" ? "active" : ""}`}>
+        <Link to="/collections/skin-care" className="item-link">
+          Skin Care
+        </Link>
+      </li>
+      <li className={`menu-item ${pathname === "hair-care" ? "active" : ""}`}>
+        <Link to="/collections/hair-care" className="item-link">
+          Hair Care
+        </Link>
+      </li>
+      <li className={`menu-item ${pathname === "combos" ? "active" : ""}`}>
+        <Link to="/collections/combos" className="item-link">
+        Kits & Combos
+        </Link>
+      </li>
+      <li className={`menu-item ${pathname === "gifting" ? "active" : ""}`}>
+        <Link to="#" className="item-link">
+          Gifting
         </Link>
       </li>
 
-      <li
+      {/* <li
         className={`menu-item position-relative ${
           Shop.some((elm) => elm.href === pathname) ? "active" : ""
         }`}
@@ -49,7 +64,7 @@ export default function Nav() {
         <Link to="/about-us" className="item-link">
           About Us
         </Link>
-      </li>
+      </li> */}
 
       <li
         className={`menu-item ${
@@ -57,7 +72,7 @@ export default function Nav() {
         }`}
       >
         <Link to="/contact-us" className="item-link">
-          Contact
+          Contact Us
         </Link>
       </li>
     </>

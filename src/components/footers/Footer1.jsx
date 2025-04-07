@@ -96,7 +96,7 @@ export default function Footer1({
                           alt=""
                           src={
                             dark
-                              ? "/images/logo/beaubless_logo_black.png"
+                              ? "/images/logo/beaubless_logo_white.png"
                               : "/images/logo/Beaubless_Logo_PNG-04.png"
                           }
                           width={300}
@@ -106,7 +106,7 @@ export default function Footer1({
                    
 
                     <ul
-                      className={`tf-social-icon mt-3 ${
+                      className={`ms-3 tf-social-icon mt-3 ${
                         dark ? "style-white" : ""
                       } `}
                     >

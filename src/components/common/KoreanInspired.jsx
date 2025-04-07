@@ -21,7 +21,7 @@ export default function KoreanInspired() {
       <div className="position-relative" style={{ height: "1000px" }}>
         {/* Background Image */}
         <img
-          src="/images/banner/Korean.png"
+          src="/images/banner/Korean.jpg"
           alt="Korean Skincare Banner"
           className="w-100 h-100 position-absolute top-0 start-0 rounded"
           style={{ objectFit: "cover", zIndex: 0 }}

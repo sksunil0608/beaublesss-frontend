@@ -2130,7 +2130,7 @@
         transform: translateY(-50%);
         width: 12px;
         height: 1px;
-        background-color: var(--main);
+        background-color: white;
         transition: 0.25s ease-in-out;
       }
       &::before {
@@ -2141,15 +2141,23 @@
         transform: translate(-50%, -50%);
         width: 1px;
         height: 12px;
-        background-color: var(--main);
+        background-color: white;
         transition: 0.25s ease-in-out;
+      }
+      &.dark {
+        .footer-heading-mobile {
+          &::before,
+          &::after {
+            background-color: white !important;
+          }
+        }
       }
     }
     .footer-col-block {
       &.open {
         .footer-heading-mobile {
           &::before {
-            opacity: 0;
+            opacity: 2;
           }
           &::after {
             transform: translate(0%, -50%) rotate(180deg);
