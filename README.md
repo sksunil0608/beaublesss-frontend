@@ -39,6 +39,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v2.0.7  | Frontend UI Changed                                                      | Sunil   |
 | v2.0.8  | UI By Vijay                                                              | Sunil   |
 | v2.0.9  | Navigation Changed, Korean Section Image, Footer Image and Style Changed | Sunil   |
+| v3.0.0  |Mobile UI Little Bit Changed | Sunil   |
 
 ## Installation
 

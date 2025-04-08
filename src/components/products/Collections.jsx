@@ -1,6 +1,7 @@
 import React from "react";
 import Pagination from "../common/Pagination";
-import { collections11 } from "@/data/collections";
+import { collections } from "@/data/collections";
+
 
 export default function Collections() {
   return (
@@ -8,7 +9,7 @@ export default function Collections() {
       <div className="container">
         <div className="tf-grid-layout tf-col-2 lg-col-4">
           {/* item 1 */}
-          {collections11.map((item, index) => (
+          {collections.map((item, index) => (
             <div
               key={index}
               className="collection-position-2 radius-lg style-3 hover-img"
@@ -17,7 +18,7 @@ export default function Collections() {
                 <img
                   className="lazyload"
                   data-src={item.imgSrc}
-                  alt={`banner-${item.text.toLowerCase()}`}
+                  alt={`banner-${item.title.toLowerCase()}`}
                   src={item.imgSrc}
                   width={450}
                   height={600}
@@ -25,7 +26,7 @@ export default function Collections() {
               </a>
               <div className="content">
                 <a href="#" className="cls-btn">
-                  <h6 className="text">{item.text}</h6>
+                  <h6 className="text">{item.title}</h6>
                   <span className="count-item text-secondary">
                     {item.count}
                   </span>

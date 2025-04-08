@@ -1,17 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
 export default function BannerCollection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
-    <section className="flat-spacing">
-      <div className="">
+    <section>
+      <div>
         <img
           className="lazyload d-block w-100"
-          data-src="/images/banner/Offer.png"
+          data-src={
+            isMobile
+              ? "/images/banner/Offer-mobile.png"
+              : "/images/banner/Offer.png"
+          }
           alt="banner-cls"
-          src="/images/banner/Offer.png"
-          width={1600}
-          height={500}
+          src={
+            isMobile
+              ? "/images/banner/Offer-mobile.png"
+              : "/images/banner/Offer.png"
+          }
+          width={isMobile ? 768 : 1600}
+          height={isMobile ? 400 : 500}
         />
       </div>
     </section>

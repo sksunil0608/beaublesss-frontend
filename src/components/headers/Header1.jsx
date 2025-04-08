@@ -104,7 +104,7 @@ export default function Header1({ fullWidth = false }) {
                   to={`/order-tracking`}
                   className="nav-icon-item"
                 >
-                  <img src="images/icons/tracking.png" alt="Tracking" width={35} height={35} />
+                  <img src="/images/icons/tracking.png" alt="Tracking" width={35} height={35} />
                 </Link>
               </li>
               <li className="nav-wishlist">
