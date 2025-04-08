@@ -85,7 +85,7 @@ export default function ProductStikyBottom({
                 <div className="tf-sticky-atc-btns">
                   <a
                     onClick={() => {
-                      if (product.productType === "single") {
+                      if (product.productType === "single"||product.productType === "combo") {
                         // Directly add to cart for single product
                         addProductToCart(
                           product._id,

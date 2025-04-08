@@ -11,7 +11,9 @@ import parseJwt from "@/utlis/jwt";
 
 export default function ShopCart() {
   const [activeDiscountIndex, setActiveDiscountIndex] = useState(1);
-  const [selectedOption, setSelectedOption] = useState([]);
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  
   const {
     cartProducts,
     setCartProducts,
@@ -30,7 +32,16 @@ export default function ShopCart() {
   } = useContextElement();
   const [userId, setUserId] = useState(null);
   const token = localStorage.getItem("authToken");
-
+  // -------------Select Shipping Option-------------------
+  useEffect(() => {
+    if (shippingInfo?.length > 0 && !selectedOption) {
+      const defaultOption = shippingInfo[0];
+      setSelectedOption(defaultOption);
+      setSelectedShippingOption(defaultOption);
+ 
+    }
+  }, [shippingInfo, selectedOption, discountDetails, totalPrice]);
+  // -------------Select Shipping Option End-------------------  
   useEffect(() => {
     const fetchUserData = async () => {
       if (token) {

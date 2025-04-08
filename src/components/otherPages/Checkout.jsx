@@ -40,7 +40,6 @@ export default function Checkout() {
   const [passwordType, setPasswordType] = useState("password");
 
   const { showToast } = useToast();
-
   useEffect(() => {
     const fetchUserData = async () => {
       if (token) {
@@ -55,7 +54,23 @@ export default function Checkout() {
 
     fetchUserData();
   }, [token]);
+  const [selectedOption, setSelectedOption] = useState(null);
 
+  // -------------Select Shipping Option-------------------
+  useEffect(() => {
+    if (shippingInfo?.length > 0 && !selectedOption) {
+      const defaultOption = shippingInfo[0];
+      setSelectedOption(defaultOption);
+      setSelectedShippingOption(defaultOption);
+      setFinalOrderTotal(
+        Math.max(
+          totalPrice - (discountDetails[0]?.value || 0) + defaultOption.charges,
+          0
+        )
+      );
+    }
+  }, [shippingInfo, selectedOption, discountDetails, totalPrice]);
+  // -------------Select Shipping Option End-------------------  
   // ---------------Handle Login-------------------
   const togglePassword = () => {
     setPasswordType(passwordType === "password" ? "text" : "password");
@@ -200,7 +215,6 @@ export default function Checkout() {
   };
 
   const [couponCode, setCouponCode] = useState("");
-  const [selectedOption, setSelectedOption] = useState([]);
 
   return (
     <section>
@@ -681,7 +695,7 @@ export default function Checkout() {
                             name="ship-check"
                             className="tf-check-rounded"
                             id={option.id}
-                            checked={selectedOption === option}
+                            checked={selectedOption?.id === option.id}
                             onChange={() => {
                               setSelectedOption(option);
                               setSelectedShippingOption(option);

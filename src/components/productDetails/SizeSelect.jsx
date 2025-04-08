@@ -27,7 +27,6 @@ export default function SizeSelect({
       }, 0); // Microtask delay to prevent conflict
     }
   }, [cartProducts, productId]);
-
   return (
     <div className="variant-picker-item">
       <div className="d-flex justify-content-between mb_12">

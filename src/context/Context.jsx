@@ -36,7 +36,7 @@ export default function Context({ children }) {
   const [orderNote, setOrderNote] = useState(null);
   const [discountDetails, setDiscountDetails] = useState([]);
   const [selectedShippingOption, setSelectedShippingOption] = useState(
-    shippingInfo[0]
+    null
   );
   const [finalOrderTotal, setFinalOrderTotal] = useState(0);
   // Add this state when initializing your component

@@ -212,9 +212,10 @@ export default function Details1({ product }) {
                           </a>
                         </div>
                         <div className="tf-product-info-by-btn mb_10">
+                          {console.log(product.productType)}
                           <a
                             onClick={() => {
-                              if (product.productType === "single") {
+                              if (product.productType === "single" || product.productType === "combo") {
                                 // Directly add to cart for single product
                                 addProductToCart(
                                   product._id,

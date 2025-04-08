@@ -32,7 +32,7 @@ export default function OrderTrac() {
           </div>
           <div className="right">
             <h4 className="mb_8">Already have an account?</h4>
-            <p className="text-secondary">
+            <p className="text-primary">
               Welcome back. Sign in to access your personalized experience,
               saved preferences, and more. We're thrilled to have you with us
               again!
