@@ -102,8 +102,13 @@ export default function Context({ children }) {
     // Apply free shipping
     if (coupon.isFreeShipping) {
       showToast("success", "Free Shipping Applied");
+    }else{
+      // Add shipping charges if any
+    if (selectedShippingOption?.charges) {
+      discountedPrice += selectedShippingOption.charges;
     }
 
+    }
     // Update state with only the new coupon
     setDiscountDetails(discountArray);
     setFinalOrderTotal(Math.max(discountedPrice, 0));

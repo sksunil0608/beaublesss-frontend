@@ -62,12 +62,7 @@ export default function Checkout() {
       const defaultOption = shippingInfo[0];
       setSelectedOption(defaultOption);
       setSelectedShippingOption(defaultOption);
-      setFinalOrderTotal(
-        Math.max(
-          totalPrice - (discountDetails[0]?.value || 0) + defaultOption.charges,
-          0
-        )
-      );
+      
     }
   }, [shippingInfo, selectedOption, discountDetails, totalPrice]);
   // -------------Select Shipping Option End-------------------  
