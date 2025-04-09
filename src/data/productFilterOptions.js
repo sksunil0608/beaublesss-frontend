@@ -1,6 +1,8 @@
 import { getAllCategories } from "@/api/category";
-import { products } from "./products";
+import { getProductsOnce } from "@/hooks/useProducts";
 import slugify from "slugify";
+// This must be in an async function
+const products = await getProductsOnce();
 // Calculate min and max price dynamically
 export const minPrice = Math.min(...products.map((product) => product.finalPrice || product.price || 0));
 export const maxPrice = Math.max(...products.map((product) => product.finalPrice || product.price || 0));

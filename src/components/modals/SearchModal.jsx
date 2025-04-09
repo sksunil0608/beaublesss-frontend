@@ -1,9 +1,10 @@
 import { categories } from "@/data/productFilterOptions";
-import { products } from "@/data/products";
 import { useState } from "react";
 import ProductCard1 from "../productCards/ProductCard1";
+import useProducts from "@/hooks/useProducts";
 
 export default function SearchModal() {
+  const {products ,loading} = useProducts();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [loadedItems, setLoadedItems] = useState(products.slice(0, 8));

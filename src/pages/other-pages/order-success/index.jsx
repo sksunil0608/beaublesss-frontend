@@ -1,10 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import MetaComponent from "@/components/common/MetaComponent";
 import RelatedProducts from "@/components/productDetails/RelatedProducts";
-import CountdownTimer from "@/components/common/Countdown";
-import { useContextElement } from "@/context/Context";
-import { products } from "@/data/products";
 import Topbar from "@/components/headers/Topbar";
 import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";

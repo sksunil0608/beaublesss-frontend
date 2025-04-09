@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import { blogPosts } from "@/data/blogs";
+import { useBlogs } from "@/hooks/useBlogs";
 
 export default function Sidebar2({ blog }) {
+  const { blogPosts, loading } = useBlogs();
   return (
     <div className="sidebar maxw-360">
       <div className="sidebar-item sidebar-writer">

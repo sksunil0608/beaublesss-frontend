@@ -1,5 +1,5 @@
 import ProductCard1 from "@/components/productCards/ProductCard1";
-import { products } from "@/data/products";
+import useProducts from "@/hooks/useProducts";
 import React from "react";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,6 +8,7 @@ export default function Products2({
   title = "Best Selling",
   parentClass = "",
 }) {
+  const { products, loading } = useProducts();
   return (
     <section className={parentClass}>
       <div className="container">

@@ -5,13 +5,14 @@ import Listview from "./Listview";
 import { useEffect, useReducer, useState } from "react";
 import FilterModal from "./FilterModal";
 import { initialState, reducer } from "@/reducer/filterReducer";
-import { productMain } from "@/data/products";
 import FilterMeta from "./FilterMeta";
 
 import Pagination from "../common/Pagination";
 import ProductCard8 from "../productCards/ProductCard8";
+import useProducts from "@/hooks/useProducts";
 
 export default function Products3() {
+  const { products } = useProducts();
   const [activeLayout, setActiveLayout] = useState(4);
   const [state, dispatch] = useReducer(reducer, initialState);
   const {
@@ -79,40 +80,40 @@ export default function Products3() {
     let filteredArrays = [];
 
     if (brands.length) {
-      const filteredByBrands = [...productMain].filter((elm) =>
+      const filteredByBrands = [...products].filter((elm) =>
         brands.every((el) => elm.filterBrands.includes(el))
       );
       filteredArrays = [...filteredArrays, filteredByBrands];
     }
     if (availability !== "All") {
-      const filteredByavailability = [...productMain].filter(
+      const filteredByavailability = [...products].filter(
         (elm) => availability.value === elm.inStock
       );
       filteredArrays = [...filteredArrays, filteredByavailability];
     }
     if (color !== "All") {
-      const filteredByColor = [...productMain].filter((elm) =>
+      const filteredByColor = [...products].filter((elm) =>
         elm.filterColor.includes(color.name)
       );
       filteredArrays = [...filteredArrays, filteredByColor];
     }
     if (size !== "All" && size !== "Free Size") {
-      const filteredBysize = [...productMain].filter((elm) =>
+      const filteredBysize = [...products].filter((elm) =>
         elm.filterSizes.includes(size)
       );
       filteredArrays = [...filteredArrays, filteredBysize];
     }
     if (activeFilterOnSale) {
-      const filteredByonSale = [...productMain].filter((elm) => elm.oldPrice);
+      const filteredByonSale = [...products].filter((elm) => elm.oldPrice);
       filteredArrays = [...filteredArrays, filteredByonSale];
     }
 
-    const filteredByPrice = [...productMain].filter(
+    const filteredByPrice = [...products].filter(
       (elm) => elm.price >= price[0] && elm.price <= price[1]
     );
     filteredArrays = [...filteredArrays, filteredByPrice];
 
-    const commonItems = [...productMain].filter((item) =>
+    const commonItems = [...products].filter((item) =>
       filteredArrays.every((array) => array.includes(item))
     );
     dispatch({ type: "SET_FILTERED", payload: commonItems });

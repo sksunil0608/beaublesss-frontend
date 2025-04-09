@@ -37,7 +37,7 @@ const generateUniqueSlugs = (blogs) => {
   });
 };
 
-export const blogPosts = generateUniqueSlugs(blogs);
+// export const blogPosts = generateUniqueSlugs(blogs);
 
 
 export const blogPosts2 = [

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useContextElement } from "@/context/Context";
-import { products } from "@/data/products";
 import parseJwt from "@/utlis/jwt";
 import { addToWishlistBackend, getWishlistItems } from "@/api/cart";
+import useProducts from "@/hooks/useProducts";
 
 export default function Wishlist() {
+  const {products ,loading} = useProducts();
   const { removeFromWishlist, wishList, setWishList, addToWishlist } =
     useContextElement();
   const [items, setItems] = useState([]);

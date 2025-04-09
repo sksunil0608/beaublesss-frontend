@@ -1,11 +1,12 @@
-import { products } from "@/data/products";
 import React from "react";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ProductCard1 from "../productCards/ProductCard1";
 import { Link } from "react-router-dom";
+import useProducts from "@/hooks/useProducts";
 
 export default function SearchProducts() {
+  const {products ,loading} = useProducts();
   return (
     <>
       {/* search */}

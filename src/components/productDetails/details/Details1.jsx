@@ -7,8 +7,9 @@ import { Link } from "react-router-dom";
 import { useContextElement } from "@/context/Context";
 import ProductStikyBottom from "../ProductStikyBottom";
 import { categories } from "@/data/productFilterOptions";
-import { coupons } from "@/data/coupons";
+import { useCouponsAndShipping } from "@/hooks/useCouponsAndShipping";
 export default function Details1({ product }) {
+  const { coupons } = useCouponsAndShipping();
   const [activeColor, setActiveColor] = useState("gray");
   const [activeSize, setActiveSize] = useState(null);
   const [quantity, setQuantity] = useState(1);

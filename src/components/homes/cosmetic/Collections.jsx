@@ -1,41 +1,96 @@
-import { collections6 } from "@/data/collections";
-import React from "react";
+import { useEffect, useState } from "react";
+import { getAllCategories } from "@/api/category";
+import slugify from "slugify";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
 
 export default function Collections() {
+  const [collections, setCollections] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCollections = async () => {
+      try {
+        const response = await getAllCategories();
+        const collectionArray = response.categories || [];
+
+        setCollections(
+          collectionArray.map((item, index) => ({
+            id: item._id,
+            imgSrc: item.image[0],
+            alt: item.name,
+            title: item.name,
+            slug: slugify(item.name, { lower: true }),
+            subtitle: item.name,
+            delay: `${index * 0.1}s`,
+          }))
+        );
+      } catch (error) {
+        console.error("Error fetching collections:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCollections();
+  }, []);
+
   return (
-    <section className="flat-spacing">
+    <section id="downSection" className="pt-5">
       <div className="container">
-        <div className="heading-section text-center wow fadeInUp">
-          <h3 className="heading">Shop by Skin Concern</h3>
-          <p className="subheading text-secondary">
-            Fresh styles just in! Elevate your look.
-          </p>
-        </div>
-        <div className="tf-grid-layout tf-col-2 md-col-3">
-          {collections6.map((collection, index) => (
-            <div
-              className="collection-position-2 style-6 hover-img wow fadeInUp"
-              data-wow-delay={collection.delay}
-              key={index}
-            >
-              <a className="img-style">
-                <img
-                  className="ls-is-cached lazyloaded"
-                  data-src={collection.imgSrc}
-                  alt={collection.alt}
-                  src={collection.imgSrc}
-                  width={615}
-                  height={615}
-                />
-              </a>
-              <div className="content">
-                <Link to={`/shop-categories-top`} className="cls-btn">
-                  <h6 className="text">{collection.category}</h6>
-                </Link>
-              </div>
-            </div>
-          ))}
+        {loading ? (
+          <div className="text-center py-5">Loading collections...</div>
+        ) : (
+          <Swiper
+            dir="ltr"
+            slidesPerView={3}
+            breakpoints={{
+              1300: { slidesPerView: 3 },
+              924: { slidesPerView: 2 },
+              0: { slidesPerView: 1.7 },
+            }}
+            spaceBetween={30}
+          >
+            {collections.map((item, index) => (
+              <SwiperSlide key={item.id || index}>
+                <div
+                  className="collection-position-2 style-5 hover-img wow fadeInUp"
+                  data-wow-delay={item.delay}
+                >
+                  <Link className="img-style" to={`/collections/${item.slug}`}>
+                    <img
+                      className="lazyload"
+                      data-src={item.imgSrc}
+                      alt={item.alt}
+                      src={item.imgSrc}
+                      width={615}
+                      height={819}
+                    />
+                  </Link>
+                  <div className="content">
+                    <div>
+                      <Link
+                        to={`/collections/${item.slug}`}
+                        className="btn-line style-white text-white"
+                      >
+                        {item.title}
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
+        <div
+          className="sec-btn text-center pt-2 pb-2 rounded mt-5"
+          style={{
+            background: "#5e0d8b",
+          }}
+        >
+          <Link to="/products" className="text-white">
+            View All Products &gt;
+          </Link>
         </div>
       </div>
     </section>

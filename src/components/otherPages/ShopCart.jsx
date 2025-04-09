@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
-import CountdownTimer from "../common/Countdown";
 import { useContextElement } from "@/context/Context";
-import { getAllCoupons } from "@/api/coupans";
-import { coupons, shippingInfo } from "@/data/coupons";
 import { removeFromCart, updateCartItem } from "@/api/cart";
 import { getUserData } from "@/api/auth";
 import parseJwt from "@/utlis/jwt";
+import { useCouponsAndShipping } from "@/hooks/useCouponsAndShipping";
 
 export default function ShopCart() {
+    const { coupons, shippingInfo } = useCouponsAndShipping();
   const [activeDiscountIndex, setActiveDiscountIndex] = useState(1);
   const [selectedOption, setSelectedOption] = useState(null);
 

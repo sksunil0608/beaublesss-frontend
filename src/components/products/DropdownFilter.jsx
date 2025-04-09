@@ -5,11 +5,12 @@ import {
   colors,
   sizes,
 } from "@/data/productFilterOptions";
-import { productMain, products } from "@/data/products";
+import useProducts from "@/hooks/useProducts";
 
 import RangeSlider from "react-range-slider-input";
 
 export default function DropdownFilter({ allProps, setIsDDActive }) {
+  const {products ,loading} = useProducts();
   return (
     <div className="canvas-wrapper">
       <div className="canvas-header d-flex d-xl-none">
@@ -147,7 +148,7 @@ export default function DropdownFilter({ allProps, setIsDDActive }) {
                   <span className="count-brand">
                     ({" "}
                     {
-                      productMain.filter((el) =>
+                      products.filter((el) =>
                         el.filterBrands.includes(brand.label)
                       ).length
                     }

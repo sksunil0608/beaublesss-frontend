@@ -1,9 +1,10 @@
 import React from "react";
 import Pagination from "../common/Pagination";
 import { Link } from "react-router-dom";
+import { useBlogs } from "@/hooks/useBlogs";
 
-import { blogPosts } from "@/data/blogs";
 export default function BlogGrid() {
+  const { blogPosts, loading } = useBlogs();
   return (
     <div className="main-content-page">
       <div className="container">

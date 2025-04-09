@@ -7,9 +7,9 @@ import useAuthorization from "@/hooks/userAuthorization";
 import { getUserData, loginUser } from "@/api/auth";
 import parseJwt from "@/utlis/jwt";
 import { createOrder } from "@/api/order";
-import { coupons, shippingInfo } from "@/data/coupons";
 import ToastNotification from "../modals/ToastNotification";
 import { useToast } from "@/context/ToastContext";
+import { useCouponsAndShipping } from "@/hooks/useCouponsAndShipping";
 
 export default function Checkout() {
   const [paymentMethods] = useState(["PhonePe", "COD"]);
@@ -31,6 +31,7 @@ export default function Checkout() {
     setCartProducts,
   } = useContextElement();
   const isAuthorized = useAuthorization();
+  const { coupons, shippingInfo } = useCouponsAndShipping();
   const [userData, setUserData] = useState(null);
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [isLoading, setIsLoading] = useState(true);

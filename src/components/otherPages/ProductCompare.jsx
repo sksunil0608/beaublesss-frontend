@@ -1,11 +1,12 @@
 import { useContextElement } from "@/context/Context";
-import { allProducts, products } from "@/data/products";
 
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { categories, sizes } from "@/data/productFilterOptions";
+import useProducts from "@/hooks/useProducts";
 
 export default function ProductCompare() {
+  const {products ,loading} = useProducts();
   const {
     compareItem,
 

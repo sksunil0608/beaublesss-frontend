@@ -1,18 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
 import React from "react";
 
-import { products } from "@/data/products";
-import { Swiper, SwiperSlide } from "swiper/react";
-import ProductCard1 from "../productCards/ProductCard1";
 import {
   ContactMenu,
-  HomeMenu,
-  Shop,
-  blogMenu,
-  shopByMaterial,
-  shopByUse,
-  shopMenu,
-  shop_by_price,
+ 
 } from "@/data/menu";
 
 export default function Nav() {

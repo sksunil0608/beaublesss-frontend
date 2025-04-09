@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 import { useContextElement } from "@/context/Context";
-import { products } from "@/data/products";
 import parseJwt from "@/utlis/jwt";
 import { getUserData } from "@/api/auth";
 import { addToCart, getCartItems, removeFromCart } from "@/api/cart";
 import EstimateShipping from "./EstimateShipping";
 import Coupon from "./Coupon";
 import OrderNote from "./OrderNote";
+import useProducts from "@/hooks/useProducts";
 export default function CartModal() {
   const {
     cartProducts,
@@ -19,7 +19,7 @@ export default function CartModal() {
     discountDetails,
     setDiscountDetails,
   } = useContextElement();
-
+  const {products ,loading} = useProducts();
   const [userId, setUserId] = useState(null);
   const [cartMerged, setCartMerged] = useState(false);
   const token = localStorage.getItem("authToken");

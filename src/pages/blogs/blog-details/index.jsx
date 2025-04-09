@@ -4,7 +4,6 @@ import BlogDetail2 from "@/components/blogs/BlogDetail2";
 import RelatedBlogs from "@/components/blogs/RelatedBlogs";
 import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";
-import Topbar6 from "@/components/headers/Topbar6";
 import MetaComponent from "@/components/common/MetaComponent";
 import Topbar from "@/components/headers/Topbar";
 import { getBlogBySlug } from "@/api/blogs";

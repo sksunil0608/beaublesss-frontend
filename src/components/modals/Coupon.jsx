@@ -1,8 +1,10 @@
 import { useContextElement } from "@/context/Context";
+import { useCouponsAndShipping } from "@/hooks/useCouponsAndShipping";
 import { useState } from "react";
-import { coupons } from "@/data/coupons"; // Importing coupons array
 
 const Coupon = ({ currentOpenPopup, setCurrentOpenPopup }) => {
+  const { coupons } = useCouponsAndShipping();
+
   const { applyCoupon, activeCoupon, setActiveCoupon } = useContextElement();
 
   const [couponCode, setCouponCode] = useState("");

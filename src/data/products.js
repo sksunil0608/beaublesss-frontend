@@ -2,114 +2,114 @@ import { getAllProducts } from "@/api/product";
 const myproducts = await getAllProducts();
 const prodArray = myproducts.products; // Get product array
 // Extract unique sizes dynamically
-export const products = prodArray.map((prod) => {
-  const isVariantProduct = prod.productType === "variant";
+// export const products = prodArray.map((prod) => {
+//   const isVariantProduct = prod.productType === "variant";
 
-  const variants = isVariantProduct
-    ? prod.variants?.map((variant) => ({
-        variantId: variant._id,
-        size: variant.size || "Default Size",
-        inventory: variant.inventory || 0,
-        category: prod.category,
-        offerPrice:
-          variant.offerprice ||
-          prod.offerPrice ||
-          prod.finalPrice ||
-          prod.price ||
-          0,
-        finalPrice: variant.finalprice || prod.finalPrice || prod.price || 0,
-      })) || []
-    : [];
+//   const variants = isVariantProduct
+//     ? prod.variants?.map((variant) => ({
+//         variantId: variant._id,
+//         size: variant.size || "Default Size",
+//         inventory: variant.inventory || 0,
+//         category: prod.category,
+//         offerPrice:
+//           variant.offerprice ||
+//           prod.offerPrice ||
+//           prod.finalPrice ||
+//           prod.price ||
+//           0,
+//         finalPrice: variant.finalprice || prod.finalPrice || prod.price || 0,
+//       })) || []
+//     : [];
 
-  const primaryVariant = variants[0] || {}; // Get first variant by default
+//   const primaryVariant = variants[0] || {}; // Get first variant by default
 
-  // Handling Reviews Data
-  const totalReviews = prod.reviews?.length || 0;
-  const averageRating = totalReviews
-    ? (
-        prod.reviews.reduce((acc, review) => acc + (review.rating || 0), 0) /
-        totalReviews
-      ).toFixed(1)
-    : 0;
+//   // Handling Reviews Data
+//   const totalReviews = prod.reviews?.length || 0;
+//   const averageRating = totalReviews
+//     ? (
+//         prod.reviews.reduce((acc, review) => acc + (review.rating || 0), 0) /
+//         totalReviews
+//       ).toFixed(1)
+//     : 0;
 
-  return {
-    _id: prod._id,
-    id: prod._id,
-    variants,
-    productType: prod.productType,
-    productId:prod._id,
-    title: prod.name,
-    name: prod.name,
-    slug: prod.slug || "unknown-product",
-    price: isVariantProduct
-      ? primaryVariant.finalPrice
-      : prod.finalPrice ?? prod.price ?? 0,
-    finalPrice: isVariantProduct
-      ? primaryVariant.finalPrice
-      : prod.finalPrice ?? prod.price ?? 0,
-    offerPrice: isVariantProduct
-      ? primaryVariant.offerPrice
-      : prod.offerPrice ?? prod.finalPrice ?? prod.price ?? 0,
-    images: prod.images || [],
-    imgSrc: prod.images?.[0] || "default-image.jpg",
-    imgHover: prod.images?.[1] || prod.images?.[0] || "default-image-hover.jpg",
-    isOnSale: prod.isOnSale || false,
-    isNewArrival: prod.isNewArrival || false,
-    isFeatured: prod.isFeatured || false,
-    stock: isVariantProduct
-      ? variants.reduce((total, v) => total + (v.inventory || 0), 0)
-      : prod.stock || 0,
-    inStock: isVariantProduct
-      ? primaryVariant.inventory
-      : typeof prod.stock === "number"
-      ? prod.stock
-      : Number(prod.stock) || 0,
-    brand: prod.brand || "Unknown Brand",
-    shortDescription: prod.shortDescription || "",
-    description: prod.description || "",
-    shades: prod.shades || [],
-    category:prod.category,
-    ingredients: prod.ingredients || [],
-    createdAt: prod.createdAt || "",
-    updatedAt: prod.updatedAt || "",
-    discount: prod.discount || { percentage: 0, validUntil: null },
+//   return {
+//     _id: prod._id,
+//     id: prod._id,
+//     variants,
+//     productType: prod.productType,
+//     productId:prod._id,
+//     title: prod.name,
+//     name: prod.name,
+//     slug: prod.slug || "unknown-product",
+//     price: isVariantProduct
+//       ? primaryVariant.finalPrice
+//       : prod.finalPrice ?? prod.price ?? 0,
+//     finalPrice: isVariantProduct
+//       ? primaryVariant.finalPrice
+//       : prod.finalPrice ?? prod.price ?? 0,
+//     offerPrice: isVariantProduct
+//       ? primaryVariant.offerPrice
+//       : prod.offerPrice ?? prod.finalPrice ?? prod.price ?? 0,
+//     images: prod.images || [],
+//     imgSrc: prod.images?.[0] || "default-image.jpg",
+//     imgHover: prod.images?.[1] || prod.images?.[0] || "default-image-hover.jpg",
+//     isOnSale: prod.isOnSale || false,
+//     isNewArrival: prod.isNewArrival || false,
+//     isFeatured: prod.isFeatured || false,
+//     stock: isVariantProduct
+//       ? variants.reduce((total, v) => total + (v.inventory || 0), 0)
+//       : prod.stock || 0,
+//     inStock: isVariantProduct
+//       ? primaryVariant.inventory
+//       : typeof prod.stock === "number"
+//       ? prod.stock
+//       : Number(prod.stock) || 0,
+//     brand: prod.brand || "Unknown Brand",
+//     shortDescription: prod.shortDescription || "",
+//     description: prod.description || "",
+//     shades: prod.shades || [],
+//     category:prod.category,
+//     ingredients: prod.ingredients || [],
+//     createdAt: prod.createdAt || "",
+//     updatedAt: prod.updatedAt || "",
+//     discount: prod.discount || { percentage: 0, validUntil: null },
 
-    // Ratings and Reviews
-    ratings: {
-      average: Number(averageRating), // Average rating based on reviews
-      totalReviews: totalReviews, // Total number of reviews
-      reviews: prod.reviews || [], // Actual reviews array
-    },
-    sizes: isVariantProduct ? variants.map((v) => v.size) : [],
-    // Dynamic Filter Values
-    filterBrands: prod.brand ? [prod.brand] : ["Generic"],
-    filterColor: prod.shades?.length ? prod.shades : ["Default Color"],
-    filterSizes: isVariantProduct ? variants.map((v) => v.size) : [],
-    // Filter Availability
-    filterAvailability: [
-      isVariantProduct
-        ? primaryVariant.inventory > 0
-          ? "In Stock"
-          : "Out of Stock"
-        : typeof prod.stock === "number"
-        ? prod.stock > 0
-          ? "In Stock"
-          : "Out of Stock"
-        : Number(prod.stock) > 0
-        ? "In Stock"
-        : "Out of Stock",
-    ].filter(Boolean),
+//     // Ratings and Reviews
+//     ratings: {
+//       average: Number(averageRating), // Average rating based on reviews
+//       totalReviews: totalReviews, // Total number of reviews
+//       reviews: prod.reviews || [], // Actual reviews array
+//     },
+//     sizes: isVariantProduct ? variants.map((v) => v.size) : [],
+//     // Dynamic Filter Values
+//     filterBrands: prod.brand ? [prod.brand] : ["Generic"],
+//     filterColor: prod.shades?.length ? prod.shades : ["Default Color"],
+//     filterSizes: isVariantProduct ? variants.map((v) => v.size) : [],
+//     // Filter Availability
+//     filterAvailability: [
+//       isVariantProduct
+//         ? primaryVariant.inventory > 0
+//           ? "In Stock"
+//           : "Out of Stock"
+//         : typeof prod.stock === "number"
+//         ? prod.stock > 0
+//           ? "In Stock"
+//           : "Out of Stock"
+//         : Number(prod.stock) > 0
+//         ? "In Stock"
+//         : "Out of Stock",
+//     ].filter(Boolean),
 
-    // Tab Filters
-    tabFilterOptions2: [
-      prod.isNewArrival ? "NEW LAUNCHES" : null,
-      prod.isOnSale ? "On Sale" : null,
-      prod.isFeatured ? "BESTSELLERS" : null,
-    ].filter(Boolean), // Remove null values
+//     // Tab Filters
+//     tabFilterOptions2: [
+//       prod.isNewArrival ? "NEW LAUNCHES" : null,
+//       prod.isOnSale ? "On Sale" : null,
+//       prod.isFeatured ? "BESTSELLERS" : null,
+//     ].filter(Boolean), // Remove null values
 
-    tabFilterOptions: [prod.category?.name || "All"],
-  };
-});
+//     tabFilterOptions: [prod.category?.name || "All"],
+//   };
+// });
 
 export const products2 = prodArray.map((prod) => ({
   id: prod._id,
@@ -2824,59 +2824,59 @@ export const products44 = [
     oldPrice: 88.0,
   },
 ];
-export const productMain = [...products, ...products7, ...products42];
-export const allProducts = [
-  ...products,
-  ...products2,
-  ...products3,
-  ...products4,
-  ...products5,
-  ...products6,
-  ...products7,
-  ...products8,
-  ...products9,
-  ...product10,
-  ...products11,
-  ...testimonialsWithProduct,
-  ...products12,
-  ...testimonialsWithProduct2,
-  ...testimonialsWithProduct3,
-  ...product13,
-  ...products14,
-  ...products15,
-  ...product16,
-  ...testimonialsWithProduct4,
-  ...product17,
-  ...products18,
-  ...products19,
-  ...testimonialsWithProduct5,
-  ...products20,
-  ...products21,
-  ...products22,
-  ...testimonialsWithProduct6,
-  ...products23,
-  ...products24,
-  ...products25,
-  ...testimonialsWithProduct7,
-  ...products26,
-  ...products27,
-  ...testimonialsWithProduct8,
-  ...products28,
-  ...products29,
-  ...products30,
-  ...products31,
-  ...products32,
-  ...products33,
-  ...products34,
-  ...products35,
-  ...products36,
-  ...lookbookProducts,
-  ...testimonialsWithProduct9,
-  ...products37,
-  ...products39,
-  ...products40,
-  ...products41,
-  ...products42,
-  ...products43,
-  ...products44,
-];
+// export const productMain = [...products, ...products7, ...products42];
+// export const allProducts = [
+//   ...products,
+//   ...products2,
+//   ...products3,
+//   ...products4,
+//   ...products5,
+//   ...products6,
+//   ...products7,
+//   ...products8,
+//   ...products9,
+//   ...product10,
+//   ...products11,
+//   ...testimonialsWithProduct,
+//   ...products12,
+//   ...testimonialsWithProduct2,
+//   ...testimonialsWithProduct3,
+//   ...product13,
+//   ...products14,
+//   ...products15,
+//   ...product16,
+//   ...testimonialsWithProduct4,
+//   ...product17,
+//   ...products18,
+//   ...products19,
+//   ...testimonialsWithProduct5,
+//   ...products20,
+//   ...products21,
+//   ...products22,
+//   ...testimonialsWithProduct6,
+//   ...products23,
+//   ...products24,
+//   ...products25,
+//   ...testimonialsWithProduct7,
+//   ...products26,
+//   ...products27,
+//   ...testimonialsWithProduct8,
+//   ...products28,
+//   ...products29,
+//   ...products30,
+//   ...products31,
+//   ...products32,
+//   ...products33,
+//   ...products34,
+//   ...products35,
+//   ...products36,
+//   ...lookbookProducts,
+//   ...testimonialsWithProduct9,
+//   ...products37,
+//   ...products39,
+//   ...products40,
+//   ...products41,
+//   ...products42,
+//   ...products43,
+//   ...products44,
+// ];

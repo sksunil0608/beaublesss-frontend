@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import React from "react";
-
-import { blogPosts } from "@/data/blogs";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
+import { useBlogs } from "@/hooks/useBlogs";
 export default function RelatedBlogs() {
+    const { blogPosts, loading } = useBlogs();
   return (
     <section className="flat-spacing">
       <div className="container">

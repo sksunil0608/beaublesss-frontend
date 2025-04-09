@@ -1,9 +1,11 @@
-import { products } from "@/data/products";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import ProductCard1 from "../productCards/ProductCard1";
 import { Pagination } from "swiper/modules";
+import useProducts from "@/hooks/useProducts";
 
 export default function RecentProducts() {
+  const {products ,loading} = useProducts();
   return (
     <section className="flat-spacing pt-0">
       <div className="container">

@@ -5,14 +5,14 @@ import GridView from "./GridView";
 import { useEffect, useReducer, useRef, useState } from "react";
 import FilterModal from "./FilterModal";
 import { initialState, reducer } from "@/reducer/filterReducer";
-import { products } from "@/data/products";
 import FilterMeta from "./FilterMeta";
+import useProducts from "@/hooks/useProducts";
 
 export default function Products15({ parentClass = "flat-spacing" }) {
   const [activeLayout, setActiveLayout] = useState(4);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [loading, setLoading] = useState(false);
-
+  const {products} = useProducts();
   const [loadedItems, setLoadedItems] = useState([]);
 
   const {

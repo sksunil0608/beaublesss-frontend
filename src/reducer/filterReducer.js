@@ -1,4 +1,5 @@
-import { products } from "@/data/products";
+import { getProductsOnce } from "@/hooks/useProducts";
+const products = await getProductsOnce();
 
 // Calculate min and max price dynamically
 const minPrice = Math.min(...products.map((product) => product.price));

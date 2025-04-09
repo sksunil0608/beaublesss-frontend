@@ -1,32 +1,63 @@
 import Footer1 from "@/components/footers/Footer1";
 import Header1 from "@/components/headers/Header1";
-import Topbar6 from "@/components/headers/Topbar6";
-import Products1 from "@/components/products/Products1";
-import ShopCategories from "@/components/products/ShopCategories";
 import { Link, Navigate, useParams } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MetaComponent from "@/components/common/MetaComponent";
 import Topbar from "@/components/headers/Topbar";
-import Categories from "@/components/common/Categories";
-import Products13 from "@/components/products/Products13";
-import Products3 from "@/components/common/Products3";
-import Products11 from "@/components/products/Products11";
 import Products14 from "@/components/products/Products14";
-import Products15 from "@/components/products/Products15";
-import { collections } from "@/data/collections";
+import { getAllCategories } from "@/api/category";
+import slugify from "slugify";
+
 const metadata = {
   title: "Shop Collections || Beaubless",
   description: "Shop Collections",
 };
+
 export default function ShopCategoriesTopPage1() {
-  // Check if slug exists in collection
   const { slug } = useParams();
-  const collection = collections.find((item) => item.slug === slug);
+
+  const [loading, setLoading] = useState(true);
+  const [collection, setCollection] = useState(null);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const res = await getAllCategories();
+        const collectionArray = res.categories.map((collection, index) => ({
+          id: collection._id,
+          imgSrc: collection.image?.[0],
+          alt: collection.name,
+          title: collection.name,
+          slug: slugify(collection.name, { lower: true }),
+          subtitle: collection.name,
+          delay: `${index * 0.1}s`,
+        }));
+
+        setCollections(collectionArray);
+
+        const matchedCollection = collectionArray.find(
+          (item) => item.slug === slug
+        );
+
+        setCollection(matchedCollection || null);
+      } catch (err) {
+        console.error("Failed to fetch categories:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, [slug]);
+
+  if (loading) return null; // or a spinner
+
   if (!collection) {
     return <Navigate to="/products" replace />;
   }
-  // Sending Collection Id to Collection page
+
   const collectionId = collection.id;
+
   return (
     <>
       <MetaComponent meta={metadata} />
@@ -55,7 +86,6 @@ export default function ShopCategoriesTopPage1() {
           </div>
         </div>
       </div>
-      {/* <Categories /> */}
       <Products14 parentClass="flat-spacing" collectionId={collectionId} />
       <Footer1 />
     </>

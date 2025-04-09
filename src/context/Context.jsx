@@ -6,8 +6,6 @@ import {
   updateCartItem,
 } from "@/api/cart";
 import ToastNotification from "@/components/modals/ToastNotification";
-import { shippingInfo } from "@/data/coupons";
-import { allProducts, products } from "@/data/products";
 import useAuthorization from "@/hooks/userAuthorization";
 import parseJwt from "@/utlis/jwt";
 import { openCartModal } from "@/utlis/openCartModal";
@@ -17,6 +15,7 @@ import React, { useEffect } from "react";
 import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useToast } from "./ToastContext";
+import { getProductsOnce } from "@/hooks/useProducts";
 const dataContext = React.createContext();
 export const useContextElement = () => {
   return useContext(dataContext);
@@ -24,12 +23,32 @@ export const useContextElement = () => {
 
 export default function Context({ children }) {
   const isAuthorized = useAuthorization();
+  const [products, setProducts] = useState([]);
   const [cartProducts, setCartProducts] = useState([]);
   const [wishList, setWishList] = useState([]);
   const [compareItem, setCompareItem] = useState([]);
-  const [quickViewItem, setQuickViewItem] = useState(products[0]);
-  const [quickAddItem, setQuickAddItem] = useState(products[0].id);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [quickViewItem, setQuickViewItem] = useState(null);
+const [quickAddItem, setQuickAddItem] = useState(null);
+console.log(products)
+useEffect(() => {
+  const fetchProducts = async () => {
+    try {
+      const data = await getProductsOnce();
+      setProducts(data);
+
+      // Optionally set defaults
+      if (data.length > 0) {
+        setQuickViewItem(data[0]);
+        setQuickAddItem(data[0].id);
+      }
+    } catch (err) {
+      console.error("Failed to load products:", err);
+    }
+  };
+
+  fetchProducts();
+}, []);
+    const [totalPrice, setTotalPrice] = useState(0);
 
   const [minThresholdFreeDelivery, setMinThresholdFreeDelivery] = useState(999);
   const [activeCoupon, setActiveCoupon] = useState("");
@@ -40,7 +59,6 @@ export default function Context({ children }) {
   );
   const [finalOrderTotal, setFinalOrderTotal] = useState(0);
   // Add this state when initializing your component
-
   const { showToast } = useToast(); // ✅ Access toast function
   const [userId, setUserId] = useState(null);
   const token = localStorage.getItem("authToken");

@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
-import { products } from "@/data/products";
 import ProductCard1 from "../productCards/ProductCard1";
+import useProducts from "@/hooks/useProducts";
 export default function RelatedProducts() {
+  const { products, loading } = useProducts();
   return (
     <section className="flat-spacing">
       <div className="container flat-animate-tab">

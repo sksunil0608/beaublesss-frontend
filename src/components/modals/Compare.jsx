@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 import { useContextElement } from "@/context/Context";
-import { products } from "@/data/products";
+import useProducts from "@/hooks/useProducts";
 export default function Compare() {
+  const {products ,loading} = useProducts();
   const { removeFromCompareItem, compareItem, setCompareItem } =
     useContextElement();
   const [items, setItems] = useState([]);

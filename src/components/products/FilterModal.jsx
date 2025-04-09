@@ -5,7 +5,6 @@ import {
   sizes,
   categories,
 } from "@/data/productFilterOptions";
-import { products } from "@/data/products";
 
 import RangeSlider from "react-range-slider-input";
 export default function FilterModal({ allProps }) {

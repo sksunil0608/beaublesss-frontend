@@ -6,11 +6,12 @@ import Sorting from "./Sorting";
 import GridView from "./GridView";
 import FilterModal from "./FilterModal";
 import { initialState, reducer } from "@/reducer/filterReducer";
-import { products } from "@/data/products";
 import FilterMeta from "./FilterMeta";
 import FilterSidebar from "./FilterSidebar";
+import useProducts from "@/hooks/useProducts";
 
 export default function Products11() {
+  const {products ,loading} = useProducts();
   const [activeLayout, setActiveLayout] = useState(4);
   const [state, dispatch] = useReducer(reducer, initialState);
   const {

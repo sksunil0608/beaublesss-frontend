@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import ProductCard1 from "../productCards/ProductCard1";
 import Pagination from "../common/Pagination";
 import { Link } from "react-router-dom";
-import { products } from "@/data/products";
+import useProducts from "@/hooks/useProducts";
 
 export default function Wishlist() {
+  const {products ,loading} = useProducts();
   const { removeFromWishlist, wishList } = useContextElement();
   const [items, setItems] = useState([]);
   useEffect(() => {

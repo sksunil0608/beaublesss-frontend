@@ -1,17 +1,17 @@
-import { getAllCategories } from "@/api/category";
-import slugify from "slugify";
+// import { getAllCategories } from "@/api/category";
+// import slugify from "slugify";
 
-const mycollections = await getAllCategories();
-const collectionArray = mycollections.categories; // Get product array
-export const collections = collectionArray.map((collection,index) => ({
-  id:collection._id,
- imgSrc: collection.image[0],
-    alt: collection.name,
-    title: collection.name,
-    slug: slugify(collection.name, { lower: true }),
-    subtitle: collection.name,
-    delay: `${index * 0.1}s`,
-}));
+// const mycollections = await getAllCategories();
+// const collectionArray = mycollections.categories; // Get product array
+// export const collections = collectionArray.map((collection,index) => ({
+//   id:collection._id,
+//  imgSrc: collection.image[0],
+//     alt: collection.name,
+//     title: collection.name,
+//     slug: slugify(collection.name, { lower: true }),
+//     subtitle: collection.name,
+//     delay: `${index * 0.1}s`,
+// }));
 
 
 // export const collections = [

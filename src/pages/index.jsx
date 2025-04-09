@@ -4,15 +4,14 @@ import Topbar from "@/components/headers/Topbar";
 import Hero from "@/components/homes/cosmetic/Hero";
 import MetaComponent from "@/components/common/MetaComponent";
 import { lazy, Suspense, useState, useEffect } from "react";
-import Testimonials2 from "@/components/common/Testimonials2";
 import Testimonials3 from "@/components/common/Testimonials3";
 import BannerTab from "@/components/common/BannerTab";
 import KoreanInspired from "@/components/common/KoreanInspired";
 const BannerCollection = lazy(() =>
-  import("@/components/homes/home-1/BannerCollection")
+  import("@/components/homes/cosmetic/BannerCollection")
 );
 const BannerCountdown = lazy(() =>
-  import("@/components/homes/home-1/BannerCountdown")
+  import("@/components/homes/cosmetic/BannerCountdown")
 );
 const Features = lazy(() => import("@/components/common/Features"));
 const ShopGram = lazy(() => import("@/components/common/ShopGram"));
@@ -22,8 +21,8 @@ const MarqueeSection2 = lazy(() =>
 );
 const Products = lazy(() => import("@/components/common/Products5"));
 const Tiktok = lazy(() => import("@/components/common/Tiktok"));
-const Lookbook = lazy(() => import("@/components/homes/skincare/Lookbook"));
-const Collections = lazy(() => import("@/components/homes/beauty/Collections"));
+const Lookbook = lazy(() => import("@/components/homes/cosmetic/Lookbook"));
+const Collections = lazy(() => import("@/components/homes/cosmetic/Collections"));
 const Products3 = lazy(() => import("@/components/common/Products3"));
 
 const metadata = {

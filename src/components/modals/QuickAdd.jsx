@@ -1,12 +1,13 @@
 import { useContextElement } from "@/context/Context";
-import { allProducts, products } from "@/data/products";
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ColorSelect from "../productDetails/ColorSelect";
 import SizeSelect from "../productDetails/SizeSelect";
 import QuantitySelect from "../productDetails/QuantitySelect";
+import useProducts from "@/hooks/useProducts";
 export default function QuickAdd() {
+  const {products ,loading} = useProducts();
   const [quantity, setQuantity] = useState(1);
   const {
     quickAddItem,
