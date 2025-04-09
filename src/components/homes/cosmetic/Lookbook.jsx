@@ -1,11 +1,13 @@
-import { products, products11, products5 } from "@/data/products";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { useContextElement } from "@/context/Context";
 import { Pagination } from "swiper/modules";
+import useProducts from "@/hooks/useProducts";
 export default function Lookbook() {
+    const {products} = useProducts()
   const {
     setQuickAddItem,
     addProductToCart,

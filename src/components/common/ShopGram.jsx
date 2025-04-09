@@ -1,10 +1,11 @@
-import { products, products2 } from "@/data/products";
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Link } from "react-router-dom";
 import { Pagination } from "swiper/modules";
+import useProducts from "@/hooks/useProducts";
 export default function ShopGram({ parentClass = "" }) {
+  const {products} =useProducts();
   return (
     <section className={parentClass}>
       <div className="container">

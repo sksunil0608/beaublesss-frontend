@@ -1,10 +1,12 @@
-import { products, products9 } from "@/data/products";
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Link } from "react-router-dom";
 import { Pagination } from "swiper/modules";
+import { use } from "react";
+import useProducts from "@/hooks/useProducts";
 export default function Tiktok({ parentClass = "flat-spacing pt-0" }) {
+  const {products} = useProducts();
   const videoRefs = useRef([]);
   const [activeVideoIndex, setActiveVideoIndex] = useState(null);
 
