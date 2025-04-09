@@ -1,16 +1,20 @@
-import {
-  availabilityOptions,
-  brands,
-  categories,
-  colors,
-  sizes,
-} from "@/data/productFilterOptions";
+
+import { useProductFilters } from "@/hooks/useProductFilters";
 import useProducts from "@/hooks/useProducts";
 
 import RangeSlider from "react-range-slider-input";
 
 export default function DropdownFilter({ allProps, setIsDDActive }) {
   const {products ,loading} = useProducts();
+  const {
+    minPrice,
+    maxPrice,
+    categories,
+    sizes,
+    colors,
+    availabilityOptions,
+    brands,
+  } = useProductFilters();
   return (
     <div className="canvas-wrapper">
       <div className="canvas-header d-flex d-xl-none">

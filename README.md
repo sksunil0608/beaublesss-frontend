@@ -43,6 +43,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v3.0.1  |Select Default Shipping Option Enable| Sunil   |
 | v3.0.2  |Corrected the loader| Sunil   |
 | v3.0.3  |Corrected build error| Sunil   |
+| v3.0.4  |Removed All product fetch from data array| Sunil   |
 
 ## Installation
 

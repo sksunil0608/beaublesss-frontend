@@ -33,7 +33,7 @@ export default function ShopCategoriesTopPage1() {
           delay: `${index * 0.1}s`,
         }));
 
-        setCollections(collectionArray);
+        setCollection(collectionArray);
 
         const matchedCollection = collectionArray.find(
           (item) => item.slug === slug
@@ -57,7 +57,6 @@ export default function ShopCategoriesTopPage1() {
   }
 
   const collectionId = collection.id;
-
   return (
     <>
       <MetaComponent meta={metadata} />

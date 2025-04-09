@@ -6,9 +6,19 @@ import QuantitySelect from "../QuantitySelect";
 import { Link } from "react-router-dom";
 import { useContextElement } from "@/context/Context";
 import ProductStikyBottom from "../ProductStikyBottom";
-import { categories } from "@/data/productFilterOptions";
 import { useCouponsAndShipping } from "@/hooks/useCouponsAndShipping";
+import { useProductFilters } from "@/hooks/useProductFilters";
 export default function Details1({ product }) {
+
+  const {
+    minPrice,
+    maxPrice,
+    categories,
+    sizes,
+    colors,
+    availabilityOptions,
+    brands,
+  } = useProductFilters();
   const { coupons } = useCouponsAndShipping();
   const [activeColor, setActiveColor] = useState("gray");
   const [activeSize, setActiveSize] = useState(null);

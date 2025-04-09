@@ -193,78 +193,87 @@ export default function Products15({ parentClass = "flat-spacing" }) {
   // May be this pagination is already there somewhere i am not sure
   return (
     <>
-      <section className={parentClass}>
-        <div className="container">
-          <div className="tf-shop-control">
-            <div className="tf-control-filter">
-              <a
-                href="#filterShop"
-                data-bs-toggle="offcanvas"
-                aria-controls="filterShop"
-                className="tf-btn-filter"
-              >
-                <span className="icon icon-filter" />
-                <span className="text">Filters</span>
-              </a>
-              <div
-                onClick={allProps.toggleFilterWithOnSale}
-                className={`d-none d-lg-flex shop-sale-text ${
-                  activeFilterOnSale ? "active" : ""
-                }`}
-              >
-                <i className="icon icon-checkCircle" />
-                <p className="text-caption-1">Shop sale items only</p>
+    {(loading || !loadedItems.length) ? (
+      <>
+        <p>Loading...</p>
+      </>
+    ) : (
+      <>
+        (<section className={parentClass}>
+          <div className="container">
+            <div className="tf-shop-control">
+              <div className="tf-control-filter">
+                <a
+                  href="#filterShop"
+                  data-bs-toggle="offcanvas"
+                  aria-controls="filterShop"
+                  className="tf-btn-filter"
+                >
+                  <span className="icon icon-filter" />
+                  <span className="text">Filters</span>
+                </a>
+                <div
+                  onClick={allProps.toggleFilterWithOnSale}
+                  className={`d-none d-lg-flex shop-sale-text ${
+                    activeFilterOnSale ? "active" : ""
+                  }`}
+                >
+                  <i className="icon icon-checkCircle" />
+                  <p className="text-caption-1">Shop sale items only</p>
+                </div>
+              </div>
+              <ul className="tf-control-layout">
+                <LayoutHandler
+                  setActiveLayout={setActiveLayout}
+                  activeLayout={activeLayout}
+                />
+              </ul>
+              <div className="tf-control-sorting">
+                <p className="d-none d-lg-block text-caption-1">Sort by:</p>
+                <Sorting allProps={allProps} />
               </div>
             </div>
-            <ul className="tf-control-layout">
-              <LayoutHandler
-                setActiveLayout={setActiveLayout}
-                activeLayout={activeLayout}
+            <div className="wrapper-control-shop">
+              <FilterMeta
+                productLength={loadedItems.length}
+                allProps={allProps}
               />
-            </ul>
-            <div className="tf-control-sorting">
-              <p className="d-none d-lg-block text-caption-1">Sort by:</p>
-              <Sorting allProps={allProps} />
+  
+              {activeLayout == 1 ? (
+                <div className="tf-list-layout wrapper-shop" id="listLayout">
+                  <Listview pagination={false} products={loadedItems} />
+                </div>
+              ) : (
+                <div
+                  className={`tf-grid-layout wrapper-shop tf-col-${activeLayout}`}
+                  id="gridLayout"
+                >
+                  <GridView pagination={false} products={loadedItems} />
+                </div>
+              )}
+              {sorted.length == loadedItems.length ? (
+                ""
+              ) : (
+                <div
+                  className="wd-load d-flex justify-content-center"
+                  onClick={() => handleLoad()}
+                >
+                  <button
+                    ref={elementRef}
+                    className={`load-more-btn btn-out-line btn-infinite-scroll tf-loading ${
+                      loading ? "loading" : ""
+                    } `}
+                  ></button>
+                </div>
+              )}
             </div>
           </div>
-          <div className="wrapper-control-shop">
-            <FilterMeta
-              productLength={loadedItems.length}
-              allProps={allProps}
-            />
-
-            {activeLayout == 1 ? (
-              <div className="tf-list-layout wrapper-shop" id="listLayout">
-                <Listview pagination={false} products={loadedItems} />
-              </div>
-            ) : (
-              <div
-                className={`tf-grid-layout wrapper-shop tf-col-${activeLayout}`}
-                id="gridLayout"
-              >
-                <GridView pagination={false} products={loadedItems} />
-              </div>
-            )}
-            {sorted.length == loadedItems.length ? (
-              ""
-            ) : (
-              <div
-                className="wd-load d-flex justify-content-center"
-                onClick={() => handleLoad()}
-              >
-                <button
-                  ref={elementRef}
-                  className={`load-more-btn btn-out-line btn-infinite-scroll tf-loading ${
-                    loading ? "loading" : ""
-                  } `}
-                ></button>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <FilterModal allProps={allProps} />
-    </>
+        </section>
+  
+        <FilterModal allProps={allProps} />)
+      </>
+    )}
+  </>
+  
   );
 }

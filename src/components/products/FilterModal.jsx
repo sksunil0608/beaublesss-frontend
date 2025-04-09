@@ -1,13 +1,17 @@
-import {
-  maxPrice,
-  minPrice,
-  availabilityOptions,
-  sizes,
-  categories,
-} from "@/data/productFilterOptions";
 
+
+import { useProductFilters } from "@/hooks/useProductFilters";
 import RangeSlider from "react-range-slider-input";
 export default function FilterModal({ allProps }) {
+  const {
+    minPrice,
+    maxPrice,
+    categories,
+    sizes,
+    colors,
+    availabilityOptions,
+    brands,
+  } = useProductFilters();
   return (
     <div className="offcanvas offcanvas-start canvas-filter" id="filterShop">
       <div className="canvas-wrapper">

@@ -1,10 +1,27 @@
-import { categories } from "@/data/productFilterOptions";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import ProductCard1 from "../productCards/ProductCard1";
 import useProducts from "@/hooks/useProducts";
+import { getAllCategories } from "@/api/category";
 
 export default function SearchModal() {
   const {products ,loading} = useProducts();
+  const [categories, setCategories] = useState([]);
+const [categoriesLoading, setCategoriesLoading] = useState(true);
+useEffect(() => {
+  const fetchCategories = async () => {
+    try {
+      const res = await getAllCategories(); // Adjust API path as needed
+      setCategories(res.categories); // assuming API returns { categories: [...] }
+    } catch (error) {
+      console.error("Failed to fetch categories", error);
+    } finally {
+      setCategoriesLoading(false);
+    }
+  };
+
+  fetchCategories();
+}, []);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [loadedItems, setLoadedItems] = useState(products.slice(0, 8));

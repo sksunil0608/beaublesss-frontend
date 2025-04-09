@@ -237,8 +237,8 @@ function App({ setIsLoading }) {
           </Routes>
         </div>
         <CartModal />
-        {/* <QuickView />
-        <QuickAdd /> */}
+        <QuickView />
+        <QuickAdd />
         <Compare />
         <MobileMenu />
 

@@ -2,11 +2,20 @@ import { useContextElement } from "@/context/Context";
 
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { categories, sizes } from "@/data/productFilterOptions";
 import useProducts from "@/hooks/useProducts";
+import { useProductFilters } from "@/hooks/useProductFilters";
 
 export default function ProductCompare() {
   const {products ,loading} = useProducts();
+  const {
+    minPrice,
+    maxPrice,
+    categories,
+    sizes,
+    colors,
+    availabilityOptions,
+    brands,
+  } = useProductFilters();
   const {
     compareItem,
 

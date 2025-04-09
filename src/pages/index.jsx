@@ -20,8 +20,8 @@ const MarqueeSection2 = lazy(() =>
   import("@/components/common/MarqueeSection2")
 );
 const Products = lazy(() => import("@/components/common/Products5"));
-const Tiktok = lazy(() => import("@/components/common/Tiktok"));
-const Lookbook = lazy(() => import("@/components/homes/cosmetic/Lookbook"));
+// const Tiktok = lazy(() => import("@/components/common/Tiktok"));
+// const Lookbook = lazy(() => import("@/components/homes/cosmetic/Lookbook"));
 const Collections = lazy(() => import("@/components/homes/cosmetic/Collections"));
 const Products3 = lazy(() => import("@/components/common/Products3"));
 

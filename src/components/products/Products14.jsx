@@ -12,7 +12,7 @@ export default function Products14({
   parentClass = "flat-spacing",
   collectionId,
 }) {
-  const {products } = useProducts();
+  const { products, loading: isProductLoading } = useProducts(); // rename loading to avoid confusion
   const [activeLayout, setActiveLayout] = useState(4);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [loading, setLoading] = useState(false);
@@ -173,92 +173,99 @@ export default function Products14({
     }, 1000);
   };
 
+
   return (
     <>
-      <section className={parentClass}>
-        <div className="container">
-          <div className="tf-shop-control">
-            <div className="tf-control-filter">
-              <a
-                href="#filterShop"
-                data-bs-toggle="offcanvas"
-                aria-controls="filterShop"
-                className="tf-btn-filter"
-              >
-                <span className="icon icon-filter" />
-                <span className="text">Filters</span>
-              </a>
-              <div
-                onClick={allProps.toggleFilterWithOnSale}
-                className={`d-none d-lg-flex shop-sale-text ${
-                  activeFilterOnSale ? "active" : ""
-                }`}
-              >
-                <i className="icon icon-checkCircle" />
-                <p className="text-caption-1">Shop sale items only</p>
-              </div>
-            </div>
-            <ul className="tf-control-layout">
-              <LayoutHandler
-                setActiveLayout={setActiveLayout}
-                activeLayout={activeLayout}
-              />
-            </ul>
-            <div className="tf-control-sorting">
-              <p className="d-none d-lg-block text-caption-1">Sort by:</p>
-              <Sorting allProps={allProps} />
-            </div>
-          </div>
-          <div className="wrapper-control-shop">
-            <FilterMeta
-              productLength={loadedItems.length}
-              allProps={allProps}
-            />
-
-            {activeLayout == 1 ? (
-              <div className="tf-list-layout wrapper-shop" id="listLayout">
-                {/* <Listview pagination={false} products={loadedItems} /> */}
-                {loadedItems.length == loadedItems.length ? (
-                  ""
-                ) : (
-                  <button
-                    className={`load-more-btn btn-out-line tf-loading ${
-                      loading ? "loading" : ""
-                    } `}
+      { loading ? (
+       <p>Loading...</p>
+      ) : (
+        <>
+          <section className={parentClass}>
+            <div className="container">
+              <div className="tf-shop-control">
+                <div className="tf-control-filter">
+                  <a
+                    href="#filterShop"
+                    data-bs-toggle="offcanvas"
+                    aria-controls="filterShop"
+                    className="tf-btn-filter"
                   >
-                    <span className="text-btn">Load more</span>
-                  </button>
-                )}
+                    <span className="icon icon-filter" />
+                    <span className="text">Filters</span>
+                  </a>
+                  <div
+                    onClick={allProps.toggleFilterWithOnSale}
+                    className={`d-none d-lg-flex shop-sale-text ${
+                      activeFilterOnSale ? "active" : ""
+                    }`}
+                  >
+                    <i className="icon icon-checkCircle" />
+                    <p className="text-caption-1">Shop sale items only</p>
+                  </div>
+                </div>
+                <ul className="tf-control-layout">
+                  <LayoutHandler
+                    setActiveLayout={setActiveLayout}
+                    activeLayout={activeLayout}
+                  />
+                </ul>
+                <div className="tf-control-sorting">
+                  <p className="d-none d-lg-block text-caption-1">Sort by:</p>
+                  <Sorting allProps={allProps} />
+                </div>
               </div>
-            ) : (
-              <div
-                className={`tf-grid-layout wrapper-shop tf-col-${activeLayout}`}
-                id="gridLayout"
-              >
-                <GridView pagination={false} products={loadedItems} />
-                {sorted.length == loadedItems.length ? (
-                  ""
+              <div className="wrapper-control-shop">
+                <FilterMeta
+                  productLength={loadedItems.length}
+                  allProps={allProps}
+                />
+
+                {activeLayout == 1 ? (
+                  <div className="tf-list-layout wrapper-shop" id="listLayout">
+                    {/* <Listview pagination={false} products={loadedItems} /> */}
+                    {loadedItems.length == loadedItems.length ? (
+                      ""
+                    ) : (
+                      <button
+                        className={`load-more-btn btn-out-line tf-loading ${
+                          loading ? "loading" : ""
+                        } `}
+                      >
+                        <span className="text-btn">Load more</span>
+                      </button>
+                    )}
+                  </div>
                 ) : (
                   <div
-                    className="wd-load d-flex justify-content-center"
-                    onClick={() => handleLoad()}
+                    className={`tf-grid-layout wrapper-shop tf-col-${activeLayout}`}
+                    id="gridLayout"
                   >
-                    <button
-                      className={`load-more-btn btn-out-line tf-loading ${
-                        loading ? "loading" : ""
-                      } `}
-                    >
-                      <span className="text-btn">Load more</span>
-                    </button>
+                    <GridView pagination={false} products={loadedItems} />
+                    {sorted.length == loadedItems.length ? (
+                      ""
+                    ) : (
+                      <div
+                        className="wd-load d-flex justify-content-center"
+                        onClick={() => handleLoad()}
+                      >
+                        <button
+                          className={`load-more-btn btn-out-line tf-loading ${
+                            loading ? "loading" : ""
+                          } `}
+                        >
+                          <span className="text-btn">Load more</span>
+                        </button>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
-            )}
-          </div>
-        </div>
-      </section>
+            </div>
+          </section>
 
-      <FilterModal allProps={allProps} />
+          <FilterModal allProps={allProps} />
+        </>
+      )}
     </>
   );
 }

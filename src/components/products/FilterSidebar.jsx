@@ -1,12 +1,16 @@
-import {
-  maxPrice,
-  minPrice,
-  sizes,
-  categories,
-  availabilityOptions,
-} from "@/data/productFilterOptions";
+
+import { useProductFilters } from "@/hooks/useProductFilters";
 import RangeSlider from "react-range-slider-input";
 export default function FilterSidebar({ allProps }) {
+  const {
+    minPrice,
+    maxPrice,
+    categories,
+    sizes,
+    colors,
+    availabilityOptions,
+    brands,
+  } = useProductFilters();
   return (
     <div className="sidebar-filter canvas-filter left">
       <div className="canvas-wrapper">

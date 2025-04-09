@@ -9,19 +9,19 @@ export const maxPrice = Math.max(...products.map((product) => product.finalPrice
 
 const categoriesData = await getAllCategories();
 
-export const categories = categoriesData.categories.map((category) => ({
-  _id: category._id,
-  name: category.name,
-  slug: category.name 
-    ? slugify(category.name.toLowerCase())
-    : "products", // If slug is not available, default to 'products',
-  count: products.filter((product) => {
-  return product?.category?.toString() === category._id.toString();
-}).length || 0,
+// export const categories = categoriesData.categories.map((category) => ({
+//   _id: category._id,
+//   name: category.name,
+//   slug: category.name 
+//     ? slugify(category.name.toLowerCase())
+//     : "products", // If slug is not available, default to 'products',
+//   count: products.filter((product) => {
+//   return product?.category?.toString() === category._id.toString();
+// }).length || 0,
 
-  image: category.image?.[0] || "default-category.jpg",
-  isActive: category.isActive || false
-}));
+//   image: category.image?.[0] || "default-category.jpg",
+//   isActive: category.isActive || false
+// }));
 
 
 // Extract unique sizes from variants or products

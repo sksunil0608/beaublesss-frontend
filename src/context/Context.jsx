@@ -15,7 +15,7 @@ import React, { useEffect } from "react";
 import { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useToast } from "./ToastContext";
-import { getProductsOnce } from "@/hooks/useProducts";
+import useProducts, { getProductsOnce } from "@/hooks/useProducts";
 const dataContext = React.createContext();
 export const useContextElement = () => {
   return useContext(dataContext);
@@ -23,23 +23,20 @@ export const useContextElement = () => {
 
 export default function Context({ children }) {
   const isAuthorized = useAuthorization();
-  const [products, setProducts] = useState([]);
+  const {products} = useProducts()
   const [cartProducts, setCartProducts] = useState([]);
   const [wishList, setWishList] = useState([]);
   const [compareItem, setCompareItem] = useState([]);
   const [quickViewItem, setQuickViewItem] = useState(null);
 const [quickAddItem, setQuickAddItem] = useState(null);
-console.log(products)
 useEffect(() => {
   const fetchProducts = async () => {
     try {
-      const data = await getProductsOnce();
-      setProducts(data);
-
+      console.log(products, "products")
       // Optionally set defaults
-      if (data.length > 0) {
-        setQuickViewItem(data[0]);
-        setQuickAddItem(data[0].id);
+      if (products.length > 0) {
+        setQuickViewItem(products[0]);
+        setQuickAddItem(products[0].id);
       }
     } catch (err) {
       console.error("Failed to load products:", err);
