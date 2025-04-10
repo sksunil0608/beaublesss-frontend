@@ -37,8 +37,8 @@ export default function StoreLocations3() {
                 <div className="mb_20">
                   <div className="text-title mb_8">Address:</div>
                   <p className="text-primary">
-                    FLAT NO- H-1059, Raj Nagar Extension Road, Gaur Cascades,
-                    Ghaziabad, Uttar Pradesh, India, 201017
+                  Raj Nagar Extension Road, Ghaziabad, Uttar Pradesh, India, 201017
+
                   </p>
                 </div>
                 <div>

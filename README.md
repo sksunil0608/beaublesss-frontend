@@ -46,6 +46,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v3.0.4  |Removed All product fetch from data array| Sunil   |
 | v3.0.5  |Speed Issue Fixed| Sunil   |
 | v3.0.6  |Product Shwing Issue Resolved| Sunil   |
+| v3.0.7  |Product Shwing Issue Resolved| Sunil   |
 
 ## Installation
 

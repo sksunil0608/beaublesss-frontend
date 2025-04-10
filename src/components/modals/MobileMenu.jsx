@@ -11,6 +11,7 @@ import {
   shop_by_price,
   shopByMaterial,
   PolicyPages,
+  ContactMenu,
 } from "@/data/menu";
 import useAuthorization from "@/hooks/userAuthorization";
 
@@ -64,7 +65,7 @@ export default function MobileMenu() {
               </button>
             </form>
             <ul className="nav-ul-mb" id="wrapper-menu-navigation">
-              <li className="nav-mb-item active">
+              {/* <li className="nav-mb-item active">
                 <Link
                   to="/"
                   className={`collapsed mb-menu-link ${
@@ -329,29 +330,87 @@ export default function MobileMenu() {
                 <Link to={`/order-tracking`} className="site-nav-icon">
                   Track Order
                 </Link>
+              </li> */}
+              <li
+                className={`nav-mb-item ${
+                  pathname === "skin-care" ? "active" : ""
+                }`}
+              >
+                <Link to="/collections/skin-care" className="mb-menu-link">
+                  <span>Skin Care</span>
+                </Link>
+              </li>
+
+              <li
+                className={`nav-mb-item ${
+                  pathname === "hair-care" ? "active" : ""
+                }`}
+              >
+                <Link to="/collections/hair-care" className="mb-menu-link">
+                  <span>Hair Care</span>
+                </Link>
+              </li>
+
+              <li
+                className={`nav-mb-item ${
+                  pathname === "combos" ? "active" : ""
+                }`}
+              >
+                <Link to="/collections/combos" className="mb-menu-link">
+                  <span>Kits & Combos</span>
+                </Link>
+              </li>
+
+              <li
+                className={`nav-mb-item ${
+                  pathname === "gifting" ? "active" : ""
+                }`}
+              >
+                <Link to="/gifting" className="mb-menu-link">
+                  <span>Gifting</span>
+                </Link>
+              </li>
+
+              <li
+                className={`nav-mb-item ${
+                  ContactMenu.some((elm) => elm.href === pathname)
+                    ? "active"
+                    : ""
+                }`}
+              >
+                <Link to="/contact-us" className="mb-menu-link">
+                  <span>Contact Us</span>
+                </Link>
               </li>
             </ul>
           </div>
           <div className="mb-other-content">
             <div className="group-icon">
-              <Link to={`/wish-list`} className="site-nav-icon">
-                <svg
-                  className="icon"
-                  width={18}
-                  height={18}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M20.8401 4.60987C20.3294 4.09888 19.7229 3.69352 19.0555 3.41696C18.388 3.14039 17.6726 2.99805 16.9501 2.99805C16.2276 2.99805 15.5122 3.14039 14.8448 3.41696C14.1773 3.69352 13.5709 4.09888 13.0601 4.60987L12.0001 5.66987L10.9401 4.60987C9.90843 3.57818 8.50915 2.99858 7.05012 2.99858C5.59109 2.99858 4.19181 3.57818 3.16012 4.60987C2.12843 5.64156 1.54883 7.04084 1.54883 8.49987C1.54883 9.95891 2.12843 11.3582 3.16012 12.3899L4.22012 13.4499L12.0001 21.2299L19.7801 13.4499L20.8401 12.3899C21.3511 11.8791 21.7565 11.2727 22.033 10.6052C22.3096 9.93777 22.4519 9.22236 22.4519 8.49987C22.4519 7.77738 22.3096 7.06198 22.033 6.39452C21.7565 5.72706 21.3511 5.12063 20.8401 4.60987V4.60987Z"
-                    stroke="#181818"
-                    strokeWidth={2}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                Wishlist
+              <Link to={`/my-account`} className="site-nav-icon">
+              <svg
+                    className="icon"
+                    width={18}
+                    height={18}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"
+                      stroke="#181818"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
+                      stroke="#181818"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                My Account
               </Link>
               {isAuthorized ? (
                 <button
@@ -386,6 +445,7 @@ export default function MobileMenu() {
                   </svg>
                   Logout
                 </button>
+                  
               ) : (
                 <Link to={`/login`} className="site-nav-icon">
                   <svg
@@ -422,16 +482,16 @@ export default function MobileMenu() {
             </div>
             <div className="mb-contact">
               <p className="text-caption-1">
-                FLAT NO- H-1059, Raj Nagar Extension Road, Gaur Cascades,
-                Ghaziabad, Uttar Pradesh, India, 201017
+                Raj Nagar Extension Road, Ghaziabad, Uttar Pradesh, India,
+                201017
               </p>
-              <Link
+              {/* <Link
                 to={`/contact-us`}
                 className="tf-btn-default text-btn-uppercase"
               >
                 GET DIRECTION
                 <i className="icon-arrowUpRight" />
-              </Link>
+              </Link> */}
             </div>
             <ul className="mb-info">
               <li>

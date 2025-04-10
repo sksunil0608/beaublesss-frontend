@@ -1,24 +1,11 @@
 
 import { getAllCategories } from "@/api/category";
+import { useProductFilters } from "@/hooks/useProductFilters";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Categories() {
-  const [categories, setCategories] = useState([]);
-  const [categoriesLoading, setCategoriesLoading] = useState(true);
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const res = await getAllCategories(); 
-        setCategories(res.categories); // assuming API returns { categories: [...] }
-      } catch (error) {
-        console.error("Failed to fetch categories", error);
-      } finally {
-        setCategoriesLoading(false);
-      }
-    };
-  
-    fetchCategories();
-  }, []);
+ const {categories} = useProductFilters()
 
   return (
     <div
@@ -36,7 +23,7 @@ export default function Categories() {
           />
         </div>
         <div className="canvas-body">
-          {categoriesLoading ? (
+          {!categories ? (
             <p>Loading...</p>
           ) : (
             categories.map((category) => (
@@ -44,7 +31,7 @@ export default function Categories() {
                 <div
                   role="dialog"
                   className="facet-title collapsed"
-                  data-bs-target={`#${category.slug}`}
+                  data-bs-target={`${category.slug}`}
                   data-bs-toggle="collapse"
                   aria-expanded="true"
                   aria-controls={category.slug}
@@ -56,18 +43,18 @@ export default function Categories() {
                     width={48}
                     height={48}
                   />
-                  <span className="title">{category.name}</span>
+                  <Link to = {`/collections/${category.slug}`} className="title">{category.name}</Link>
                   <span className="icon icon-arrow-down" />
                 </div>
                 <div id={category.slug} className="collapse">
                   <ul className="facet-body">
                     <li>
-                      <a
-                        href={`collections/${category.slug}`}
+                      <Link
+                        to={`/collections/${category.slug}`}
                         className="item link"
                       >
                         {category.name} ({category.count} products)
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>

@@ -7,15 +7,6 @@ export default function KoreanProductCard({ product, gridClass = "" }) {
   const [currentImage, setCurrentImage] = useState(product.imgSrc);
 
   const {
-    setQuickAddItem,
-    addToWishlist,
-    isAddedtoWishlist,
-    addToCompareItem,
-    isAddedtoCompareItem,
-    setQuickViewItem,
-    addProductToCart,
-    isAddedToCartProducts,
-    wishList,
   } = useContextElement();
 
   useEffect(() => {
@@ -28,7 +19,8 @@ export default function KoreanProductCard({ product, gridClass = "" }) {
       } ${product.sizes ? "card-product-size" : ""}`}
     >
       <div className="card-product-wrapper ">
-        <Link to={`/products/${product.slug}`} className="product-img korean-section-shadow ">
+        <Link to={'#'} className="product-img korean-section-shadow ">
+        {/* <Link to={`/products/${product.slug}`} className="product-img korean-section-shadow "> */}
           
 
           <img

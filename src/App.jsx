@@ -50,6 +50,7 @@ import ShippingPage from "./pages/other-pages/shipping";
 import ContactPage from "./pages/other-pages/contact";
 import CheckoutPage from "./pages/products/checkout";
 import OrderSuccessPage from "./pages/other-pages/order-success";
+import GiftingPage from "./pages/gifting/Gifting";
 
 function App({ setIsLoading }) {
   const { pathname } = useLocation();
@@ -193,6 +194,7 @@ function App({ setIsLoading }) {
               {/* My Account End */}
 
               {/* Pages */}
+              <Route path="gifting" element={<GiftingPage />} />
               <Route path="blogs" element={<BlogGridPage />} />
               <Route path="blogs/:slug" element={<BlogDetailsPage2 />} />
               <Route path="about-us" element={<AboutUsPage />} />

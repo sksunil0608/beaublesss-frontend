@@ -165,7 +165,7 @@ export default function Shipping() {
                   </a>
                 </li>
                 <li>
-                  🏢 <strong>Address:</strong> Flat No- H-1059, Raj Nagar
+                  🏢 <strong>Address:</strong>  Raj Nagar
                   Extension Road, Gaur Cascades, Ghaziabad, Uttar Pradesh,
                   India, 201017
                 </li>

@@ -26,7 +26,7 @@ export default function Nav() {
         </Link>
       </li>
       <li className={`menu-item ${pathname === "gifting" ? "active" : ""}`}>
-        <Link to="#" className="item-link">
+        <Link to="/gifting" className="item-link">
           Gifting
         </Link>
       </li>

@@ -127,7 +127,7 @@ export default function ProductDescriptionListPage() {
       <Header1 />
       <Breadcumb product={product} />
       <Details1 product={product} />
-      <DescriptionList product={product} />
+      {/* <DescriptionList product={product} /> */}
       <RelatedProducts product={product} />
       <Footer1 hasPaddingBottom />
     </>

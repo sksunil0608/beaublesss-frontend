@@ -288,7 +288,7 @@ export default function Details1({ product }) {
                             </span>
                           </a>
                           <a
-                            href="#"
+                            href="/checkout"
                             className="buy-btn flex-grow-1 btn-style-3 text-btn-uppercase"
                           >
                             Buy it now
@@ -407,8 +407,8 @@ export default function Details1({ product }) {
                                 </div>
                                 <div>
                                   <p>
-                                    FLAT NO- H-1059, Raj Nagar Extension Road,
-                                    Gaur Cascades,
+Skin CareRaj Nagar Extension Road, Ghaziabad, Uttar Pradesh, India, 201017
+
                                   </p>
                                   <p>Ghaziabad, Uttar Pradesh, India, 201017</p>
                                 </div>
