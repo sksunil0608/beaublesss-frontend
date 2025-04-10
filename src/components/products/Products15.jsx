@@ -14,7 +14,6 @@ export default function Products15({ parentClass = "flat-spacing" }) {
   const [loading, setLoading] = useState(false);
   const {products} = useProducts();
   const [loadedItems, setLoadedItems] = useState([]);
-
   const {
     price,
     availability,
@@ -121,7 +120,7 @@ export default function Products15({ parentClass = "flat-spacing" }) {
       filteredArrays.every((array) => array.includes(item))
     );
     dispatch({ type: "SET_FILTERED", payload: commonItems });
-  }, [price, availability, color, size, brands, activeFilterOnSale]);
+  }, [products,price, availability, color, size, brands, activeFilterOnSale]);
 
   useEffect(() => {
     if (sortingOption === "Price Ascending") {
@@ -195,11 +194,15 @@ export default function Products15({ parentClass = "flat-spacing" }) {
     <>
     {(loading || !loadedItems.length) ? (
       <>
-        <p>Loading...</p>
+        <div id="preloader" class="preload-container">
+      <div class="loader-wrapper">
+        <div class="spinner"></div>
+      </div>
+    </div>
       </>
     ) : (
       <>
-        (<section className={parentClass}>
+        <section className={parentClass}>
           <div className="container">
             <div className="tf-shop-control">
               <div className="tf-control-filter">
@@ -270,7 +273,7 @@ export default function Products15({ parentClass = "flat-spacing" }) {
           </div>
         </section>
   
-        <FilterModal allProps={allProps} />)
+        <FilterModal allProps={allProps} />
       </>
     )}
   </>

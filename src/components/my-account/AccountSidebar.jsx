@@ -49,12 +49,12 @@ export default function AccountSidebar() {
           <div className="image">
             <img
               alt=""
-              src="/images/avatar/user-account.jpg"
+              src={userData.profilePhoto||"/images/avatar/user-default.jpg"}
               width={281}
               height={280}
             />
           </div>
-          <h6 className="mb_4">{userData.name}</h6>
+          <h6 className="mb_4">{userData.firstName}</h6>
           <div className="body-text-1">{userData.email}</div>
         </div>
         <ul className="my-account-nav">

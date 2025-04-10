@@ -39,7 +39,11 @@ export default function ShopCategories() {
     <section className="flat-spacing">
       <div className="container">
         {loading ? (
-          <div className="text-center py-5">Loading categories...</div>
+          <div id="preloader" class="preload-container">
+          <div class="loader-wrapper">
+            <div class="spinner"></div>
+          </div>
+        </div>
         ) : (
           <Swiper
             dir="ltr"

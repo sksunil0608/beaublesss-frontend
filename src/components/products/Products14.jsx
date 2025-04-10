@@ -8,15 +8,13 @@ import { initialState, reducer } from "@/reducer/filterReducer";
 import FilterMeta from "./FilterMeta";
 import useProducts from "@/hooks/useProducts";
 
-export default function Products14({
-  parentClass = "flat-spacing",
-  collectionId,
-}) {
-  const { products, loading: isProductLoading } = useProducts(); // rename loading to avoid confusion
+export default function Products14({ parentClass = "flat-spacing", collectionId }) {
+  const { products, loading: isProductLoading } = useProducts();
   const [activeLayout, setActiveLayout] = useState(4);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [loading, setLoading] = useState(false);
   const [loadedItems, setLoadedItems] = useState([]);
+  const [allLoaded, setAllLoaded] = useState(false);
 
   const {
     price,
@@ -28,244 +26,215 @@ export default function Products14({
     sortingOption,
     sorted,
     activeFilterOnSale,
-    currentPage,
-    itemPerPage,
   } = state;
 
   const allProps = {
     ...state,
     setPrice: (value) => dispatch({ type: "SET_PRICE", payload: value }),
-
-    setColor: (value) => {
-      value == color
-        ? dispatch({ type: "SET_COLOR", payload: "All" })
-        : dispatch({ type: "SET_COLOR", payload: value });
-    },
-    setSize: (value) => {
-      value == size
-        ? dispatch({ type: "SET_SIZE", payload: "All" })
-        : dispatch({ type: "SET_SIZE", payload: value });
-    },
-    setAvailability: (value) => {
-      value == availability
-        ? dispatch({ type: "SET_AVAILABILITY", payload: "All" })
-        : dispatch({ type: "SET_AVAILABILITY", payload: value });
-    },
-
+    setColor: (value) =>
+      dispatch({
+        type: "SET_COLOR",
+        payload: value === color ? "All" : value,
+      }),
+    setSize: (value) =>
+      dispatch({
+        type: "SET_SIZE",
+        payload: value === size ? "All" : value,
+      }),
+    setAvailability: (value) =>
+      dispatch({
+        type: "SET_AVAILABILITY",
+        payload: value === availability ? "All" : value,
+      }),
     setBrands: (newBrand) => {
-      const updated = [...brands].includes(newBrand)
-        ? [...brands].filter((elm) => elm != newBrand)
+      const updated = brands.includes(newBrand)
+        ? brands.filter((b) => b !== newBrand)
         : [...brands, newBrand];
       dispatch({ type: "SET_BRANDS", payload: updated });
     },
-    removeBrand: (newBrand) => {
-      const updated = [...brands].filter((brand) => brand != newBrand);
-
-      dispatch({ type: "SET_BRANDS", payload: updated });
-    },
+    removeBrand: (brandToRemove) =>
+      dispatch({
+        type: "SET_BRANDS",
+        payload: brands.filter((b) => b !== brandToRemove),
+      }),
     setSortingOption: (value) =>
       dispatch({ type: "SET_SORTING_OPTION", payload: value }),
-    toggleFilterWithOnSale: () => dispatch({ type: "TOGGLE_FILTER_ON_SALE" }),
+    toggleFilterWithOnSale: () =>
+      dispatch({ type: "TOGGLE_FILTER_ON_SALE" }),
     setCurrentPage: (value) =>
       dispatch({ type: "SET_CURRENT_PAGE", payload: value }),
     setItemPerPage: (value) => {
-      dispatch({ type: "SET_CURRENT_PAGE", payload: 1 }),
-        dispatch({ type: "SET_ITEM_PER_PAGE", payload: value });
+      dispatch({ type: "SET_CURRENT_PAGE", payload: 1 });
+      dispatch({ type: "SET_ITEM_PER_PAGE", payload: value });
     },
-    clearFilter: () => {
-      dispatch({ type: "CLEAR_FILTER" });
-    },
+    clearFilter: () => dispatch({ type: "CLEAR_FILTER" }),
   };
+
   useEffect(() => {
     let filteredArrays = [];
 
     if (brands.length) {
-      const filteredByBrands = [...products].filter((elm) =>
-        brands.every((el) => elm.filterBrands.includes(el))
+      const byBrands = products.filter((p) =>
+        brands.every((b) => p.filterBrands.includes(b))
       );
-      filteredArrays = [...filteredArrays, filteredByBrands];
+      filteredArrays.push(byBrands);
     }
+
     if (availability !== "All") {
-      const filteredByAvailability = [...products].filter((elm) =>
+      const byAvailability = products.filter((p) =>
         availability.value
-          ? elm.filterAvailability.includes("In Stock")
-          : elm.filterAvailability.includes("Out of Stock")
+          ? p.filterAvailability.includes("In Stock")
+          : p.filterAvailability.includes("Out of Stock")
       );
-      filteredArrays = [...filteredArrays, filteredByAvailability];
+      filteredArrays.push(byAvailability);
     }
 
     if (color !== "All") {
-      const filteredByColor = [...products].filter((elm) =>
-        elm.filterColor.includes(color.name)
+      const byColor = products.filter((p) =>
+        p.filterColor.includes(color.name)
       );
-      filteredArrays = [...filteredArrays, filteredByColor];
+      filteredArrays.push(byColor);
     }
+
     if (size !== "All" && size !== "") {
-      const filteredBysize = [...products].filter((elm) =>
-        elm.filterSizes.includes(size)
+      const bySize = products.filter((p) =>
+        p.filterSizes.includes(size)
       );
-
-      filteredArrays = [...filteredArrays, filteredBysize];
+      filteredArrays.push(bySize);
     }
+
     if (activeFilterOnSale) {
-      const filteredByonSale = [...products].filter((elm) => elm.oldPrice);
-      filteredArrays = [...filteredArrays, filteredByonSale];
+      const onSale = products.filter((p) => p.oldPrice);
+      filteredArrays.push(onSale);
     }
 
-    const filteredByPrice = [...products].filter(
-      (elm) => elm.price >= price[0] && elm.price <= price[1]
+    const byPrice = products.filter(
+      (p) => p.price >= price[0] && p.price <= price[1]
     );
-    filteredArrays = [...filteredArrays, filteredByPrice];
+    filteredArrays.push(byPrice);
 
-    const commonItems = [...products].filter((item) =>
-      filteredArrays.every((array) => array.includes(item))
+    const finalFiltered = products.filter((item) =>
+      filteredArrays.every((arr) => arr.includes(item))
     );
-    dispatch({ type: "SET_FILTERED", payload: commonItems });
-  }, [price, availability, color, size, brands, activeFilterOnSale]);
+
+    dispatch({ type: "SET_FILTERED", payload: finalFiltered });
+  }, [products, price, availability, color, size, brands, activeFilterOnSale]);
 
   useEffect(() => {
+    let sortedItems = [...filtered];
     if (sortingOption === "Price Ascending") {
-      dispatch({
-        type: "SET_SORTED",
-        payload: [...filtered].sort((a, b) => a.price - b.price),
-      });
+      sortedItems.sort((a, b) => a.price - b.price);
     } else if (sortingOption === "Price Descending") {
-      dispatch({
-        type: "SET_SORTED",
-        payload: [...filtered].sort((a, b) => b.price - a.price),
-      });
+      sortedItems.sort((a, b) => b.price - a.price);
     } else if (sortingOption === "Title Ascending") {
-      dispatch({
-        type: "SET_SORTED",
-        payload: [...filtered].sort((a, b) => a.title.localeCompare(b.title)),
-      });
+      sortedItems.sort((a, b) => a.title.localeCompare(b.title));
     } else if (sortingOption === "Title Descending") {
-      dispatch({
-        type: "SET_SORTED",
-        payload: [...filtered].sort((a, b) => b.title.localeCompare(a.title)),
-      });
-    } else {
-      dispatch({ type: "SET_SORTED", payload: filtered });
+      sortedItems.sort((a, b) => b.title.localeCompare(a.title));
     }
+    dispatch({ type: "SET_SORTED", payload: sortedItems });
     dispatch({ type: "SET_CURRENT_PAGE", payload: 1 });
   }, [filtered, sortingOption]);
 
   useEffect(() => {
-    const filteredProducts = sorted.filter(
-      (product) => product.category === collectionId
+    const filteredByCategory = sorted.filter(
+      (p) => p.category === collectionId
     );
-    setLoadedItems(filteredProducts.slice(0, 2));
+    const initialItems = filteredByCategory.slice(0, 2);
+    setLoadedItems(initialItems);
+    setAllLoaded(initialItems.length >= filteredByCategory.length);
   }, [sorted, collectionId]);
 
   const handleLoad = () => {
+    if (loading || allLoaded) return;
+
     setLoading(true);
     setTimeout(() => {
       const filteredByCategory = sorted.filter(
-        (product) => product.category === collectionId
+        (p) => p.category === collectionId
       );
-
-      setLoadedItems((prev) => [
-        ...prev,
-        ...filteredByCategory.slice(prev.length, prev.length + 4),
-      ]);
-
+      const nextItems = filteredByCategory.slice(
+        loadedItems.length,
+        loadedItems.length + 4
+      );
+      const updatedItems = [...loadedItems, ...nextItems];
+      setLoadedItems(updatedItems);
+      setAllLoaded(updatedItems.length >= filteredByCategory.length);
       setLoading(false);
-    }, 1000);
+    }, 800);
   };
-
 
   return (
     <>
-      { loading ? (
-       <p>Loading...</p>
-      ) : (
-        <>
-          <section className={parentClass}>
-            <div className="container">
-              <div className="tf-shop-control">
-                <div className="tf-control-filter">
-                  <a
-                    href="#filterShop"
-                    data-bs-toggle="offcanvas"
-                    aria-controls="filterShop"
-                    className="tf-btn-filter"
-                  >
-                    <span className="icon icon-filter" />
-                    <span className="text">Filters</span>
-                  </a>
-                  <div
-                    onClick={allProps.toggleFilterWithOnSale}
-                    className={`d-none d-lg-flex shop-sale-text ${
-                      activeFilterOnSale ? "active" : ""
-                    }`}
-                  >
-                    <i className="icon icon-checkCircle" />
-                    <p className="text-caption-1">Shop sale items only</p>
-                  </div>
-                </div>
-                <ul className="tf-control-layout">
-                  <LayoutHandler
-                    setActiveLayout={setActiveLayout}
-                    activeLayout={activeLayout}
-                  />
-                </ul>
-                <div className="tf-control-sorting">
-                  <p className="d-none d-lg-block text-caption-1">Sort by:</p>
-                  <Sorting allProps={allProps} />
-                </div>
+      <section className={parentClass}>
+        <div className="container">
+          <div className="tf-shop-control">
+            <div className="tf-control-filter">
+              <a
+                href="#filterShop"
+                data-bs-toggle="offcanvas"
+                aria-controls="filterShop"
+                className="tf-btn-filter"
+              >
+                <span className="icon icon-filter" />
+                <span className="text">Filters</span>
+              </a>
+              <div
+                onClick={allProps.toggleFilterWithOnSale}
+                className={`d-none d-lg-flex shop-sale-text ${activeFilterOnSale ? "active" : ""}`}
+              >
+                <i className="icon icon-checkCircle" />
+                <p className="text-caption-1">Shop sale items only</p>
               </div>
-              <div className="wrapper-control-shop">
-                <FilterMeta
-                  productLength={loadedItems.length}
-                  allProps={allProps}
-                />
+            </div>
+            <ul className="tf-control-layout">
+              <LayoutHandler
+                setActiveLayout={setActiveLayout}
+                activeLayout={activeLayout}
+              />
+            </ul>
+            <div className="tf-control-sorting">
+              <p className="d-none d-lg-block text-caption-1">Sort by:</p>
+              <Sorting allProps={allProps} />
+            </div>
+          </div>
 
-                {activeLayout == 1 ? (
-                  <div className="tf-list-layout wrapper-shop" id="listLayout">
-                    {/* <Listview pagination={false} products={loadedItems} /> */}
-                    {loadedItems.length == loadedItems.length ? (
-                      ""
-                    ) : (
-                      <button
-                        className={`load-more-btn btn-out-line tf-loading ${
-                          loading ? "loading" : ""
-                        } `}
-                      >
-                        <span className="text-btn">Load more</span>
-                      </button>
-                    )}
-                  </div>
-                ) : (
-                  <div
-                    className={`tf-grid-layout wrapper-shop tf-col-${activeLayout}`}
-                    id="gridLayout"
-                  >
-                    <GridView pagination={false} products={loadedItems} />
-                    {sorted.length == loadedItems.length ? (
-                      ""
-                    ) : (
-                      <div
-                        className="wd-load d-flex justify-content-center"
-                        onClick={() => handleLoad()}
-                      >
-                        <button
-                          className={`load-more-btn btn-out-line tf-loading ${
-                            loading ? "loading" : ""
-                          } `}
-                        >
-                          <span className="text-btn">Load more</span>
-                        </button>
-                      </div>
-                    )}
+          <div className="wrapper-control-shop">
+            <FilterMeta productLength={loadedItems.length} allProps={allProps} />
+
+            {activeLayout === 1 ? (
+              <div className="tf-list-layout wrapper-shop" id="listLayout">
+                <Listview pagination={false} products={loadedItems} />
+                {!allLoaded && (
+                  <div className="wd-load d-flex justify-content-center">
+                    <button
+                      onClick={handleLoad}
+                      className={`load-more-btn btn-out-line tf-loading ${loading ? "loading" : ""}`}
+                    >
+                      <span className="text-btn">Load more</span>
+                    </button>
                   </div>
                 )}
               </div>
-            </div>
-          </section>
+            ) : (
+              <div className={`tf-grid-layout wrapper-shop tf-col-${activeLayout}`} id="gridLayout">
+                <GridView pagination={false} products={loadedItems} />
+                {!allLoaded && (
+                  <div className="wd-load d-flex justify-content-center">
+                    <button
+                      onClick={handleLoad}
+                      className={`load-more-btn btn-out-line tf-loading ${loading ? "loading" : ""}`}
+                    >
+                      <span className="text-btn">Load more</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
 
-          <FilterModal allProps={allProps} />
-        </>
-      )}
+      <FilterModal allProps={allProps} />
     </>
   );
 }

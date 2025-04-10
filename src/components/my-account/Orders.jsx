@@ -12,43 +12,27 @@ const parseJwt = (token) => {
 };
 
 export default function Orders() {
-  const [userData, setUserData] = useState(null);
-  const [addresses, setAddresses] = useState([]);
+  const [orders, setOrders] = useState([]);
   const token = localStorage.getItem("authToken");
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchOrders = async () => {
       if (!token) return;
 
       try {
         const decodedToken = parseJwt(token);
         if (decodedToken && decodedToken._id) {
-          const user = await getUserOrders(decodedToken._id);
-          setUserData(user.user);
-
-          // Extract address details from user data if available
-          if (user.user?.address) {
-            setAddresses([
-              {
-                id: 1,
-                houseNo: user.user.address.houseNo,
-                street: user.user.address.street,
-                landmark: user.user.address.landmark,
-                city: user.user.address.city,
-                state: user.user.address.state,
-                country: user.user.address.country,
-                pincode: user.user.address.pincode,
-                isEditing: false,
-              },
-            ]);
+          const res = await getUserOrders(decodedToken._id);
+          if (res?.userOrders) {
+            setOrders(res.userOrders);
           }
         }
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching user orders:", error);
       }
     };
 
-    fetchUserData();
+    fetchOrders();
   }, [token]);
 
   return (
@@ -66,48 +50,40 @@ export default function Orders() {
               </tr>
             </thead>
             <tbody>
-              <tr className="tf-order-item">
-                <td>#123</td>
-                <td>August 1, 2024</td>
-                <td>On hold</td>
-                <td>$200.0 for 1 item</td>
-                <td>
-                  <Link
-                    to="/order-details/1"
-                    className="tf-btn btn-fill radius-4"
-                  >
-                    <span className="text">View</span>
-                  </Link>
-                </td>
-              </tr>
-              <tr className="tf-order-item">
-                <td>#345</td>
-                <td>August 2, 2024</td>
-                <td>On hold</td>
-                <td>$300.0 for 1 item</td>
-                <td>
-                  <Link
-                    to="/order-details/1"
-                    className="tf-btn btn-fill radius-4"
-                  >
-                    <span className="text">View</span>
-                  </Link>
-                </td>
-              </tr>
-              <tr className="tf-order-item">
-                <td>#567</td>
-                <td>August 3, 2024</td>
-                <td>On hold</td>
-                <td>$400.0 for 1 item</td>
-                <td>
-                  <Link
-                    to="/order-details/1"
-                    className="tf-btn btn-fill radius-4"
-                  >
-                    <span className="text">View</span>
-                  </Link>
-                </td>
-              </tr>
+              {orders.length > 0 ? (
+                orders.map((order) => {
+                  const createdAt = new Date(order.createdAt).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  });
+
+                  const itemCount = order.cartProducts?.length || 0;
+
+                  return (
+                    <tr className="tf-order-item" key={order._id}>
+                      <td>{order._id}</td>
+                      <td>{createdAt}</td>
+                      <td>{order.orderStatus}</td>
+                      <td>₹{order.totalPrice} for {itemCount} item{itemCount > 1 ? "s" : ""}</td>
+                      <td>
+                        <Link
+                          to={`/order-details/${order._id}`}
+                          className="tf-btn btn-fill radius-4"
+                        >
+                          <span className="text">View</span>
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan="5" style={{ textAlign: "center", padding: "20px" }}>
+                    No orders found.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

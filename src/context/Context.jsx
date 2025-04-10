@@ -32,7 +32,6 @@ const [quickAddItem, setQuickAddItem] = useState(null);
 useEffect(() => {
   const fetchProducts = async () => {
     try {
-      console.log(products, "products")
       // Optionally set defaults
       if (products.length > 0) {
         setQuickViewItem(products[0]);

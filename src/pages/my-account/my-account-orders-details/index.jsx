@@ -8,6 +8,7 @@ import React from "react";
 
 import MetaComponent from "@/components/common/MetaComponent";
 import Topbar from "@/components/headers/Topbar";
+import AccountSidebarMobile from "@/components/modals/AccountSidebarMobile";
 const metadata = {
   title:
     "My Account Order Details || Modave - Multipurpose Reactjs eCommerce Template",
@@ -60,6 +61,7 @@ export default function MyAccountOrdersDetailsPage() {
           </button>
         </div>
       </>
+       <AccountSidebarMobile />
 
       <section className="flat-spacing">
         <div className="container">

@@ -10,6 +10,7 @@ import React from "react";
 import MetaComponent from "@/components/common/MetaComponent";
 import useAuthorization from "@/hooks/userAuthorization";
 import Topbar from "@/components/headers/Topbar";
+import AccountSidebarMobile from "@/components/modals/AccountSidebarMobile";
 const metadata = {
   title: "My Orders || Beaubless - Exclusive Beauty & Cosmetics Store",
   description:
@@ -72,6 +73,7 @@ export default function MyAccountOrdersPage() {
           </button>
         </div>
       </>
+       <AccountSidebarMobile />
 
       <section className="flat-spacing">
         <div className="container">

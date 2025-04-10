@@ -1334,6 +1334,8 @@ ul.list-text {
       overflow: hidden;
       margin-left: auto;
       margin-right: auto;
+      border: 4px solid #ccc; /* 👈 Add this line for border */
+      
       img {
         width: 100%;
         height: 100%;

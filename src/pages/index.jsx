@@ -33,7 +33,11 @@ const metadata = {
 
 // Full-page Loader
 const FullPageLoader = () => (
-  <div className="full-page-loader">Loading....</div>
+  <div id="preloader" className="preload-container">
+    <div className="loader-wrapper">
+      <div className="spinner"></div>
+    </div>
+  </div>
 );
 
 // Inline Section Loader

@@ -187,7 +187,7 @@ function App({ setIsLoading }) {
               <Route path="my-orders" element={<MyAccountOrdersPage />} />
               <Route path="my-address" element={<MyAccountAddressPage />} />
               <Route
-                path="order-details/:id"
+                path="order-details/:orderId"
                 element={<MyAccountOrdersDetailsPage />}
               />
               {/* My Account End */}

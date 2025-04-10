@@ -10,6 +10,7 @@ import Topbar from "@/components/headers/Topbar";
 import { getUserData } from "@/api/auth";
 import parseJwt from "@/utlis/jwt";
 import useAuthorization from "@/hooks/userAuthorization";
+import AccountSidebarMobile from "@/components/modals/AccountSidebarMobile";
 
 const metadata = {
   title: "My Account Address || Beaubless",
@@ -94,6 +95,7 @@ export default function MyAccountAddressPage() {
           <i className="icon icon-squares-four" />
         </button>
       </div>
+       <AccountSidebarMobile />
 
       <section className="flat-spacing">
         <div className="container">

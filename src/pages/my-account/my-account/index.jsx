@@ -11,6 +11,7 @@ import useAuthorization from "@/hooks/userAuthorization";
 import Topbar from "@/components/headers/Topbar";
 import { getUserData } from "@/api/auth";
 import parseJwt from "@/utlis/jwt";
+import AccountSidebarMobile from "@/components/modals/AccountSidebarMobile";
 const metadata = {
   title: "My Account || Beaubless",
   description: "Beaubless - Hair Care and Skin Care Solution",
@@ -85,6 +86,7 @@ export default function MyAccountPage() {
           </button>
         </div>
       </>
+      <AccountSidebarMobile />
 
       <section className="flat-spacing">
         <div className="container">

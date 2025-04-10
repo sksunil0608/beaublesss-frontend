@@ -18,7 +18,11 @@ const metadata = {
 export default function LoginPage() {
   const isAuthorized = useAuthorization();
   if (isAuthorized === null) {
-    return <div>Loading...</div>; // Avoids redirection before auth check completes
+    return <div id="preloader" class="preload-container">
+    <div class="loader-wrapper">
+      <div class="spinner"></div>
+    </div>
+  </div>; // Avoids redirection before auth check completes
   }
 
   if (isAuthorized) {
