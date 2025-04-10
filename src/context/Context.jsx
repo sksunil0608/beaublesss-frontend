@@ -73,13 +73,53 @@ useEffect(() => {
     fetchUserData();
   }, [token]);
 
+  const calculateFinalTotal = (subtotal, shipping = 0, coupon = null) => {
+    let discountedPrice = subtotal;
+    let discountArray = [];
+  
+    if (coupon) {
+      if (coupon.discountType === "flat") {
+        discountedPrice -= coupon.discountValue;
+        discountArray.push({
+          value: coupon.discountValue,
+          type: "Coupon",
+          code: coupon.code,
+          discount: `₹${coupon.discountValue} off`,
+        });
+      } else if (coupon.discountType === "percentage") {
+        const discountAmount = (subtotal * coupon.discountValue) / 100;
+        const finalDiscount = Math.min(discountAmount, coupon.maxDiscount || discountAmount);
+        discountedPrice -= finalDiscount;
+  
+        discountArray.push({
+          value: discountAmount,
+          type: "Coupon",
+          code: coupon.code,
+          discount: `${coupon.discountValue}% off (₹${finalDiscount.toFixed(2)})`,
+        });
+      }
+    }
+  
+    if (!coupon?.isFreeShipping) {
+      discountedPrice += shipping;
+    }
+  
+    setDiscountDetails(discountArray);
+    return Math.max(discountedPrice, 0);
+  };
+  
+  
   useEffect(() => {
     const subtotal = cartProducts.reduce((accumulator, product) => {
       return accumulator + product.quantity * product.offerPrice;
     }, 0);
     setTotalPrice(subtotal);
-    setFinalOrderTotal(subtotal + selectedShippingOption?.charges);
-  }, [cartProducts]);
+  
+    const shippingCharge = selectedShippingOption?.charges || 0;
+    const finalAmount = calculateFinalTotal(subtotal, shippingCharge, activeCoupon);
+    setFinalOrderTotal(finalAmount);
+  }, [cartProducts, selectedShippingOption, activeCoupon]);
+  
 
   const applyCoupon = (coupon) => {
     if (!coupon) return;
@@ -288,7 +328,6 @@ useEffect(() => {
     orderNote,
     setSelectedShippingOption,
     selectedShippingOption,
-    setFinalOrderTotal,
   };
   return (
     <dataContext.Provider value={contextElement}>

@@ -41,7 +41,7 @@ export const verifyPayment = async (transactionId) => {
 // Get User Orders
 export const getUserOrders = async (userId) => {
     try {
-        const response = await api.get(`/orders/user-orders/${userId}`);
+        const response = await api.get(`/order/user-order/${userId}`);
         return response.data;
     } catch (error) {
         console.error("Error fetching user orders:", error);
@@ -52,7 +52,7 @@ export const getUserOrders = async (userId) => {
 // Get Single Order Details
 export const getOrderDetails = async (orderId) => {
     try {
-        const response = await api.get(`/orders/order-details/${orderId}`);
+        const response = await api.get(`/order/order-details/${orderId}`);
         return response.data;
     } catch (error) {
         console.error("Error fetching order details:", error);
@@ -81,5 +81,21 @@ export const updateOrderStatus = async (orderId, status) => {
         throw error;
     }
 };
+
+// Track Order by ID and Email
+export const trackOrderById = async (email, orderId) => {
+    try {
+      const response = await api.post("/track-order", {
+        email,
+        orderId,
+      });
+  
+      return response.data;
+    } catch (error) {
+      console.error("Error tracking order:", error);
+      throw error;
+    }
+  };
+  
 
 export default api;

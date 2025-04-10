@@ -25,6 +25,11 @@ export default function SizeSelect({
       setTimeout(() => {
         setActiveSize(cartItem.activeSize);
       }, 0); // Microtask delay to prevent conflict
+    }else if (filterSizes.length > 0) {
+      // Set default to first size in list
+      setTimeout(() => {
+        setActiveSize(filterSizes[0].variantId);
+      }, 0);
     }
   }, [cartProducts, productId]);
   return (

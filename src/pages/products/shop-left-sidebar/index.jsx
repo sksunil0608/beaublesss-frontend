@@ -8,7 +8,7 @@ import React from "react";
 import MetaComponent from "@/components/common/MetaComponent";
 import Topbar from "@/components/headers/Topbar";
 import Products15 from "@/components/products/Products15";
-import Products14 from "@/components/products/Products14";
+
 
 const metadata = {
   title: "Product || Beaubless Cosmetics - Your Skinkare Choice",

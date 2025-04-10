@@ -1,6 +1,30 @@
-import React from "react";
+import { trackOrderById } from "@/api/order";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
 export default function OrderTrac() {
+  const [email, setEmail] = useState("");
+  const [orderId, setOrderId] = useState("");
+  const [orderData, setOrderData] = useState(null);
+  const [error, setError] = useState("");
+  const [activeTab, setActiveTab] = useState(1); // Optional: for tab switching if you have tabs
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setOrderData(null);
+    try {
+      const result = await trackOrderById(email, orderId);
+      if (result.success) {
+        setOrderData(result);
+      } else {
+        setError(result.message);
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || "Something went wrong.");
+    }
+  };
+
   return (
     <section className="flat-spacing">
       <div className="container">
@@ -9,33 +33,98 @@ export default function OrderTrac() {
             <div className="heading">
               <h4 className="mb_8">Order Tracking</h4>
               <p>
-                To track your order please enter your Order ID in the box below
-                and press the "Track" button. This was given to you on your
-                receipt and in the confirmation email you should have received.
+                To track your order please enter your Order ID and billing email
+                below.
               </p>
             </div>
-            <form onSubmit={(e) => e.preventDefault()} className="form-login">
+            <form onSubmit={handleSubmit} className="form-login">
               <div className="wrap">
                 <fieldset>
-                  <input type="text" placeholder="Username or email address*" />
+                  <input
+                    type="text"
+                    placeholder="Order ID*"
+                    value={orderId}
+                    onChange={(e) => setOrderId(e.target.value)}
+                    required
+                  />
                 </fieldset>
                 <fieldset>
-                  <input type="text" placeholder="Billing Email*" />
+                  <input
+                    type="email"
+                    placeholder="Billing Email*"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
                 </fieldset>
               </div>
               <div className="button-submit">
                 <button className="tf-btn btn-fill" type="submit">
-                  <span className="text">Tracking Orders</span>
+                  <span className="text">Track Order</span>
                 </button>
               </div>
+              {error && <p className="text-danger mt_10">{error}</p>}
             </form>
+
+            {/* Show Tracking Info if Available */}
+            {orderData && (
+              <div className="widget-content-tab mt_40">
+                <div
+                  className={`widget-content-inner ${
+                    activeTab === 1 ? "active" : ""
+                  }`}
+                >
+                  <div className="widget-timeline">
+                    <ul className="timeline">
+                      {orderData.statusHistory.map((item, index) => (
+                        <li key={index}>
+                          <div className="timeline-badge success" />
+                          <div className="timeline-box">
+                            <a className="timeline-panel" href="#">
+                              <div className="text-2 fw-6">
+                                {item.status || "Updated"}
+                              </div>
+                              <span>{new Date(item.date).toLocaleString()}</span>
+                            </a>
+                            {item.details && <p>{item.details}</p>}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div
+                  className={`widget-content-inner ${
+                    activeTab === 4 ? "active" : ""
+                  }`}
+                >
+                  <p className="text-2 text-success">
+                    Thank you! Your order has been received.
+                  </p>
+                  <ul className="mt_20">
+                    <li>
+                      Order Number :{" "}
+                      <span className="fw-7">#{orderId}</span>
+                    </li>
+                    <li>
+                      Status :{" "}
+                      <span className="fw-7">{orderData.orderStatus}</span>
+                    </li>
+                    <li>
+                      Email : <span className="fw-7">{email}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            )}
           </div>
+
           <div className="right">
             <h4 className="mb_8">Already have an account?</h4>
             <p className="text-primary">
               Welcome back. Sign in to access your personalized experience,
-              saved preferences, and more. We're thrilled to have you with us
-              again!
+              saved preferences, and more.
             </p>
             <Link to={`/login`} className="tf-btn btn-fill">
               <span className="text">Login</span>
