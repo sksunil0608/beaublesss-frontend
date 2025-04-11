@@ -89,7 +89,7 @@ export default function Testimonials3() {
                 </div>
                 <div className="content-top pt-4">
                  
-                  <p className="text-secondary">{testimonial.text}</p>
+                  <p className="text-caption-1 text-white">{testimonial.text}</p>
                  
                   {/* <div className="list-star-default">
                     <i className="icon icon-star" />

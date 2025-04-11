@@ -6,7 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Beaubless Cosmetics - Best is here only</title>
     <style>
-      /* Preloader Styling */
+      /* Responsive Font & Logo Size for Mobile */
+      @media (max-width: 767px) {
+        body,
+        .text-secondary-2,
+        footer,
+        .footer-menu {
+          font-size: 13px !important;
+        }
+    
+        .footer-logo img {
+          width: 200px !important;
+        }
+      }
+    
+      /* Preloader Container */
       .preload-container {
         position: fixed;
         width: 100%;
@@ -17,25 +31,24 @@
         justify-content: center;
         z-index: 999999;
       }
-
+    
       .loader-wrapper {
         position: relative;
-        width: 100px; /* Adjust size as needed */
+        width: 100px;
         height: 100px;
         display: flex;
         align-items: center;
         justify-content: center;
       }
-
-      /* Logo Styling */
+    
+      /* Logo in Loader */
       .loader-logo {
-        width: 60px; /* Adjust based on logo size */
+        width: 60px;
         height: 60px;
         z-index: 2;
       }
-
-      /* Spinner Outline */
-      /* Preloader Styling */
+    
+      /* Spinner */
       .spinner {
         position: fixed;
         top: 50%;
@@ -44,34 +57,36 @@
         width: 80px;
         height: 80px;
         background: url("/buebless-logo.png") no-repeat center center;
-        background-size: 60%; /* Adjust logo size */
+        background-size: 60%;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
       }
-
-      /* Rotating border */
+    
+      /* Rotating Border Animation */
       .spinner::before {
         content: "";
         position: absolute;
         width: 100%;
         height: 100%;
-        border: 4px solid #663399; /* Outer static border */
-        border-top: 4px solid #ff69b4; /* Active moving part (Pink) */
+        border: 4px solid #663399;         /* Outer static border */
+        border-top: 4px solid #ff69b4;      /* Rotating top border */
         border-radius: 50%;
         animation: spin 1s linear infinite;
       }
-
+    
       @keyframes spin {
         from {
           transform: rotate(0deg);
         }
+    
         to {
           transform: rotate(720deg);
         }
       }
     </style>
+    
   </head>
   <body>
     <!-- Preloader with Logo -->
