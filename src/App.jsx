@@ -51,6 +51,7 @@ import ContactPage from "./pages/other-pages/contact";
 import CheckoutPage from "./pages/products/checkout";
 import OrderSuccessPage from "./pages/other-pages/order-success";
 import GiftingPage from "./pages/gifting/Gifting";
+import CCAvenueCheckout from "./pages/other-pages/cc-avenue/cc-avenue-checkout";
 
 function App({ setIsLoading }) {
   const { pathname } = useLocation();
@@ -185,6 +186,7 @@ function App({ setIsLoading }) {
               <Route path="cart" element={<ShopingCartPage />} />
               <Route path="order-success" element={<OrderSuccessPage />} />
               <Route path="checkout" element={<CheckoutPage />} />
+              <Route path="cc-avenue-checkout" element={<CCAvenueCheckout/>} />
               <Route path="my-orders" element={<MyAccountOrdersPage />} />
               <Route path="my-address" element={<MyAccountAddressPage />} />
               <Route
