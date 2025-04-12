@@ -8,7 +8,7 @@ import Topbar from "@/components/headers/Topbar";
 import Header1 from "@/components/headers/Header1";
 import Footer1 from "@/components/footers/Footer1";
 const api = axios.create({
-  baseURL: "http://localhost:5000/api/v1", // update if needed
+  baseURL: apiConfig.baseURL, // update if needed
 });
 const metadata = {
   title: "Gifting Coming Soon || Modave",
