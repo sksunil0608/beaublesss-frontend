@@ -184,6 +184,50 @@ export default function Checkout() {
       };
 
       const orderData = await createOrder(orderPayload);
+      if (!orderData.success) {
+        showToast("error", "Order Failed");
+        navigate("/order-failed");
+        return;
+      }
+  
+      // Handle CCAvenue flow
+      if (paymentMethod === "CCAvenue") {
+        const ccRes = await api.post("/order/test-order", {
+          amount: finalOrderTotal.toFixed(2),
+          name: `${formData.firstName} ${formData.lastName}`,
+          email,
+          phone: formData.phone,
+        });
+  
+        const { encRequest, access_code, order_id } = ccRes.data;
+  
+        if (encRequest && access_code) {
+          // Create & submit form dynamically to CCAvenue
+          const form = document.createElement("form");
+          form.method = "POST";
+          form.action = "https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
+  
+          const inputEnc = document.createElement("input");
+          inputEnc.type = "hidden";
+          inputEnc.name = "encRequest";
+          inputEnc.value = encRequest;
+  
+          const inputAccess = document.createElement("input");
+          inputAccess.type = "hidden";
+          inputAccess.name = "access_code";
+          inputAccess.value = access_code;
+  
+          form.appendChild(inputEnc);
+          form.appendChild(inputAccess);
+          document.body.appendChild(form);
+          form.submit();
+  
+          return;
+        } else {
+          showToast("error", "CCAvenue credentials missing.");
+          return;
+        }
+      }
       if (orderData.success) {
         if (orderData.paymentUrl) {
           window.location.href = orderData.paymentUrl;
