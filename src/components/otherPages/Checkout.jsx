@@ -477,12 +477,12 @@ export default function Checkout() {
                       onChange={handleInputChange}
                     />
                   </div>
-                  <textarea
+                  {/* <textarea
                     name="note"
                     placeholder="Write note..."
                     value={formData.note}
                     onChange={handleInputChange}
-                  />
+                  /> */}
                 </form>
               </div>
               <div className="wrap">
