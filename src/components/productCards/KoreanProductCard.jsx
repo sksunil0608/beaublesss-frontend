@@ -13,10 +13,15 @@ export default function KoreanProductCard({ product, gridClass = "" }) {
     setCurrentImage(product.imgSrc);
   }, [product]);
   return (
+    // <div
+    //   className={`card-product wow fadeInUp ${gridClass} ${
+    //     product.isOnSale ? "on-sale" : ""
+    //   } ${product.sizes ? "card-product-size" : ""}`}
+    // >
     <div
       className={`card-product wow fadeInUp ${gridClass} ${
         product.isOnSale ? "on-sale" : ""
-      } ${product.sizes ? "card-product-size" : ""}`}
+      } `}
     >
       <div className="card-product-wrapper ">
         <Link to={'#'} className="product-img korean-section-shadow ">

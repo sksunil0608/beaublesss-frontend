@@ -140,7 +140,7 @@ export default function ProductCard3({ product }) {
             <span className="on-sale-item">-{product.salePercentage}</span>
           </div>
         )}
-        {product.sizes && (
+        {/* {product.sizes && (
           <div className="variant-wrap size-list">
             <ul className="variant-box">
               {product.sizes.map((size) => (
@@ -150,7 +150,7 @@ export default function ProductCard3({ product }) {
               ))}
             </ul>
           </div>
-        )}
+        )} */}
         {product.countdown && (
           <div className="variant-wrap countdown-wrap">
             <div className="variant-box">

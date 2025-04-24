@@ -48,7 +48,8 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v3.0.6  |Product Shwing Issue Resolved| Sunil   |
 | v3.0.7  |Product Shwing Issue Resolved| Sunil   |
 | v3.0.8  |CC Avenue Testing Version| Sunil   |
-| v3.0.8  |CC Avenue Testing URL Update| Sunil   |
+| v3.0.9  |CC Avenue Testing URL Update| Sunil   |
+| v4.0.0  |Product Varient Option Removed and CC Avenue changed to secure from test| Sunil   |
 
 ## Installation
 

@@ -95,17 +95,17 @@ export default function HomePage() {
         <Tiktok />
       </Suspense> */}
       <KoreanInspired/>
-      <Suspense fallback={<Loader />}>
-        <Testimonials3 />
-      </Suspense>
-
       {/* <Suspense fallback={<Loader />}>
+        <Testimonials3 />
+      </Suspense> */}
+
+      <Suspense fallback={<Loader />}>
         <Features />
       </Suspense>
 
-      <Suspense fallback={<Loader />}>
+      {/* <Suspense fallback={<Loader />}>
         <ShopGram />
-      </Suspense> */}
+      </Suspense>  */}
 
       <Footer1 />
     </>

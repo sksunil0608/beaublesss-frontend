@@ -112,7 +112,7 @@ export default function ProductCard1({ product, gridClass = "" }) {
             )}
           </div>
         )}
-        {product.sizes && (
+        {/* {product.sizes && (
           <div className="variant-wrap size-list">
             <ul className="variant-box">
               {product.sizes.map((size) => (
@@ -122,7 +122,7 @@ export default function ProductCard1({ product, gridClass = "" }) {
               ))}
             </ul>
           </div>
-        )}
+        )} */}
         {/* Countdown */}
         {/* {product.discount.validUntil && (
           <div className="variant-wrap countdown-wrap">
@@ -233,9 +233,9 @@ export default function ProductCard1({ product, gridClass = "" }) {
             ? product.title.slice(0, 100) + "..."
             : product.title}
         </Link>
-        <p className="text-secondary-2">{product?.shortDescription?.length > 100
-            ? product.shortDescription.slice(0, 100) + "..."
-            : product.shortDescription}</p>
+        {/* <p className="text-secondary-2">{product?.shortDescription?.length > 100
+            ? product.shortDescription.slice(0, 50) + "..."
+            : product.shortDescription}</p> */}
         {/* Product Price */}
         <span className="price">
           {product.finalPrice && (

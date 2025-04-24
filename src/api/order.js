@@ -85,7 +85,7 @@ export const updateOrderStatus = async (orderId, status) => {
 // Track Order by ID and Email
 export const trackOrderById = async (email, orderId) => {
     try {
-      const response = await api.post("/track-order", {
+      const response = await api.post("/order/track-order", {
         email,
         orderId,
       });

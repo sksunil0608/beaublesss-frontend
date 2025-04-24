@@ -156,7 +156,7 @@ export default function Details1({ product }) {
                                       {item.discount}% Off
                                     </span>{" "}
                                   </div>
-                                  <span className=""></span>
+                                  {/* <span className=""></span> */}
                                   <div className="ml-2 tf-btn-discount btn-discount-apply">
                                     {item.code}
                                   </div>

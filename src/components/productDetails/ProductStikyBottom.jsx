@@ -44,9 +44,9 @@ export default function ProductStikyBottom({
                 </div>
                 <div className="content">
                   <div className="text-title">{product.name}</div>
-                  <div className="text-caption-1 text-secondary-2">
+                  {/* <div className="text-caption-1 text-secondary-2">
                     {selectedSize || ""}
-                  </div>
+                  </div> */}
                   <div className="text-title">
                     ₹{product.offerPrice.toFixed(2)}
                   </div>

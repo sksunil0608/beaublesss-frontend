@@ -239,9 +239,9 @@ export default function CartModal() {
                                 </div>
                               </div>
                               <div className="d-flex align-items-center justify-content-between flex-wrap gap-12">
-                                <div className="text-secondary-2">
+                                {/* <div className="text-secondary-2">
                                   {product.sizes}
-                                </div>
+                                </div> */}
                                 <div className="text-button">
                                   {product.quantity} X ₹
                                   {(Number(product?.offerPrice) || 0).toFixed(

@@ -65,10 +65,55 @@ export default function OrderTrac() {
               </div>
               {error && <p className="text-danger mt_10">{error}</p>}
             </form>
+          </div>
 
-            {/* Show Tracking Info if Available */}
-            {orderData && (
-              <div className="widget-content-tab mt_40">
+          {/* Show Tracking Info if Available */}
+          <div className="right">
+            {orderData ? (
+              <div className="widget-content-tab ">
+                <h6 className="line-under">Order Status</h6>
+                <div
+                  className={`widget-content-inner mt_20${
+                    activeTab === 4 ? "active" : ""
+                  }`}
+                >
+                  <p
+                    className={`text-2 ${
+                      orderData.orderStatus === "Cancelled"
+                        ? "text-danger"
+                        : orderData.orderStatus === "Delivered"
+                        ? "text-success"
+                        : orderData.orderStatus === "Shipped"
+                        ? "text-info"
+                        : "text-primary"
+                    }`}
+                  >
+                    {orderData.orderStatus === "Pending" &&
+                      "Your order is pending confirmation."}
+                    {orderData.orderStatus === "Processing" &&
+                      "Your order is being prepared."}
+                    {orderData.orderStatus === "Shipped" &&
+                      "Your order has been shipped!"}
+                    {orderData.orderStatus === "Delivered" &&
+                      "Your order has been delivered."}
+                    {orderData.orderStatus === "Completed" &&
+                      "Your order is completed. Thank you!"}
+                    {orderData.orderStatus === "Cancelled" &&
+                      "Sorry, your order has been cancelled."}
+                  </p>
+                  <ul className="">
+                    <li>
+                      Order Number : <span className="fw-7">#{orderId}</span>
+                    </li>
+                    <li>
+                      Status :{" "}
+                      <span className="fw-7">{orderData.orderStatus}</span>
+                    </li>
+                    <li>
+                      Email : <span className="fw-7">{email}</span>
+                    </li>
+                  </ul>
+                </div>
                 <div
                   className={`widget-content-inner ${
                     activeTab === 1 ? "active" : ""
@@ -84,7 +129,9 @@ export default function OrderTrac() {
                               <div className="text-2 fw-6">
                                 {item.status || "Updated"}
                               </div>
-                              <span>{new Date(item.date).toLocaleString()}</span>
+                              <span>
+                                {new Date(item.updatedAt).toLocaleString()}
+                              </span>
                             </a>
                             {item.details && <p>{item.details}</p>}
                           </div>
@@ -93,42 +140,19 @@ export default function OrderTrac() {
                     </ul>
                   </div>
                 </div>
-
-                <div
-                  className={`widget-content-inner ${
-                    activeTab === 4 ? "active" : ""
-                  }`}
-                >
-                  <p className="text-2 text-success">
-                    Thank you! Your order has been received.
-                  </p>
-                  <ul className="mt_20">
-                    <li>
-                      Order Number :{" "}
-                      <span className="fw-7">#{orderId}</span>
-                    </li>
-                    <li>
-                      Status :{" "}
-                      <span className="fw-7">{orderData.orderStatus}</span>
-                    </li>
-                    <li>
-                      Email : <span className="fw-7">{email}</span>
-                    </li>
-                  </ul>
-                </div>
+              </div>
+            ) : (
+              <div>
+                <h4 className="mb_8">Already have an account?</h4>
+                <p className="text-primary">
+                  Welcome back. Sign in to access your personalized experience,
+                  saved preferences, and more.
+                </p>
+                <Link to={`/login`} className="tf-btn btn-fill">
+                  <span className="text">Login</span>
+                </Link>
               </div>
             )}
-          </div>
-
-          <div className="right">
-            <h4 className="mb_8">Already have an account?</h4>
-            <p className="text-primary">
-              Welcome back. Sign in to access your personalized experience,
-              saved preferences, and more.
-            </p>
-            <Link to={`/login`} className="tf-btn btn-fill">
-              <span className="text">Login</span>
-            </Link>
           </div>
         </div>
       </div>

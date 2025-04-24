@@ -34,16 +34,16 @@ export default function SizeSelect({
   }, [cartProducts, productId]);
   return (
     <div className="variant-picker-item">
-      <div className="d-flex justify-content-between mb_12">
+      {/* <div className="d-flex justify-content-between mb_12">
         <div className="variant-picker-label">
           Selected Size:
           <span className="text-title variant-picker-label-value">
             {getSelectedSize()}
           </span>
         </div>
-      </div>
+      </div> */}
 
-      <div className="variant-picker-values gap12">
+      {/* <div className="variant-picker-values gap12">
         {filterSizes.map((item) => (
           <div
             key={`${item.variantId}-${item.size}`} // Unique key
@@ -63,7 +63,7 @@ export default function SizeSelect({
             </label>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }

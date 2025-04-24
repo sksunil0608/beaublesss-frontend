@@ -8,12 +8,12 @@ export default function Features({ parentClass = "flat-spacing" }) {
       <div className="container ">
         <div className="heading-section text-center">
           <h3 className="heading wow fadeInUp text-primary">
-            ✨ Why Choose Beaubless? ✨
+             Our Features
           </h3>
           <p className="subheading wow fadeInUp">
             Our products are crafted with ethically sourced, cruelty-free
             ingredients, ensuring luxury, effectiveness, and sustainability.
-            Experience skincare that truly cares for you! ✨💖
+            Experience skincare that truly cares for you! 
           </p>
         </div>
         <Swiper
@@ -37,17 +37,17 @@ export default function Features({ parentClass = "flat-spacing" }) {
               <div className="tf-icon-box">
                 <div className="icon-box text-center">
                   <span
-                    className={`icon ${item.icon} text-center text-primary`}
+                    className={`icon ${item.icon} text-center text-purple bg-white rounded-circle p-3`}
                   />
                 </div>
                 <div className="content text-primary text-center">
                   <h6>{item.title}</h6>
-                  <p className="text-center">{item.description}</p>
+                  {/* <p className="text-center text-caption-1">{item.description}</p> */}
                 </div>
               </div>
             </SwiperSlide>
           ))}
-          <div className="sw-pagination-iconbox spd2 sw-dots type-circle justify-content-center" />
+          {/* <div className="sw-pagination-iconbox spd2 sw-dots type-circle justify-content-center" /> */}
         </Swiper>
       </div>
     </section>

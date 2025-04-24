@@ -64,4 +64,63 @@ export const getUserData = async (token) => {
     }
 };
 
+export const addUserAddress = async (addressData, token) => {
+    try {
+      const response = await api.post("/auth/address/add", addressData, {
+        headers: { Authorization: `${token}` },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error adding address:", error);
+      throw error;
+    }
+  };
+  
+  export const updateUserAddress = async (userId, addressId, updatedAddress, token) => {
+    try {
+      const response = await api.put("/auth/address/update", {
+        userId,
+        addressId,
+        updatedAddress,
+      }, {
+        headers: { Authorization: `${token}` },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error updating address:", error);
+      throw error;
+    }
+  };
+
+  export const deleteUserAddress = async (userId, addressId, token) => {
+    try {
+      const response = await api.delete("/auth/address/delete", {
+        headers: { Authorization: `${token}` },
+        data: { userId, addressId }, // 👈 DELETE request uses `data` inside config
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error deleting address:", error);
+      throw error;
+    }
+  };
+
+  export const setDefaultUserAddress = async (userId, addressId, token) => {
+    try {
+      const response = await api.put("/auth/address/set-default", {
+        userId,
+        addressId,
+      }, {
+        headers: { Authorization: `${token}` },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error setting default address:", error);
+      throw error;
+    }
+  };
+  
+  
+  
+
 export default api;

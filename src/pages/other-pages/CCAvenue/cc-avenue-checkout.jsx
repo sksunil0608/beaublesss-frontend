@@ -11,8 +11,8 @@ const api = axios.create({
   baseURL: apiConfig.baseURL, // update if needed
 });
 const metadata = {
-  title: "Gifting Coming Soon || Modave",
-  description: "Modave - Gifting section launching soon",
+  title: "Gifting Coming Soon || Beaubless",
+  description: "Beaubless - Gifting section launching soon",
 };
 
 export default function CCAvenueCheckout() {
@@ -21,7 +21,7 @@ export default function CCAvenueCheckout() {
   const redirectToCCAvenue = ({ encRequest, access_code }) => {
     const form = document.createElement("form");
     form.method = "POST";
-    form.action = "https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
+    form.action = "https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction";
 
     const encInput = document.createElement("input");
     encInput.type = "hidden";
