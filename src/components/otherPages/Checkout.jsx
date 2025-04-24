@@ -511,38 +511,40 @@ export default function Checkout() {
                     </div>
 
                     {/* PayPal */}
-                    {/* <div className="payment-item">
+                                      <div className="payment-item">
                       <label
-                        htmlFor="paypal-method"
+                        htmlFor="ccavenue-method"
                         className="payment-header collapsed"
                         data-bs-toggle="collapse"
-                        data-bs-target="#paypal-payment"
-                        aria-controls="paypal-payment"
+                        data-bs-target="#ccavenue-payment"
+                        aria-controls="ccavenue-payment"
                       >
                         <input
                           type="radio"
                           name="payment-method"
                           className="tf-check-rounded"
-                          id="paypal-method"
-                          value="PayPal"
-                          checked={paymentMethod === "PayPal"}
+                          id="ccavenue-method"
+                          value="CCAvenue"
+                          checked={paymentMethod === "CCAvenue"}
                           onChange={handlePaymentChange}
                         />
-                        <span className="paypal-title">
+                        <span className="text-title">
                           <img
-                            alt="PayPal"
-                            src="/images/payment/paypal.png"
-                            width={90}
-                            height={23}
+                            alt="CCAvenue"
+                            src="/images/payment/cc-avenue.png"
+                            width={40}
+                            height={18}
                           />
+                          CCAvenue
                         </span>
                       </label>
                       <div
-                        id="paypal-payment"
+                        id="ccavenue-payment"
                         className="collapse"
                         data-bs-parent="#payment-box"
                       />
-                    </div> */}
+                    </div>
+
                   </div>
 
                   {/* Checkout Button */}
