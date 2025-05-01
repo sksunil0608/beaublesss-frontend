@@ -1020,7 +1020,9 @@ export default function Checkout() {
           navigate(``);
            // Save the order details temporarily
           sessionStorage.setItem("orderDetails", JSON.stringify(fullOrderDetailsFromBackend));
-
+          
+          // ✅ Clear the cart from localStorage
+          localStorage.removeItem("cartList");
           // Navigate to the success page
           navigate(`/order-success?payment_id=${response.razorpay_payment_id}`);
           

@@ -53,6 +53,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v4.0.1  |CC Avenue Added| Sunil   |
 | v4.0.2  |CC Avenue Added modified| Sunil   |
 | v4.0.3  |Razorpay test integration| Sunil   |
+| v4.0.4  |Remove cart after Order and Cleared Orderr Success Page| Sunil   |
 ## Installation
 
 1. Clone the repository:
