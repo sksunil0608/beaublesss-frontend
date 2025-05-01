@@ -1150,7 +1150,7 @@ export default function Checkout() {
                 </div>
               )}
               {/* Bootstrap Toast for Error Message */}
-              Toast
+          
               <div className="wrap">
                 <h5 className="title">Information</h5>
                 <form className="info-box" onSubmit={(e) => e.preventDefault()}>
