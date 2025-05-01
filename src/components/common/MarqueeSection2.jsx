@@ -7,7 +7,7 @@ export default function MarqueeSection2({ parentClass = "tf-marquee" }) {
         <div className="initial-child-container text-primary">
           <div className="marquee-child-item">
             <p className="text-btn-uppercase">
-              Beaubless is LIVE! 🎉 Up to 30% OFF + FREE Gifts on Every Order!
+              Beaubless is LIVE! 🎉
             </p>
           </div>
           <div className="marquee-child-item">
@@ -15,7 +15,7 @@ export default function MarqueeSection2({ parentClass = "tf-marquee" }) {
           </div>
           <div className="marquee-child-item">
             <p className="text-btn-uppercase">
-              Flat 15% OFF on Combos + Exclusive FREE Gifts!
+              Flat 15% OFF on Combos!
             </p>
           </div>
           <div className="marquee-child-item">
@@ -24,7 +24,7 @@ export default function MarqueeSection2({ parentClass = "tf-marquee" }) {
           {/* 2 */}
           <div className="marquee-child-item">
             <p className="text-btn-uppercase">
-              Up to 30% OFF + FREE Gift on Orders Above ₹999! Shop Now!
+              Up to 15% OFF Code: CARE10! Shop Now!
             </p>
           </div>
           <div className="marquee-child-item">
@@ -32,7 +32,7 @@ export default function MarqueeSection2({ parentClass = "tf-marquee" }) {
           </div>
           <div className="marquee-child-item">
             <p className="text-btn-uppercase">
-              Free shipping on all orders over ₹999.00
+              Free shipping on all orders
             </p>
           </div>
           <div className="marquee-child-item">

@@ -59,6 +59,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v4.0.7  |Removed Toast option on checkout page| Sunil   |
 | v4.0.9  |Removed sticky cart and loading in payment button| Sunil   |
 | v5.0.0  |Ready for the first live| Sunil   |
+| v5.0.1  |Ready for the first live| Sunil   |
 ## Installation
 
 1. Clone the repository:

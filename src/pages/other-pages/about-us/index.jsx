@@ -62,7 +62,7 @@ export default function AboutUsPage() {
       <Features />
       {/* <Team /> */}
       {/* <Brands parentClass="flat-spacing-5 bg-surface" /> */}
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Faqs />
       <Footer1 />
     </>

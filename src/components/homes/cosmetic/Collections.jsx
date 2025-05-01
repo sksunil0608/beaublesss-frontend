@@ -39,7 +39,18 @@ export default function Collections() {
     <section id="downSection" className="pt-5">
       <div className="container">
         {loading ? (
-          <div className="text-center py-5">Loading collections...</div>
+           <>
+ 
+
+           {/* Skeleton Loader (When loading) */}
+           <div className="skeleton-wrapper pt-5 px-5">
+             <div className="skeleton-item"></div>
+             <div className="skeleton-item"></div>
+             <div className="skeleton-item"></div>
+             <div className="skeleton-item"></div>
+             {/* Add as many skeletons as needed */}
+           </div>
+         </>
         ) : (
           <Swiper
             dir="ltr"

@@ -18,7 +18,18 @@ export default function Products5() {
         </div>
 
         {loading ? (
-          <div className="text-center py-5">Loading products...</div>
+          <>
+ 
+
+          {/* Skeleton Loader (When loading) */}
+          <div className="skeleton-wrapper pt-5 px-5">
+            <div className="skeleton-item"></div>
+            <div className="skeleton-item"></div>
+            <div className="skeleton-item"></div>
+            <div className="skeleton-item"></div>
+            {/* Add as many skeletons as needed */}
+          </div>
+        </>
         ) : (
           <Swiper
             className="swiper tf-sw-latest"

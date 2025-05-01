@@ -67,7 +67,18 @@ export default function Products3({ parentClass = "flat-spacing-3" }) {
               role="tabpanel"
             >
               {loading ? (
-                <div className="text-center p-5">Loading...</div>
+                 <>
+ 
+
+                 {/* Skeleton Loader (When loading) */}
+                 <div className="skeleton-wrapper pt-5 px-5">
+                   <div className="skeleton-item"></div>
+                   <div className="skeleton-item"></div>
+                   <div className="skeleton-item"></div>
+                   <div className="skeleton-item"></div>
+                   {/* Add as many skeletons as needed */}
+                 </div>
+               </>
               ) : (
                 <div className="tf-grid-layout tf-col-2 lg-col-3 xl-col-4">
                   {selectedItems.slice(0, 4).map((product, i) => (

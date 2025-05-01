@@ -366,8 +366,8 @@ export default function Details1({ product }) {
                             </div>
                             <p className="text-primary">
                               Estimated Delivery:&nbsp;&nbsp;
-                              <span>12-26 days</span>
-                              (International), <span>3-7 days</span> (India)
+                              {/* <span>12-26 days</span> */}
+                             <span>12-20 days</span> (India)
                             </p>
                           </div>
                           <div className="tf-product-info-return">
@@ -376,7 +376,7 @@ export default function Details1({ product }) {
                             </div>
                             <p className="text-primary">
                               Return within <span>7 days</span> of purchase.
-                              Duties &amp; taxes are non-refundable.
+                              
                             </p>
                           </div>
                           <div className="dropdown dropdown-store-location">

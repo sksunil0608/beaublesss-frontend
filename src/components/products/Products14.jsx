@@ -139,7 +139,7 @@ export default function Products14({ parentClass = "flat-spacing", collectionId 
     const filteredByCategory = sorted.filter(
       (p) => p.category === collectionId
     );
-    const initialItems = filteredByCategory.slice(0, 2);
+    const initialItems = filteredByCategory.slice(0, 4);
     setLoadedItems(initialItems);
     setAllLoaded(initialItems.length >= filteredByCategory.length);
   }, [sorted, collectionId]);
@@ -165,6 +165,21 @@ export default function Products14({ parentClass = "flat-spacing", collectionId 
 
   return (
     <>
+        {(loading || !loadedItems.length) ? (
+          <>
+     
+    
+          {/* Skeleton Loader (When loading) */}
+          <div className="skeleton-wrapper pt-5 px-5">
+            <div className="skeleton-item"></div>
+            <div className="skeleton-item"></div>
+            <div className="skeleton-item"></div>
+            <div className="skeleton-item"></div>
+            {/* Add as many skeletons as needed */}
+          </div>
+        </>
+        ) : (
+          <>
       <section className={parentClass}>
         <div className="container">
           <div className="tf-shop-control">
@@ -236,5 +251,7 @@ export default function Products14({ parentClass = "flat-spacing", collectionId 
 
       <FilterModal allProps={allProps} />
     </>
+        )}
+      </>
   );
 }

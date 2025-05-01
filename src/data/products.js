@@ -144,7 +144,7 @@ export const products42 = [
     id: 1,
     imgSrc: "/images/products/Rice Water Niacinamide.png",
     title: "Rice Water Niacinamide",
-    slug: "rice-water-niacinamide",
+    slug: "rice-based-moisturiser",
   },{
     id: 2,
     imgSrc: "/images/products/Rice Water Toner & Vitamin C.png",
@@ -154,8 +154,8 @@ export const products42 = [
 {
   id: 3,
   imgSrc: "/images/products/Rice Water Toner.png",
-  title: "Rice Water Toner",
-  slug: "rice-water-serum",
+  title: "Rice + Vitamin C SPF 50+ Sunscreen",
+  slug: "rice-spf-50-sunscreen",
 }
   
 ];
