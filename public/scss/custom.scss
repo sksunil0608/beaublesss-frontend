@@ -180,13 +180,13 @@
 
 .skeleton-wrapper {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* You can adjust this for different grid layouts */
+  grid-template-columns: repeat(4, 1fr); /* Default: 4 columns */
   gap: 20px;
 }
 
 .skeleton-item {
   background-color: #e0e0e0;
-  height: 400px; /* Adjust height based on your content size */
+  height: 400px; /* Adjust height based on your content */
   border-radius: 8px;
   animation: skeleton-animation 1.5s infinite ease-in-out;
 }
@@ -203,3 +203,15 @@
   }
 }
 
+/* Mobile: 2 columns */
+@media (max-width: 768px) {
+  .skeleton-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .skeleton-item {
+    background-color: #e0e0e0;
+    height: 200px; /* Adjust height based on your content */
+    border-radius: 8px;
+    animation: skeleton-animation 1.5s infinite ease-in-out;
+  }
+}

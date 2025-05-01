@@ -52,7 +52,7 @@ export default function Products5() {
               </SwiperSlide>
             ))}
 
-            <div className="sw-pagination-latest spd6 sw-dots type-circle justify-content-center" />
+            {/* <div className="sw-pagination-latest spd6 sw-dots type-circle justify-content-center" /> */}
           </Swiper>
         )}
       </div>

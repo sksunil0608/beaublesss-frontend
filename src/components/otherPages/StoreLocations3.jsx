@@ -14,15 +14,18 @@ export default function StoreLocations3() {
                   data-map-zoom={16}
                   data-map-scroll="true"
                 >
-                  <iframe
+                  {/* <iframe
                     src="https://www.google.com/maps/place/Gaur+Cascades+A-Block/@28.702934,77.4235721,17z/data=!3m1!4b1!4m6!3m5!1s0x390cf11d0eba5643:0x5dc468996567c6f7!8m2!3d28.702934!4d77.426147!16s%2Fg%2F1hm2080cy?entry=ttu&g_ep=EgoyMDI1MDMwNC4wIKXMDSoASAFQAw%3D%3D"
                     width={600}
                     height={450}
                     style={{ border: 0, width: "100%", height: "100%" }}
                     allowFullScreen=""
                     loading="lazy"
-                  />
+                  /> */}
+                  <img src="/images/banner/contact.jpg" className=" p-5 rounded" style={{ border: 0,borderRadius:'10px',width: "100%", height: "100%" }}/>
+                 
                 </div>
+                 
               </div>
               <div className="right">
                 <h4>Information</h4>

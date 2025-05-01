@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
 import { Pagination } from "swiper/modules";
 import { useEffect, useState } from "react";
-export default function Hero() {
+export default function Hero2() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   useEffect(() => {
     const handleResize = () => {
@@ -15,7 +15,7 @@ export default function Hero() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const slides = isMobile ? slides0Mobile : slides0;
+  const slides = isMobile ? slides7Mobile : slides7;
   return (
     <div className="tf-slideshow slider-style2 slider-effect-fade">
       <Swiper
@@ -40,7 +40,6 @@ export default function Hero() {
               <img
               alt={`fashion-slideshow-${index}`}
               src={slide.imgSrc}
-              width={100}
               className="img-fluid w-100 d-block"
             />
 

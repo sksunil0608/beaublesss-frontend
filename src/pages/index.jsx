@@ -7,6 +7,7 @@ import { lazy, Suspense, useState, useEffect } from "react";
 import Testimonials3 from "@/components/common/Testimonials3";
 import BannerTab from "@/components/common/BannerTab";
 import KoreanInspired from "@/components/common/KoreanInspired";
+import Hero2 from "@/components/homes/cosmetic/Hero2";
 const BannerCollection = lazy(() =>
   import("@/components/homes/cosmetic/BannerCollection")
 );
@@ -73,7 +74,7 @@ export default function HomePage() {
         <Products3 />
       </Suspense>
 
-      <Hero />
+      <Hero2 />
 
       {/* <Suspense fallback={<Loader />}>
         <BannerCountdown />

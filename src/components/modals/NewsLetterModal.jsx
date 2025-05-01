@@ -71,7 +71,7 @@ export default function NewsLetterModal() {
       ref={modalElement}
     >
       <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content">
+        <div className="modal-content bg-primary border border-white border-3 ">
           <div className="modal-top">
             {/* <img
               className="lazyload"
@@ -86,12 +86,12 @@ export default function NewsLetterModal() {
               data-bs-dismiss="modal"
             />
           </div>
-          <div className="modal-bottom text-center">
+          <div className="modal-bottom text-center bg-primary text-white">
             <p className="text-btn-uppercase fw-4 font-2">
               Subscribe To Our Newletter!
             </p>
-            <h5>
-              Receive 10% OFF your next order, exclusive offers &amp; more!
+            <h5 className="text-white">
+              Receive 15% OFF your next order, exclusive offers &amp; more!
             </h5>
             <div
               className={`tfSubscribeMsg  footer-sub-element ${
@@ -125,14 +125,14 @@ export default function NewsLetterModal() {
                 <button
                   type="submit"
                   id="subscribe-button"
-                  className="btn-style-2 radius-12 w-100 justify-content-center"
+                  className="btn-style-2 radius-12 w-100 justify-content-center bg-white text-primary"
                 >
                   <span className="text text-btn-uppercase">SUBSCRIBE</span>
                 </button>
               </div>
               <div id="subscribe-msg" />
             </form>
-            <ul className="tf-social-icon style-default justify-content-center">
+            {/* <ul className="tf-social-icon style-default justify-content-center">
               <li>
                 <a href="#" className="social-facebook">
                   <i className="icon icon-fb" />
@@ -153,7 +153,7 @@ export default function NewsLetterModal() {
                   <i className="icon icon-pinterest" />
                 </a>
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
       </div>

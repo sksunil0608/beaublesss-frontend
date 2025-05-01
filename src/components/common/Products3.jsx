@@ -81,7 +81,7 @@ export default function Products3({ parentClass = "flat-spacing-3" }) {
                </>
               ) : (
                 <div className="tf-grid-layout tf-col-2 lg-col-3 xl-col-4">
-                  {selectedItems.slice(0, 4).map((product, i) => (
+                  {selectedItems.slice(0, 8 ).map((product, i) => (
                     <ProductCard1 key={i} product={product} />
                   ))}
                 </div>

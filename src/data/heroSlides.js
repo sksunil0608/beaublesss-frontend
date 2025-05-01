@@ -257,12 +257,42 @@ export const slides7 = [
 export const slides7Mobile = [
   
    {
-    imgSrc: "/images/slider/Beaubless_Mobile.png",
+    imgSrc: "https://res.cloudinary.com/dc2mqs3kv/image/upload/v1746127376/WhatsApp_Image_2025-05-02_at_00.35.10_6c5d27cb_hdfwsk.jpg",
     title: "",
     description:
       "",
   }, {
-    imgSrc: "/images/slider/Beaubless_Mobile.png",
+    imgSrc: "https://res.cloudinary.com/dc2mqs3kv/image/upload/v1746127376/WhatsApp_Image_2025-05-02_at_00.35.10_6c5d27cb_hdfwsk.jpg",
+    title: "",
+    description:
+      "",
+  },
+  
+];
+
+export const slides0 = [
+  {
+    imgSrc: "/images/slider/Beaubless2.png",
+    title: "",
+    description:
+      "",
+  },  {
+    imgSrc: "/images/slider/Beaubless2.png",
+    title: "",
+    description:
+      "",
+  },
+   
+];
+export const slides0Mobile = [
+  
+   {
+    imgSrc: "/images/slider/Beaubless_Mobile2.png",
+    title: "",
+    description:
+      "",
+  }, {
+    imgSrc: "/images/slider/Beaubless_Mobile2.png",
     title: "",
     description:
       "",
