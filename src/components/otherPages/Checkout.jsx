@@ -1049,7 +1049,7 @@ export default function Checkout() {
       console.error("Checkout error:", error);
       showToast("error", "Something went wrong");
     }finally {
-      setIsLoading(false); // Hide loader even if there's an error
+      setIsRazorpayIsLoading(false); // Hide loader even if there's an error
     }is
   };
   
