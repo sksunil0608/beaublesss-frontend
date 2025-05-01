@@ -1064,7 +1064,7 @@ export default function Checkout() {
               {/* If User Not Logged in */}
               {!isAuthorized ? (
                 <div className="wrap">
-                  <div className="title-login">
+                  {/* <div className="title-login">
                     <p>Already have an account?</p>{" "}
                     <Link to={`/login`} className="text-button">
                       Login here
@@ -1072,9 +1072,9 @@ export default function Checkout() {
                   </div>
                   {loginError && (
                     <p className="error-message text-danger">{loginError}</p>
-                  )}{" "}
+                  )}{" "} */}
                   {/* Show error message */}
-                  <form className="login-box" onSubmit={handleLogin}>
+                  {/* <form className="login-box" onSubmit={handleLogin}>
                     <div className="grid-2">
                       <input
                         type="email"
@@ -1109,7 +1109,7 @@ export default function Checkout() {
                     <button className="tf-btn" type="submit">
                       <span className="text">Login</span>
                     </button>
-                  </form>
+                  </form> */}
                 </div>
               ) : (
                 <div className="wrap">
