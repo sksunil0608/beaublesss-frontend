@@ -55,7 +55,9 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v4.0.3  |Razorpay test integration| Sunil   |
 | v4.0.4  |Remove cart after Order and Cleared Orderr Success Page| Sunil   |
 | v4.0.5  |Removed already have an account option| Sunil   |
-| v4.0.6  |Removed already have an account option| Sunil   |
+| v4.0.6  |Removed Toast option on checkout page| Sunil   |
+| v4.0.7  |Removed Toast option on checkout page| Sunil   |
+| v4.0.9  |Removed sticky cart and loading in payment button| Sunil   |
 ## Installation
 
 1. Clone the repository:

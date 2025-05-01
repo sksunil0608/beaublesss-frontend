@@ -481,12 +481,12 @@ Skin CareRaj Nagar Extension Road, Ghaziabad, Uttar Pradesh, India, 201017
           </div>
         </div>
       </div>
-      <ProductStikyBottom
+      {/* <ProductStikyBottom
         product={product}
         activeSize={activeSize}
         setActiveSize={setActiveSize}
         filterSizes={filterSizes}
-      />
+      /> */}
     </section>
   );
 }

@@ -956,8 +956,12 @@ export default function Checkout() {
     setPaymentMethod(event.target.value);
   };
 
+  const [isRazorpayLoading, setIsRazorpayIsLoading] = useState(false);
+
+
   const handleCheckout = async (formData) => {
     try {
+      setIsRazorpayIsLoading(true); // Show loader
       let userId = isAuthorized
         ? localStorage.getItem("userId")
         : `guest_${Date.now()}`;
@@ -966,6 +970,7 @@ export default function Checkout() {
   
       if (!email) {
         alert("Please provide a valid email address to proceed.");
+        setIsRazorpayIsLoading(false); // Hide loader
         return;
       }
   
@@ -995,6 +1000,7 @@ export default function Checkout() {
       if (!orderData.success) {
         showToast("error", "Order Failed");
         navigate("/order-failed");
+        setIsRazorpayIsLoading(false); // Hide loader
         return;
       }
   
@@ -1042,7 +1048,9 @@ export default function Checkout() {
     } catch (error) {
       console.error("Checkout error:", error);
       showToast("error", "Something went wrong");
-    }
+    }finally {
+      setIsLoading(false); // Hide loader even if there's an error
+    }is
   };
   
   useEffect(() => {
@@ -1287,14 +1295,21 @@ export default function Checkout() {
               <div className="wrap">
   {/* <h5 className="title">Proceed to Checkout:</h5> */}
   <form className="form-payment" onSubmit={(e) => e.preventDefault()}>
-    <button
-      onClick={() =>
-        handleCheckout({ ...formData, paymentMethod: "Razorpay" })
-      }
-      className="tf-btn btn-reset"
-    >
-      Proceed to Payment
-    </button>
+  <button
+  onClick={() => handleCheckout({ ...formData, paymentMethod: "Razorpay" })}
+  className="tf-btn btn-reset"
+  disabled={isRazorpayLoading}
+>
+  {isRazorpayLoading ? (
+    <>
+      <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+      Please wait...
+    </>
+  ) : (
+    "Proceed to Payment"
+  )}
+</button>
+
   </form>
 </div>
 
