@@ -66,7 +66,7 @@ export default function Details1({ product }) {
                         <span>{matchedCategory?.name || ""}</span>
                       </div>
                       <h3 className="name">{product?.name}</h3>
-                      <div className="sub">
+                      {/* <div className="sub">
                         <div className="tf-product-info-rate">
                           <div className="list-star">
                             {[...Array(5)].map((_, i) => (
@@ -87,15 +87,15 @@ export default function Details1({ product }) {
                             </div>
                           )}
                         </div>
-                        {/* <div className="tf-product-info-sold">
+                        <div className="tf-product-info-sold">
                           <i className="icon icon-lightning" />
                           <div className="text text-caption-1 text-primary">
                             {product.sold || 0}&nbsp;sold in last&nbsp;
                             {product.soldDuration || 32}
                             &nbsp;hours
                           </div>
-                        </div> */}
-                      </div>
+                        </div>
+                      </div> */}
                     </div>
                     <div className="tf-product-info-desc">
                       <div className="tf-product-info-price">

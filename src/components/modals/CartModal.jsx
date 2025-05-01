@@ -265,7 +265,7 @@ export default function CartModal() {
                   </div>
                 </div>
                 <div className="tf-mini-cart-bottom">
-                  <div className="tf-mini-cart-tool">
+                  {/* <div className="tf-mini-cart-tool">
                     <div
                       className="tf-mini-cart-tool-btn btn-add-note"
                       onClick={() => setCurrentOpenPopup("add-note")}
@@ -378,7 +378,7 @@ export default function CartModal() {
                       </svg>
                       <div className="text-caption-1">Coupon</div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="tf-mini-cart-bottom-wrap">
                     <div className="tf-cart-totals-discounts">
                       <h5>Subtotal</h5>
@@ -386,7 +386,7 @@ export default function CartModal() {
                         ₹{totalPrice.toFixed(2)}
                       </h5>
                     </div>
-                    <div className="tf-cart-totals-discounts">
+                    {/* <div className="tf-cart-totals-discounts">
                       <p>Total Discount</p>
                       <p className="tf-totals-total-value">
                         {discountDetails.length > 0
@@ -399,27 +399,27 @@ export default function CartModal() {
                               .join(", ")
                           : "0 off"}
                       </p>
-                    </div>
-
-                    {/* <div className="tf-cart-checkbox">
-                      <div className="tf-checkbox-wrapp">
-                        <input
-                          className=""
-                          type="checkbox"
-                          id="CartDrawer-Form_agree"
-                          name="agree_checkbox"
-                        />
-                        <div>
-                          <i className="icon-check" />
-                        </div>
-                      </div>
-                      <label htmlFor="CartDrawer-Form_agree">
-                        I agree with
-                        <Link to={`/term-of-use`} title="Terms of Service">
-                          Terms &amp; Conditions
-                        </Link>
-                      </label>
                     </div> */}
+
+                      {/* <div className="tf-cart-checkbox">
+                        <div className="tf-checkbox-wrapp">
+                          <input
+                            className=""
+                            type="checkbox"
+                            id="CartDrawer-Form_agree"
+                            name="agree_checkbox"
+                          />
+                          <div>
+                            <i className="icon-check" />
+                          </div>
+                        </div>
+                        <label htmlFor="CartDrawer-Form_agree">
+                          I agree with
+                          <Link to={`/term-of-use`} title="Terms of Service">
+                            Terms &amp; Conditions
+                          </Link>
+                        </label>
+                      </div> */}
                     <div className="tf-mini-cart-view-checkout">
                       <Link
                         to={`/cart`}

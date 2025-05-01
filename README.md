@@ -52,6 +52,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v4.0.0  |Product Varient Option Removed and CC Avenue changed to secure from test| Sunil   |
 | v4.0.1  |CC Avenue Added| Sunil   |
 | v4.0.2  |CC Avenue Added modified| Sunil   |
+| v4.0.3  |Razorpay test integration| Sunil   |
 ## Installation
 
 1. Clone the repository:

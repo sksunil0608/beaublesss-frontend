@@ -244,7 +244,7 @@ export default function ProductCard1({ product, gridClass = "" }) {
           ₹{product.offerPrice?.toFixed(2)}
         </span>
         {/* Product Ratings */}
-        <div className="sub d-md-flex">
+        {/* <div className="sub d-md-flex">
           <div className="tf-product-info-rate d-flex">
             <div className="list-star d-flex">
               {[...Array(5)].map((_, i) => (
@@ -264,7 +264,7 @@ export default function ProductCard1({ product, gridClass = "" }) {
               </div>
             )}
           </div>
-        </div>
+        </div> */}
 
         
         {product.colors && (

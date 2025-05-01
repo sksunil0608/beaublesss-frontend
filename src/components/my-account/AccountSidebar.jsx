@@ -90,7 +90,10 @@ export default function AccountSidebar() {
           </li>
           <li>
             <Link
-              to="/login"
+               onClick={() => {
+                localStorage.removeItem("authToken");
+                window.location.href = "/login";
+              }}
               className={`my-account-nav-item ${
                 pathname === "/login" ? "active" : ""
               }`}
