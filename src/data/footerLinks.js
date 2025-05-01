@@ -1,7 +1,7 @@
 export const socialLinks = [
-  { href: "#", className: "social-facebook", iconClass: "icon-fb" },
+  { href: "https://www.facebook.com/profile.php?id=61574193269112", className: "social-facebook", iconClass: "icon-fb" },
   { href: "#", className: "social-twiter", iconClass: "icon-x" },
-  { href: "#", className: "social-instagram", iconClass: "icon-instagram" },
+  { href: "https://www.instagram.com/beaubless_skincare", className: "social-instagram", iconClass: "icon-instagram" },
   { href: "#", className: "social-amazon", iconClass: "icon-amazon" },
 ];
 

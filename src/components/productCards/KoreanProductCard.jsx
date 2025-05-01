@@ -24,7 +24,7 @@ export default function KoreanProductCard({ product, gridClass = "" }) {
       } `}
     >
       <div className="card-product-wrapper ">
-        <Link to={'#'} className="product-img korean-section-shadow ">
+        <Link to={'/products'} className="product-img korean-section-shadow ">
         {/* <Link to={`/products/${product.slug}`} className="product-img korean-section-shadow "> */}
           
 

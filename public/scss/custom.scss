@@ -177,3 +177,29 @@
     transform: rotate(720deg);
   }
 }
+
+.skeleton-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* You can adjust this for different grid layouts */
+  gap: 20px;
+}
+
+.skeleton-item {
+  background-color: #e0e0e0;
+  height: 600px; /* Adjust height based on your content size */
+  border-radius: 8px;
+  animation: skeleton-animation 1.5s infinite ease-in-out;
+}
+
+@keyframes skeleton-animation {
+  0% {
+    background-color: #e0e0e0;
+  }
+  50% {
+    background-color: #f0f0f0;
+  }
+  100% {
+    background-color: #e0e0e0;
+  }
+}
+

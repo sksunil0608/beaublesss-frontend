@@ -194,12 +194,17 @@ export default function Products15({ parentClass = "flat-spacing" }) {
     <>
     {(loading || !loadedItems.length) ? (
       <>
-        <div id="preloader" class="preload-container">
-      <div class="loader-wrapper">
-        <div class="spinner"></div>
+ 
+
+      {/* Skeleton Loader (When loading) */}
+      <div className="skeleton-wrapper pt-5 px-5">
+        <div className="skeleton-item"></div>
+        <div className="skeleton-item"></div>
+        <div className="skeleton-item"></div>
+        <div className="skeleton-item"></div>
+        {/* Add as many skeletons as needed */}
       </div>
-    </div>
-      </>
+    </>
     ) : (
       <>
         <section className={parentClass}>

@@ -385,12 +385,12 @@ export default function Details1({ product }) {
                               data-bs-toggle="dropdown"
                               aria-haspopup="true"
                             >
-                              <div className="tf-product-info-view link">
+                              {/* <div className="tf-product-info-view link">
                                 <div className="icon">
                                   <i className="icon-map-pin" />
                                 </div>
                                 <span>View Store Information</span>
-                              </div>
+                              </div> */}
                             </div>
                             <div className="dropdown-menu dropdown-menu-end">
                               <div className="dropdown-content">
