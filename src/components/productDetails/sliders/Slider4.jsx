@@ -148,7 +148,7 @@ export default function Slider4({
         className="swiper tf-product-media-main"
         id="gallery-swiper-started"
         spaceBetween={10}
-        slidesPerView={1}
+        slidesPerView={0}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[Thumbs]}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
