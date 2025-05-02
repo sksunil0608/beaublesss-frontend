@@ -16,7 +16,7 @@ export default function Slider4({
   );
 
   if (items.length > 0) {
-    items[0].src = firstItem || items[0].src;
+    items[0].src =  items[0].src;
   }
 
   useEffect(() => {
