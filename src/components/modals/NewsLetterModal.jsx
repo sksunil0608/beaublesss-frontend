@@ -7,7 +7,7 @@ export default function NewsLetterModal() {
   const modalElement = useRef();
   useEffect(() => {
     const showModal = async () => {
-      if (pathname === "/") {
+      if (pathname === "/" && !localStorage.getItem("modalShown")) {
         const bootstrap = await import("bootstrap"); // dynamically import bootstrap
         const myModal = new bootstrap.Modal(
           document.getElementById("newsletterPopup"),
@@ -19,6 +19,9 @@ export default function NewsLetterModal() {
         // Show the modal after a delay using a promise
         await new Promise((resolve) => setTimeout(resolve, 2000));
         myModal.show();
+        // Set the 'modalShown' flag in localStorage
+        localStorage.setItem("modalShown", "true");
+
 
         modalElement.current.addEventListener("hidden.bs.modal", () => {
           myModal.hide();
