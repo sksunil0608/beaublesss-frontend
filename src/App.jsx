@@ -52,6 +52,8 @@ import CheckoutPage from "./pages/products/checkout";
 import OrderSuccessPage from "./pages/other-pages/order-success";
 import GiftingPage from "./pages/gifting/Gifting";
 import CCAvenueCheckout from "./pages/other-pages/CCAvenue/cc-avenue-checkout";
+import OrderFailurePage from "./pages/other-pages/order-failure";
+import OrderPendingPage from "./pages/other-pages/order-pending";
 
 function App({ setIsLoading }) {
   const { pathname } = useLocation();
@@ -185,6 +187,8 @@ function App({ setIsLoading }) {
               <Route path="register" element={<RegisterPage />} />
               <Route path="cart" element={<ShopingCartPage />} />
               <Route path="order-success" element={<OrderSuccessPage />} />
+              <Route path="order-failed" element={<OrderFailurePage/>} />
+              <Route path="order-pending" element={<OrderPendingPage />} />
               <Route path="checkout" element={<CheckoutPage />} />
               <Route path="cc-avenue-checkout" element={<CCAvenueCheckout />} />
               <Route path="my-orders" element={<MyAccountOrdersPage />} />
