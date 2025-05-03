@@ -1007,9 +1007,11 @@ export default function Checkout() {
   
       // ✅ COD Flow
       if (paymentMethod.toLowerCase() === "cod") {
+        setIsRazorpayIsLoading(true);
         setCartProducts([]);
         localStorage.removeItem("cartList");
         showToast("success", "Order placed successfully! Pay on delivery.");
+        setIsRazorpayIsLoading(false);
         setTimeout(() => navigate("/order-success"), 3000);
         return;
       }
