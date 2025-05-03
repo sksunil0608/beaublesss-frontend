@@ -961,7 +961,7 @@ export default function Checkout() {
 
   const handleCheckout = async (formData) => {
     try {
-      setIsRazorpayIsLoading();
+      setIsRazorpayIsLoading(true);
   
       let userId = isAuthorized
         ? localStorage.getItem("userId")
