@@ -38,9 +38,11 @@ const paymentId = searchParams.get("payment_id");
                   Your Order is Confirmed
                 </h4>
                 <div className="text body-text-1 pt-3">
-                  We appreciate your purchase! Your order is being processed and
-                  will be shipped soon.
-                </div>
+  Thank you for your purchase! Your order details have been sent to your email. 
+  You’ll receive a notification once your order is shipped. 
+  If you have any questions, feel free to message us through our website.
+</div>
+
               </div>
             </div>
           </div>
