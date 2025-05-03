@@ -46,7 +46,7 @@ useEffect(() => {
 }, []);
     const [totalPrice, setTotalPrice] = useState(0);
 
-  const [minThresholdFreeDelivery, setMinThresholdFreeDelivery] = useState(999);
+  const [minThresholdFreeDelivery, setMinThresholdFreeDelivery] = useState(499);
   const [activeCoupon, setActiveCoupon] = useState("");
   const [orderNote, setOrderNote] = useState(null);
   const [discountDetails, setDiscountDetails] = useState([]);

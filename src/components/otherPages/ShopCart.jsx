@@ -625,7 +625,7 @@ export default function ShopCart() {
           <div className="row">
             <div className="col-xl-8">
               <div className="tf-cart-sold">
-                {cartProducts.length > 0 && (
+                {/* {cartProducts.length > 0 && (
                   <div className="notification-sold bg-surface">
                     <div className="count-text">
                       Your cart will expire in in&nbsp;
@@ -636,7 +636,7 @@ export default function ShopCart() {
                       out!
                     </div>
                   </div>
-                )}
+                )} */}
                 <div className="notification-progress">
                   <div className="text">
                     {totalPrice >= minThresholdFreeDelivery ? (

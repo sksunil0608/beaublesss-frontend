@@ -61,6 +61,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v5.0.0  |Ready for the first live| Sunil   |
 | v5.0.1  |Ready for the first live| Sunil   |
 | v5.0.2  |Optimized the code| Sunil   |
+| v5.0.3  |Optimized the code| Sunil   |
 ## Installation
 
 1. Clone the repository:

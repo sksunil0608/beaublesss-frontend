@@ -961,7 +961,8 @@ export default function Checkout() {
 
   const handleCheckout = async (formData) => {
     try {
-      setIsRazorpayIsLoading(true); // Show loader
+      setIsRazorpayIsLoading();
+  
       let userId = isAuthorized
         ? localStorage.getItem("userId")
         : `guest_${Date.now()}`;
@@ -970,7 +971,7 @@ export default function Checkout() {
   
       if (!email) {
         alert("Please provide a valid email address to proceed.");
-        setIsRazorpayIsLoading(false); // Hide loader
+        setIsRazorpayIsLoading(false);
         return;
       }
   
@@ -990,68 +991,70 @@ export default function Checkout() {
         cartProducts,
         finalOrderTotal: finalOrderTotal ? finalOrderTotal.toFixed(2) : "0",
         note: formData.note || "",
-        paymentMethod: "Razorpay", // Fixed method
+        paymentMethod,
         activeCoupon,
         discountDetails,
         selectedShippingOption,
       };
   
       const orderData = await createOrder(orderPayload);
+  
       if (!orderData.success) {
         showToast("error", "Order Failed");
         navigate("/order-failed");
-        setIsRazorpayIsLoading(false); // Hide loader
         return;
       }
   
-      const {
-        id: order_id,
-        amount,
-        currency,
-        key,
-      } = orderData.razorpayOrderDetails;
-      const fullOrderDetailsFromBackend = orderData.OrderDetails; // Make sure this exists!
-      console.log(orderData)
+      // ✅ COD Flow
+      if (paymentMethod === "COD") {
+        setCartProducts([]);
+        localStorage.removeItem("cartList");
+        showToast("success", "Order placed successfully! Pay on delivery.");
   
-      // Open Razorpay checkout modal
-      const options = {
-        key,
-        amount,
-        currency,
-        name: "Beaubless Cosmetics",
-        description: "Order Payment",
-        order_id,
-        handler: function (response) {
-          console.log("Payment Success", response);
-          navigate(``);
-           // Save the order details temporarily
-          sessionStorage.setItem("orderDetails", JSON.stringify(fullOrderDetailsFromBackend));
-          
-          // ✅ Clear the cart from localStorage
-          localStorage.removeItem("cartList");
-          // Navigate to the success page
-          navigate(`/order-success?payment_id=${response.razorpay_payment_id}`);
-          
-        },
-        prefill: {
-          name: `${formData.firstName} ${formData.lastName}`,
-          email,
-          contact: formData.phone,
-        },
-        theme: {
-          color: "#3399cc",
-        },
-      };
+        setTimeout(() => {
+          navigate("/order-success");
+        }, 3000);
+        return;
+      }
   
-      const rzp = new window.Razorpay(options);
-      rzp.open();
+      // ✅ Razorpay Flow
+      if (paymentMethod === "Razorpay") {
+        const { id: order_id, amount, currency, key } = orderData.razorpayOrderDetails;
+        const fullOrderDetailsFromBackend = orderData.OrderDetails;
+  
+        const options = {
+          key,
+          amount,
+          currency,
+          name: "Beaubless Cosmetics",
+          description: "Order Payment",
+          order_id,
+          handler: function (response) {
+            sessionStorage.setItem("orderDetails", JSON.stringify(fullOrderDetailsFromBackend));
+            localStorage.removeItem("cartList");
+            navigate(`/order-success?payment_id=${response.razorpay_payment_id}`);
+          },
+          prefill: {
+            name: `${formData.firstName} ${formData.lastName}`,
+            email,
+            contact: formData.phone,
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+  
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+      }
     } catch (error) {
       console.error("Checkout error:", error);
-      showToast("error", "Something went wrong");
-    }finally {
-      setIsRazorpayIsLoading(false); // Hide loader even if there's an error
-    }is
+      showToast("error", error.response?.data?.message || "Something went wrong.");
+    } finally {
+      setIsRazorpayIsLoading(false);
+    }
   };
+  
   
   useEffect(() => {
     const script = document.createElement("script");
@@ -1295,22 +1298,73 @@ export default function Checkout() {
               <div className="wrap">
   {/* <h5 className="title">Proceed to Checkout:</h5> */}
   <form className="form-payment" onSubmit={(e) => e.preventDefault()}>
-  <button
-  onClick={() => handleCheckout({ ...formData, paymentMethod: "Razorpay" })}
-  className="tf-btn btn-reset"
-  disabled={isRazorpayLoading}
->
-  {isRazorpayLoading ? (
-    <>
-      <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-      Please wait...
-    </>
-  ) : (
-    "Proceed to Payment"
-  )}
-</button>
+  <div className="payment-box" id="payment-box">
+    {/* Cash on Delivery */}
+    <div className="payment-item">
+      <label
+        htmlFor="cod-method"
+        className="payment-header collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#cod-payment"
+        aria-controls="cod-payment"
+      >
+        <input
+          type="radio"
+          name="payment-method"
+          className="tf-check-rounded"
+          id="cod-method"
+          value="COD"
+          checked={paymentMethod === "COD"}
+          onChange={handlePaymentChange}
+        />
+        <span className="text-title">Cash on Delivery</span>
+      </label>
+      <div id="cod-payment" className="collapse" data-bs-parent="#payment-box" />
+    </div>
 
-  </form>
+    {/* Razorpay */}
+    <div className="payment-item">
+      <label
+        htmlFor="razorpay-method"
+        className="payment-header collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#razorpay-payment"
+        aria-controls="razorpay-payment"
+      >
+        <input
+          type="radio"
+          name="payment-method"
+          className="tf-check-rounded"
+          id="razorpay-method"
+          value="Razorpay"
+          checked={paymentMethod === "Razorpay"}
+          onChange={handlePaymentChange}
+        />
+        <span className="text-title">
+          <img alt="Razorpay" src="/images/payment/unnamed.png" width={40} height={18} /> Razorpay
+        </span>
+      </label>
+      <div id="razorpay-payment" className="collapse" data-bs-parent="#payment-box" />
+    </div>
+  </div>
+
+  {/* Submit Button */}
+  <button
+    onClick={() => handleCheckout({ ...formData, paymentMethod })}
+    className="tf-btn btn-reset"
+    disabled={paymentMethod === "Razorpay" && isRazorpayLoading}
+  >
+    {paymentMethod === "Razorpay" && isRazorpayLoading ? (
+      <>
+        <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        Please wait...
+      </>
+    ) : (
+      "Proceed to Payment"
+    )}
+  </button>
+</form>
+
 </div>
 
             </div>

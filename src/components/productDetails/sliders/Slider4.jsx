@@ -16,7 +16,7 @@ export default function Slider4({
   );
 
   if (items.length > 0) {
-    items[0].src =  items[0].src;
+    items[0].src = firstItem|| items[0].src;
   }
 
   useEffect(() => {
@@ -97,16 +97,27 @@ export default function Slider4({
       swiperRef.current.slideTo(slideIndex);
     }
   }, [activeVarient]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     if (swiperRef.current) {
+  //       swiperRef.current.slideTo(1);
+  //       swiperRef.current.slideTo(
+  //         items.filter((elm) => elm.variant == activeVarient)[0]?.id - 1
+  //       );
+  //     }
+  //   });
+  // }, []);
   useEffect(() => {
-    setTimeout(() => {
-      if (swiperRef.current) {
-        swiperRef.current.slideTo(1);
-        swiperRef.current.slideTo(
-          items.filter((elm) => elm.variant == activeVarient)[0]?.id - 1
-        );
-      }
-    });
+    if (!swiperRef.current || items.length === 0) return;
+  
+    const targetIndex = items.findIndex((item) => item.variant === activeVarient);
+  
+    if (targetIndex !== -1) {
+      swiperRef.current.slideTo(targetIndex);
+    }
   }, []);
+  
+  
 
   return (
     <div className="thumbs-slider">
@@ -148,7 +159,7 @@ export default function Slider4({
         className="swiper tf-product-media-main"
         id="gallery-swiper-started"
         spaceBetween={10}
-        slidesPerView={0}
+        slidesPerView={1}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[Thumbs]}
         onSwiper={(swiper) => (swiperRef.current = swiper)}
