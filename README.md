@@ -64,6 +64,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v5.0.3  |Removed Razoryapy Offer| Sunil   |
 | v5.0.4  |Changed Thak you message| Sunil   |
 | v5.0.5  |Fixed Popup Reload| Sunil   |
+| v5.0.6  |Hero section hight in responsive screen| Sunil   |
 ## Installation
 
 1. Clone the repository:

@@ -367,7 +367,7 @@ export default function Details1({ product }) {
                             <p className="text-primary">
                               Estimated Delivery:&nbsp;&nbsp;
                               {/* <span>12-26 days</span> */}
-                             <span>12-20 days</span> (India)
+                             <span>3-5 days</span> (India)
                             </p>
                           </div>
                           <div className="tf-product-info-return">
