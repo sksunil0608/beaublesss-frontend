@@ -1006,19 +1006,18 @@ export default function Checkout() {
       }
   
       // ✅ COD Flow
-      if (paymentMethod === "COD") {
+      if (paymentMethod.toLowerCase() === "cod") {
+        setIsRazorpayIsLoading(true);
         setCartProducts([]);
         localStorage.removeItem("cartList");
         showToast("success", "Order placed successfully! Pay on delivery.");
-  
-        setTimeout(() => {
-          navigate("/order-success");
-        }, 3000);
+        setIsRazorpayIsLoading(false);
+        setTimeout(() => navigate("/order-success"), 3000);
         return;
       }
   
       // ✅ Razorpay Flow
-      if (paymentMethod === "Razorpay") {
+      if (paymentMethod.toLowerCase() === "razorpay") {
         const { id: order_id, amount, currency, key } = orderData.razorpayOrderDetails;
         const fullOrderDetailsFromBackend = orderData.OrderDetails;
   
@@ -1029,10 +1028,32 @@ export default function Checkout() {
           name: "Beaubless Cosmetics",
           description: "Order Payment",
           order_id,
-          handler: function (response) {
-            sessionStorage.setItem("orderDetails", JSON.stringify(fullOrderDetailsFromBackend));
-            localStorage.removeItem("cartList");
-            navigate(`/order-success?payment_id=${response.razorpay_payment_id}`);
+          handler: async function (response) {
+            try {
+              // Save order temporarily
+              sessionStorage.setItem("orderDetails", JSON.stringify(fullOrderDetailsFromBackend));
+              localStorage.removeItem("cartList");
+  
+              // Verify payment
+              const verifyRes = await fetch(`https://www.api.beaubless.com/api/v1/order/verify-payment`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ order_id }),
+              });
+  
+              const verifyData = await verifyRes.json();
+  
+              if (verifyData?.orderStatus === "Confirmed") {
+                navigate(`/order-success?payment_id=${response.razorpay_payment_id}`);
+              } else if (verifyData?.orderStatus === "Pending") {
+                navigate(`/order-pending?payment_id=${response.razorpay_payment_id}`);
+              } else {
+                navigate(`/order-failed`);
+              }
+            } catch (err) {
+              console.error("Verification failed", err);
+              navigate("/order-failed");
+            }
           },
           prefill: {
             name: `${formData.firstName} ${formData.lastName}`,
@@ -1054,6 +1075,7 @@ export default function Checkout() {
       setIsRazorpayIsLoading(false);
     }
   };
+  
   
   
   useEffect(() => {
