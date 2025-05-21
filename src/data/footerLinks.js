@@ -15,7 +15,6 @@ export const footerLinks = [
       { label: "My Wishlist", href: "/wish-list", isLink: true },
       { label: "Order Tracking", href: "/order-tracking", isLink: true },
       { label: "Cart", href: "/cart", isLink: true },
-      { label: "Forget Password", href: "/forget-password", isLink: true },
     ],
   },
   {
