@@ -12,8 +12,8 @@ import { useParams } from "react-router-dom";
 import MetaComponent from "@/components/common/MetaComponent";
 import axios from "axios";
 const metadata = {
-  title: "Product Detail || Beaubless Cosmetics - Your Skinkare Choice",
-  description: "Beaubless Cosmetics - Your Skinkare Choice",
+  title: "Product Detail || Beaubless Cosmetics - Your Skincare Choice",
+  description: "Beaubless Cosmetics - Your Skincare Choice",
 };
 
 export default function ProductDetailPage() {
