@@ -11,8 +11,8 @@ import Products15 from "@/components/products/Products15";
 
 
 const metadata = {
-  title: "Product || Beaubless Cosmetics - Your Skinkare Choice",
-  description: "Beaubless Cosmetics - Your Skinkare Choice",
+  title: "Product || Beaubless Cosmetics - Your Skincare Choice",
+  description: "Beaubless Cosmetics - Your Skincare Choice",
 };
 export default function ShopLeftSidebarPage() {
   return (

@@ -17,7 +17,7 @@ export default function RelatedProducts() {
         >
           <li className="nav-tab-item" role="presentation">
             <a href="#ralatedProducts" className="active" data-bs-toggle="tab">
-              Ralated Products
+              Related Products
             </a>
           </li>
           <li className="nav-tab-item" role="presentation">

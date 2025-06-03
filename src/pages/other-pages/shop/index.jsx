@@ -11,8 +11,8 @@ import React from "react";
 
 import MetaComponent from "@/components/common/MetaComponent";
 const metadata = {
-  title: "Shop || Beaubless Cosmetics - Your Skinkare Choice",
-  description: "Beaubless Cosmetics - Your Skinkare Choice",
+  title: "Shop || Beaubless Cosmetics - Your Skincare Choice",
+  description: "Beaubless Cosmetics - Your Skincare Choice",
 };
 
 export default function ShopPage() {
