@@ -94,7 +94,7 @@ export default function NewsLetterModal() {
               Subscribe To Our Newletter!
             </p>
             <h5 className="text-white">
-              Receive 15% OFF your next order, exclusive offers &amp; more!
+              Receive 60% OFF your next order, exclusive offers &amp; more!
             </h5>
             <div
               className={`tfSubscribeMsg  footer-sub-element ${

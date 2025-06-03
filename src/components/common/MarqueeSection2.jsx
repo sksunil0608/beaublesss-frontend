@@ -24,7 +24,7 @@ export default function MarqueeSection2({ parentClass = "tf-marquee" }) {
           {/* 2 */}
           <div className="marquee-child-item">
             <p className="text-btn-uppercase">
-              Up to 15% OFF Code: CARE15! Shop Now!
+              Up to 60% OFF! Shop Now!
             </p>
           </div>
           <div className="marquee-child-item">
