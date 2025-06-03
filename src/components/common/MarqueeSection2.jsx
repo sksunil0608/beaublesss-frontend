@@ -15,7 +15,7 @@ export default function MarqueeSection2({ parentClass = "tf-marquee" }) {
           </div>
           <div className="marquee-child-item">
             <p className="text-btn-uppercase">
-              Flat 15% OFF on Combos!
+              Flat 60% OFF on Combos!
             </p>
           </div>
           <div className="marquee-child-item">
