@@ -70,7 +70,8 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v5.0.8  |Spelling Change| Sunil   |
 | v5.0.9  |Tag Manager Update| Sunil   |
 | v6.0.0  |In Product14 Page commented price filter| Sunil   |
-| v6.0.1  |Updated Sitemap Sunil   |
+| v6.0.1  |Updated Sitemap |Sunil   |
+| v6.0.2  |Change Razorpay name |Sunil  |
 ## Installation
 
 1. Clone the repository:

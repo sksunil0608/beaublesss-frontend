@@ -1363,7 +1363,8 @@ export default function Checkout() {
           onChange={handlePaymentChange}
         />
         <span className="text-title">
-          <img alt="Razorpay" src="/images/payment/unnamed.png" width={40} height={18} /> Razorpay
+          More way to pay<br></br>
+          <small className="text-dark fs-6">(Credit/Debit Card, UPI, Net Banking)</small>             
         </span>
       </label>
       <div id="razorpay-payment" className="collapse" data-bs-parent="#payment-box" />
