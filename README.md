@@ -72,6 +72,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v6.0.0  |In Product14 Page commented price filter| Sunil   |
 | v6.0.1  |Updated Sitemap |Sunil   |
 | v6.0.2  |Change Razorpay name |Sunil  |
+| v6.0.3  |Remove Charges in Online Payment and Add charges in COD |Sunil  |
 ## Installation
 
 1. Clone the repository:

@@ -823,7 +823,7 @@ import { useCouponsAndShipping } from "@/hooks/useCouponsAndShipping";
 
 export default function Checkout() {
   const [paymentMethods] = useState(["PhonePe", "COD"]);
-  const [paymentMethod, setPaymentMethod] = useState("COD");
+  const [paymentMethod, setPaymentMethod] = useState("Razorpay");
   const [activeDiscountIndex, setActiveDiscountIndex] = useState(1);
   const navigate = useNavigate();
   const {
@@ -1321,30 +1321,8 @@ export default function Checkout() {
   {/* <h5 className="title">Proceed to Checkout:</h5> */}
   <form className="form-payment" onSubmit={(e) => e.preventDefault()}>
   <div className="payment-box" id="payment-box">
-    {/* Cash on Delivery */}
-    <div className="payment-item">
-      <label
-        htmlFor="cod-method"
-        className="payment-header collapsed"
-        data-bs-toggle="collapse"
-        data-bs-target="#cod-payment"
-        aria-controls="cod-payment"
-      >
-        <input
-          type="radio"
-          name="payment-method"
-          className="tf-check-rounded"
-          id="cod-method"
-          value="COD"
-          checked={paymentMethod === "COD"}
-          onChange={handlePaymentChange}
-        />
-        <span className="text-title">Cash on Delivery</span>
-      </label>
-      <div id="cod-payment" className="collapse" data-bs-parent="#payment-box" />
-    </div>
 
-    {/* Razorpay */}
+      {/* Razorpay */}
     <div className="payment-item">
       <label
         htmlFor="razorpay-method"
@@ -1369,6 +1347,32 @@ export default function Checkout() {
       </label>
       <div id="razorpay-payment" className="collapse" data-bs-parent="#payment-box" />
     </div>
+
+    
+    {/* Cash on Delivery */}
+    <div className="payment-item">
+      <label
+        htmlFor="cod-method"
+        className="payment-header collapsed"
+        data-bs-toggle="collapse"
+        data-bs-target="#cod-payment"
+        aria-controls="cod-payment"
+      >
+        <input
+          type="radio"
+          name="payment-method"
+          className="tf-check-rounded"
+          id="cod-method"
+          value="COD"
+          checked={paymentMethod === "COD"}
+          onChange={handlePaymentChange}
+        />
+        <span className="text-title">Cash on Delivery</span>
+      </label>
+      <div id="cod-payment" className="collapse" data-bs-parent="#payment-box" />
+    </div>
+
+  
   </div>
 
   {/* Submit Button */}
@@ -1511,6 +1515,7 @@ export default function Checkout() {
                     products over ₹500.00
                   </p> */}
                 </div>
+                {paymentMethod === "COD" && (
                 <div className="wrap">
                   <div className="ship">
                     <h5 className="title">Shipping:</h5>
@@ -1549,8 +1554,10 @@ export default function Checkout() {
                         </fieldset>
                       ))}
                     </div>
+                     <p className="text-danger">*Free Shipping is only available on online payment*</p>
                   </div>
                 </div>
+                )}
                 <div className="sec-total-price">
                   <div className="top">
                     <div className="item d-flex align-items-center justify-content-between text-button">
