@@ -108,10 +108,10 @@ export default function Products14({ parentClass = "flat-spacing", collectionId 
       filteredArrays.push(onSale);
     }
 
-    const byPrice = products.filter(
-      (p) => p.price >= price[0] && p.price <= price[1]
-    );
-    filteredArrays.push(byPrice);
+    // const byPrice = products.filter(
+    //   (p) => p.price >= price[0] && p.price <= price[1]
+    // );
+    // filteredArrays.push(byPrice);
 
     const finalFiltered = products.filter((item) =>
       filteredArrays.every((arr) => arr.includes(item))
@@ -149,7 +149,7 @@ export default function Products14({ parentClass = "flat-spacing", collectionId 
 
     setLoading(true);
     setTimeout(() => {
-      const filteredByCategory = sorted.filter(
+      const filteredByCategory = products.filter(
         (p) => p.category === collectionId
       );
       const nextItems = filteredByCategory.slice(
@@ -162,6 +162,7 @@ export default function Products14({ parentClass = "flat-spacing", collectionId 
       setLoading(false);
     }, 800);
   };
+ 
 
   return (
     <>
