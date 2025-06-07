@@ -961,41 +961,47 @@ export default function Checkout() {
 
   const handleCheckout = async (formData) => {
     try {
-      setIsRazorpayIsLoading(true);
-  
-      let userId = isAuthorized
-        ? localStorage.getItem("userId")
-        : `guest_${Date.now()}`;
-      let email =
-        formData.email || (isAuthorized ? localStorage.getItem("userEmail") : null);
-  
-      if (!email) {
-        alert("Please provide a valid email address to proceed.");
-        setIsRazorpayIsLoading(false);
-        return;
-      }
-  
-      const orderPayload = {
-        email,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        phone: formData.phone,
-        address: {
-          country: formData.country,
-          city: formData.city,
-          state: formData.state,
-          houseNo: formData.houseNo,
-          street: formData.street,
-          pincode: formData.pincode,
-        },
-        cartProducts,
-        finalOrderTotal: finalOrderTotal ? finalOrderTotal.toFixed(2) : "0",
-        note: formData.note || "",
-        paymentMethod,
-        activeCoupon,
-        discountDetails,
-        selectedShippingOption,
-      };
+    setIsRazorpayIsLoading(true);
+
+    let userId = isAuthorized
+      ? localStorage.getItem("userId")
+      : `guest_${Date.now()}`;
+    let email =
+      formData.email || (isAuthorized ? localStorage.getItem("userEmail") : null);
+
+    if (!email) {
+      alert("Please provide a valid email address to proceed.");
+      setIsRazorpayIsLoading(false);
+      return;
+    }
+
+    // ✅ Adjust total price based on payment method
+    let calculatedTotal = totalPrice - (discountDetails[0]?.value || 0);
+    if (paymentMethod === "COD" && selectedShippingOption?.charges) {
+      calculatedTotal += selectedShippingOption.charges;
+    }
+
+    const orderPayload = {
+      email,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.phone,
+      address: {
+        country: formData.country,
+        city: formData.city,
+        state: formData.state,
+        houseNo: formData.houseNo,
+        street: formData.street,
+        pincode: formData.pincode,
+      },
+      cartProducts,
+      finalOrderTotal: calculatedTotal.toFixed(2), // ✅ use conditionally calculated total
+      note: formData.note || "",
+      paymentMethod,
+      activeCoupon,
+      discountDetails,
+      selectedShippingOption,
+    };
   
       const orderData = await createOrder(orderPayload);
   
