@@ -820,6 +820,7 @@ import { createOrder } from "@/api/order";
 import ToastNotification from "../modals/ToastNotification";
 import { useToast } from "@/context/ToastContext";
 import { useCouponsAndShipping } from "@/hooks/useCouponsAndShipping";
+import axios from "axios";
 
 export default function Checkout() {
   const [paymentMethods] = useState(["PhonePe", "COD"]);
@@ -850,6 +851,11 @@ export default function Checkout() {
   const [error, setError] = useState("");
   const [passwordType, setPasswordType] = useState("password");
 
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [cvv, setCvv] = useState("");
+  const [cardName, setCardName] = useState("");
+  const [cardHolderName, setCardHolderName] = useState('');
   const { showToast } = useToast();
   useEffect(() => {
     const fetchUserData = async () => {
@@ -953,8 +959,23 @@ export default function Checkout() {
   };
 
   const handlePaymentChange = (event) => {
-    setPaymentMethod(event.target.value);
-  };
+  const selectedMethod = event.target.value;
+  setPaymentMethod(selectedMethod);
+
+  // Calculate updated total
+  // const baseTotal = totalPrice - (discountDetails[0]?.value || 0);
+  // const shippingCharge = selectedMethod === "COD" ? 149 : 0;
+  // const updatedTotal = baseTotal + shippingCharge;
+
+  // setFinalOrderTotal(updatedTotal); // Update final total
+};
+useEffect(() => {
+  const baseTotal = totalPrice - (discountDetails[0]?.value || 0);
+  const shippingCharge = paymentMethod === "COD" ? 149 : 0;
+  const updatedTotal = baseTotal + shippingCharge;
+  setFinalOrderTotal(updatedTotal);
+}, [paymentMethod, totalPrice, discountDetails]);
+
 
   const [isRazorpayLoading, setIsRazorpayIsLoading] = useState(false);
 
@@ -980,6 +1001,8 @@ export default function Checkout() {
     if (paymentMethod === "COD" && selectedShippingOption?.charges) {
       calculatedTotal += selectedShippingOption.charges;
     }
+    console.log("calculatedTotal",calculatedTotal);
+    
 
     const orderPayload = {
       email,
@@ -1000,7 +1023,10 @@ export default function Checkout() {
       paymentMethod,
       activeCoupon,
       discountDetails,
-      selectedShippingOption,
+      selectedShippingOption: {
+    ...selectedShippingOption,
+    charges: paymentMethod === "COD" ? 149 : 0, // ✅ set charges based on payment method
+  },
     };
   
       const orderData = await createOrder(orderPayload);
