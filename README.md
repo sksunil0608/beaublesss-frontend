@@ -75,6 +75,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v6.0.3  |Remove Charges in Online Payment and Add charges in COD |Sunil  |
 | v6.0.4  |Remove Charges in Online Payment Corrected|Sunil  |
 | v6.0.5  |Razorpay update and toolbar changed|Sunil  |
+| v6.0.6  |Checkout Changed|Sunil  |
 ## Installation
 
 1. Clone the repository:
