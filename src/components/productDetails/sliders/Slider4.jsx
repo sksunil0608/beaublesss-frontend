@@ -142,14 +142,27 @@ export default function Slider4({
         {items.map((slide, index) => (
           <SwiperSlide className="swiper-slide stagger-item" key={index}>
             <div className="item">
-              <img
-                className="lazyload"
-                data-src={slide.src}
-                alt={slide.alt}
-                src={slide.src}
-                width={slide.width}
-                height={slide.height}
-              />
+              {slide.src.match(/\.(mp4)$/i) ? (
+  <video
+    muted
+    playsInline
+    preload="metadata"
+    width={slide.width}
+    height={slide.height}
+    poster={slide.poster || slide.src.replace(/\.(mp4)$/i, ".jpg")}
+    className="video-thumb"
+  />
+) : (
+  <img
+    className="lazyload"
+    data-src={slide.src}
+    alt={slide.alt}
+    src={slide.src}
+    width={slide.width}
+    height={slide.height}
+  />
+)}
+
             </div>
           </SwiperSlide>
         ))}
@@ -173,28 +186,46 @@ export default function Slider4({
           }
         }}
       >
-        {items.map((slide, index) => (
-          <SwiperSlide key={index} className="swiper-slide">
-            <a
-              href={slide.src}
-              target="_blank"
-              className="item"
-              data-pswp-width={slide.width}
-              data-pswp-height={slide.height}
-              //   onClick={() => openLightbox(index)}
-            >
-              <img
-                className="tf-image-zoom lazyload"
-                data-zoom={slide.src}
-                data-src={slide.src}
-                alt=""
-                src={slide.src}
-                width={slide.width}
-                height={slide.height}
-              />
-            </a>
-          </SwiperSlide>
-        ))}
+       {items.map((slide, index) => (
+  <SwiperSlide key={index} className="swiper-slide">
+    {slide.src.match(/\.(jpg|jpeg|png|gif|webp)$/i) ? (
+      <a
+        href={slide.src}
+        target="_blank"
+        className="item"
+        data-pswp-width={slide.width}
+        data-pswp-height={slide.height}
+      >
+        <img
+          className="tf-image-zoom lazyload"
+          data-zoom={slide.src}
+          data-src={slide.src}
+          alt=""
+          src={slide.src}
+          width={slide.width}
+          height={slide.height}
+        />
+      </a>
+    ) : slide.src.match(/\.(mp4)$/i) ? (
+      <div className="item video-wrapper">
+        <video
+  controls
+  src={slide.src}
+  width={slide.width}
+  height={slide.height}
+  className="video-slide"
+  playsInline
+  preload="metadata"
+  autoPlay
+  muted
+  loop
+  poster={slide.poster || slide.src.replace(/\.(mp4)$/i, ".jpg")}
+/>
+      </div>
+    ) : null}
+  </SwiperSlide>
+))}
+
       </Swiper>
     </div>
   );

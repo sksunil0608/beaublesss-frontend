@@ -40,7 +40,7 @@ export default function BlogDetail2({ blog }) {
                     </div>
                   </div>
                 </div>
-                <div className="image">
+                {/* <div className="image">
                   <img
                     className="lazyload"
                     data-src={blog.image[0]}
@@ -49,11 +49,18 @@ export default function BlogDetail2({ blog }) {
                     width={1275}
                     height={717}
                   />
+                </div> */}
+               <div className="content">
+                  <div
+                    className="body-text-1 mb_12"
+                    dangerouslySetInnerHTML={{ __html: blog.description }}
+                  ></div>
+                  <div
+                    className="body-text-1"
+                    dangerouslySetInnerHTML={{ __html: blog.description2 }}
+                  ></div>
                 </div>
-                <div className="content">
-                  <p className="body-text-1 mb_12">{blog.description}</p>
-                  <p className="body-text-1">{blog.description2}</p>
-                </div>
+
                 {/* <div className="group-image d-flex gap-20">
                   <div>
                     <img alt="" src={blog.imgSrc} width={623} height={468} />
@@ -128,8 +135,8 @@ export default function BlogDetail2({ blog }) {
                     </h6>
                   </div>
                 </div> */}
-                <Comments comments={blog.comments} />
-                <CommentForm />
+                {/* <Comments comments={blog.comments} />
+                <CommentForm /> */}
               </div>
             </div>
           </div>

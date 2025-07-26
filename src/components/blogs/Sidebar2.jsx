@@ -11,7 +11,7 @@ export default function Sidebar2({ blog }) {
           <div className="image">
             <img
               alt=""
-              src="/images/avatar/user-3.jpg"
+              src="https://res.cloudinary.com/dc2mqs3kv/image/upload/v1753523978/485194159_9569415016430916_6359721354571105804_n_1_sdmptc.jpg"
               width={91}
               height={113}
             />
@@ -25,13 +25,13 @@ export default function Sidebar2({ blog }) {
               </h6>
               {/* <p className="text-caption-1"></p> */}
             </div>
-            <a href="#" className="button-follow text-btn-uppercase link">
+            <a href="https://www.instagram.com/beaubless_skincare/" className="button-follow text-btn-uppercase ">
               Follow
             </a>
           </div>
         </div>
         <div className="writer-content">
-          <p>
+          <p className="text-primary">
             Beaubless Skincare is a brand born from the fusion of ancient beauty
             traditions and modern innovation. Inspired by centuries-old skincare
             practices from Japan and Korea, where beauty rituals were deeply
@@ -39,7 +39,7 @@ export default function Sidebar2({ blog }) {
             time-tested secrets to India—a country that values holistic beauty
             and self-care.
           </p>
-          <ul className="tf-social-icon">
+          {/* <ul className="tf-social-icon">
             <li>
               <a href="#" className="social-facebook">
                 <i className="icon icon-fb" />
@@ -70,7 +70,7 @@ export default function Sidebar2({ blog }) {
                 <i className="icon icon-pinterest" />
               </a>
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
       <div className="sidebar-item sidebar-relatest-post">
@@ -83,7 +83,7 @@ export default function Sidebar2({ blog }) {
                 i != 0 ? "style-row" : ""
               } hover-image `}
             >
-              <div className="image">
+              {/* <div className="image">
                 <img
                   className="lazyload"
                   alt=""
@@ -91,7 +91,7 @@ export default function Sidebar2({ blog }) {
                   width={540}
                   height={360}
                 />
-              </div>
+              </div> */}
               <div className="content">
                 <div className="meta">
                   <div className="meta-item gap-8">

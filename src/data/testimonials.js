@@ -146,32 +146,33 @@ export const testimonials4 = [
 
 export const testimonials5 = [
   {
-    id: 1,
-    author: "Ananya Mehra",
-    location: "New Delhi, India",
-    text: `"As someone with extremely sensitive skin, finding skincare that doesn’t cause breakouts or irritation has always been a challenge—until I found Beaubless. Their Hydrating Aloe Vera Gel has completely transformed my routine. It feels light, absorbs quickly, and instantly soothes any redness or dryness. I even use it under makeup and it keeps my skin calm all day. I’ve never felt more confident in my bare skin!"`,
-    avatar: "/images/avatar/user-1.jpg",
-    product: "Hydrating Aloe Vera Gel",
-    price: "₹349.00",
-  },
-  {
-    id: 2,
-    author: "Ritika Sharma",
-    location: "Jaipur, Rajasthan",
-    text: `"Beaubless is honestly a skin savior! My skin used to feel rough, dull, and dehydrated, especially during winters. But ever since I started using the Rose & Vitamin C Serum, the difference is amazing. My skin glows naturally now, and it feels so nourished and plump. What I love most is how gentle and non-sticky it is—even my mom uses it now! Highly recommend this to anyone looking for an everyday glow-up."`,
-    avatar: "/images/avatar/user-1.jpg",
-    product: "Rose & Vitamin C Serum",
-    price: "₹499.00",
-  },
-  {
-    id: 3,
-    author: "Priya Nair",
-    location: "Kochi, Kerala",
-    text: `"I’ve been on a clean beauty journey for years and tried dozens of so-called ‘natural’ products, but nothing felt as genuine as Beaubless. Their Gentle Foaming Face Wash is a dream come true—soft on the skin, smells refreshing, and leaves my face feeling clean without stripping away moisture. I’ve seen a visible reduction in breakouts and my complexion looks brighter and more balanced."`,
-    avatar: "/images/avatar/user-1.jpg",
-    product: "Gentle Foaming Face Wash",
-    price: "₹299.00",
-  },
+  id: 1,
+  author: "Tanya Gautam",
+  location: "Exceeded Expectations",
+  text: `"It's really good shampoo and conditioner — it makes my hair soft, shiny, and bouncy. The smell is so good, it lasts all day, and I genuinely feel my hair is healthier. I’m so blessed with Beaubless products❤️❤️ Definitely going to restock!"`,
+  avatar: "https://res.cloudinary.com/dc2mqs3kv/image/upload/v1753505299/tanya_mhcguh.png",
+  product: "Beaubless Frizz-Free Shampoo",
+  price: "₹349.00",
+},
+{
+  id: 2,
+  author: "Sachdeva Aman",
+  location: "Great Value",
+  text: `"I’ve been using Beaubless skin products for a while now, and honestly, I’m impressed. My skin feels cleaner, smoother, and more refreshed every day. The ingredients feel natural and safe, and the glow it gives is noticeable. Love it!"`,
+  avatar: "https://res.cloudinary.com/dc2mqs3kv/image/upload/v1753505300/aman_pw8gbm.png",
+  product: "Rose & Vitamin C Serum",
+  price: "₹499.00",
+},
+{
+  id: 3,
+  author: "Ankita Kushwaha",
+  location: "Highly Recommended",
+  text: `"Lightweight, non-greasy, and offers excellent sun protection without leaving a white cast🤩 I’ve tried many sunscreens, but this one stands out for its finish and comfort. It blends in beautifully and doesn’t clog my pores."`,
+  avatar: "https://res.cloudinary.com/dc2mqs3kv/image/upload/v1753505300/ankita_cpjkhr.png",
+  product: "Gentle Foaming Face Wash",
+  price: "₹299.00",
+}
+
 ];
 
 

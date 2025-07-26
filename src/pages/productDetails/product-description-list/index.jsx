@@ -11,6 +11,7 @@ import RelatedProducts from "@/components/productDetails/RelatedProducts";
 import MetaComponent from "@/components/common/MetaComponent";
 import Topbar from "@/components/headers/Topbar";
 import { getSingleProduct } from "@/api/product";
+import Reviews from "@/components/productDetails/descriptions/Reviews";
 
 export default function ProductDescriptionListPage() {
   const { slug } = useParams();
@@ -49,6 +50,7 @@ export default function ProductDescriptionListPage() {
       _id: prod._id,
       productId: prod._id,
       name: prod.name,
+      reasonsToLove: prod.reasonsToLove || "",
       productType: prod.productType,
       slug: prod.slug || "unknown-product",
       price:
@@ -125,9 +127,35 @@ export default function ProductDescriptionListPage() {
       <MetaComponent meta={metadata} />
       <Topbar />
       <Header1 />
-      <Breadcumb product={product} />
+      {/* <Breadcumb product={product} /> */}
       <Details1 product={product} />
       {/* <DescriptionList product={product} /> */}
+
+      {/* Reviews */}
+      <section className="">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <div className="product-description-list">
+                <div className="product-description-list-content">
+                  <div className="product-description-list-item">
+                    <h3 className="product-description-list-title text-center">
+                      Customer Reviews
+                    </h3>
+                    <div className="product-description-list-content">
+                      <div className="tab-reviews write-cancel-review-wrap">
+                        <Reviews product={product} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Reviews End */}
+
       <RelatedProducts product={product} />
       <Footer1 hasPaddingBottom />
     </>

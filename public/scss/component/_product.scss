@@ -795,23 +795,50 @@
     border-bottom: 1px solid var(--line);
     margin-bottom: 20px;
   }
-  .tf-product-info-name {
-    margin-bottom: 20px;
-    > .text {
-      color: var(--secondary-2);
-      letter-spacing: 0.1em;
-      margin-bottom: 4px;
+.tf-product-info-name {
+  margin-bottom: 20px;
+
+  > .text {
+    color: var(--secondary-2);
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+
+  .name {
+    margin-bottom: 12px;
+    font-size: 24px;
+    line-height: 2.2rem;
+
+    // Responsive font sizes for product title
+    @media (max-width: 1200px) {
+      font-size: 20px;
+      line-height: 2rem;
     }
-    .name {
-      margin-bottom: 12px;
+
+    @media (max-width: 992px) {
+      font-size: 20px;
+      line-height: 1.8rem;
     }
-    > .sub {
-      display: flex;
-      align-items: center;
-      gap: 10px 16px;
-      flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+      line-height: 1.6rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 20px;
+      line-height: 1.5rem;
     }
   }
+
+  > .sub {
+    display: flex;
+    align-items: center;
+    gap: 10px 16px;
+    flex-wrap: wrap;
+  }
+}
+
   .tf-product-info-rate {
     display: flex;
     gap: 4px;
@@ -986,13 +1013,13 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 19.52px;
-    color: var(--secondary-2);
+    color: #da9696;
     text-decoration: line-through;
     margin-right: 16px;
   }
   .badges-on-sale {
     padding: 0 8px;
-    background-color: var(--critical);
+    background-color: var(--success);
     border-radius: 999px;
     color: var(--white);
     letter-spacing: 0.1em;

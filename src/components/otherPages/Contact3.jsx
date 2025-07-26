@@ -49,12 +49,11 @@ export default function Contact3() {
   };
 
   return (
-    <section className="flat-spacing pt-0 mt-5">
+    <section className="">
       <div className="container">
         <div className="heading-section text-center">
-          <h3 className="heading text-primary">📩 Get in Touch with Us!</h3>
-          <p className="subheading">
-            Have questions or need assistance? Our team is here to help! Fill
+          <h5 className="heading text-primary mb-2">📩Our team is here to help!</h5>
+          <p className="w-full">Fill
             out the form below, and we’ll get back to you as soon as possible.
             💖
           </p>

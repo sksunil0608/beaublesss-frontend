@@ -30,7 +30,7 @@ export default function Testimonials3() {
         >
           {testimonials5.map((testimonial) => (
             <SwiperSlide className="swiper-slide" key={testimonial.id}>
-              <div className="testimonial-item style-2 style-3 bg-primary">
+              <div className="testimonial-item style-2 style-3 bg-beaubless">
               {testimonial.id === 1  && <img className="quote-mark" src="/images/logo/quote_icon.png" alt="" />}
               <div className="box-avt">
                   <div className="avatar avt-80 round ms-3">

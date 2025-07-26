@@ -44,7 +44,7 @@ export default function RelatedBlogs() {
               {blogPosts.slice(0, 5).map((post, i) => (
                 <SwiperSlide key={i} className="swiper-slide">
                   <div className="wg-blog style-1 hover-image">
-                    <div className="image">
+                    {/* <div className="image">
                       <img
                         className="lazyload"
                         alt=" "
@@ -52,7 +52,7 @@ export default function RelatedBlogs() {
                         width={615}
                         height={461}
                       />
-                    </div>
+                    </div> */}
                     <div className="content">
                       <div className="meta">
                         <div className="meta-item gap-8">
@@ -83,8 +83,9 @@ export default function RelatedBlogs() {
                           </Link>
                         </h6>
                         <div className="text-black">
-                          {post.description.split(" ").slice(0, 10).join(" ")}
-                        </div>
+  {post.description.replace(/<[^>]+>/g, '').split(" ").slice(0, 10).join(" ")}...
+</div>
+
                       </div>
                     </div>
                   </div>

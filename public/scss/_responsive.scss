@@ -84,6 +84,7 @@
     max-width: 615px;
     // margin-left: auto;
   }
+  
   .canvas-mb {
     width: 100% !important;
     max-width: 367px;
@@ -2011,7 +2012,7 @@
       padding: 40px 0;
     }
     &.has-pb {
-      padding-bottom: 165px;
+      padding-bottom: 65px;
     }
   }
   .mb-lg-30 {
@@ -2104,7 +2105,7 @@
 
 @media only screen and (max-width: 767px) {
   footer.has-pb {
-    padding-bottom: 197px;
+    padding-bottom: 57px;
   }
   .loobook-product:not(.style-row) .img-style {
     height: 120px;

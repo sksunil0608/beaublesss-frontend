@@ -272,33 +272,34 @@ export const slides7Mobile = [
 
 export const slides0 = [
   {
-    imgSrc: "/images/slider/Beaubless2.png",
+    imgSrc: "/images/slider/raksha-bandhan.jpg",
     title: "",
-    description:
-      "",
-  },  {
-    imgSrc: "/images/slider/Beaubless2.png",
-    title: "",
-    description:
-      "",
+    description: "",
+    link: "/gifting"
   },
-   
+  {
+    imgSrc: "/images/slider/Beaubless2.png",
+    title: "",
+    description: "",
+    link: "/products"
+  },
 ];
+
 export const slides0Mobile = [
-  
-   {
+  {
     imgSrc: "/images/slider/Beaubless_Mobile2.png",
     title: "",
-    description:
-      "",
-  }, {
-    imgSrc: "/images/slider/Beaubless_Mobile2.png",
-    title: "",
-    description:
-      "",
+    description: "",
+    link: "/products"
   },
-  
+  {
+    imgSrc: "/images/slider/Beaubless_Mobile2.png",
+    title: "",
+    description: "",
+    link: "/products"
+  },
 ];
+
 
 export const sliderData2 = [
   {

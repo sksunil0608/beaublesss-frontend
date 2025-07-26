@@ -8,6 +8,7 @@ import Testimonials3 from "@/components/common/Testimonials3";
 import BannerTab from "@/components/common/BannerTab";
 import KoreanInspired from "@/components/common/KoreanInspired";
 import Hero2 from "@/components/homes/cosmetic/Hero2";
+import Tiktok from "@/components/common/Tiktok";
 const BannerCollection = lazy(() =>
   import("@/components/homes/cosmetic/BannerCollection")
 );
@@ -71,6 +72,10 @@ export default function HomePage() {
       </Suspense>
       
       <Suspense fallback={<Loader />}>
+        <Tiktok />
+      </Suspense>
+
+      <Suspense fallback={<Loader />}>
         <Products3 />
       </Suspense>
 
@@ -92,13 +97,11 @@ export default function HomePage() {
         <BannerCollection />
       </Suspense>
 
-      {/* <Suspense fallback={<Loader />}>
-        <Tiktok />
-      </Suspense> */}
-      <KoreanInspired/>
-      {/* <Suspense fallback={<Loader />}>
+      
+      {/* <KoreanInspired/> */}
+      <Suspense fallback={<Loader />}>
         <Testimonials3 />
-      </Suspense> */}
+      </Suspense>
 
       <Suspense fallback={<Loader />}>
         <Features />

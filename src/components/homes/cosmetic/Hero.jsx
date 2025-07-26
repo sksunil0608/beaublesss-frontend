@@ -2,7 +2,7 @@ import { slides0, slides0Mobile, slides7, slides7Mobile } from "@/data/heroSlide
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Link } from "react-router-dom";
-import { Pagination } from "swiper/modules";
+import { Pagination,Autoplay } from "swiper/modules";
 import { useEffect, useState } from "react";
 export default function Hero() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -23,20 +23,23 @@ export default function Hero() {
         centeredSlides={false}
         spaceBetween={0}
         loop={true}
-        autoplay={false}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
         breakpoints={{
           1024: { slidesPerView: 1 },
           768: { slidesPerView: 1 },
           640: { slidesPerView: 1 },
           0: { slidesPerView: 1 },
         }}
-        modules={[Pagination]}
+        modules={[Pagination,Autoplay]}
         pagination={{ clickable: true, el: ".spd18" }}
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="wrap-slider">
-              <a href="/products">
+              <a href={slide.link}>
               <img
               alt={`fashion-slideshow-${index}`}
               src={slide.imgSrc}

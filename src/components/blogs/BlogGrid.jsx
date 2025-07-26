@@ -13,7 +13,7 @@ export default function BlogGrid() {
             <div className="tf-grid-layout md-col-3">
               {blogPosts.map((blog, index) => (
                 <div className="wg-blog style-1 hover-image" key={index}>
-                  <div className="image">
+                  {/* <div className="image">
                     <img
                       className="lazyload"
                       data-src={blog.imgSrc}
@@ -22,7 +22,7 @@ export default function BlogGrid() {
                       width={615}
                       height={461}
                     />
-                  </div>
+                  </div> */}
                   <div className="content">
                     <div className="meta">
                       <div className="meta-item gap-8">
@@ -52,7 +52,9 @@ export default function BlogGrid() {
                           {blog.title}
                         </Link>
                       </h6>
-                      <div className="text-black">{blog.description}</div>
+                      <div className="text-black">
+                        {blog.description.split(" ").slice(0, 20).join(" ")}...
+                      </div>
                     </div>
                   </div>
                 </div>

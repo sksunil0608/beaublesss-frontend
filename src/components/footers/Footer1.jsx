@@ -103,7 +103,6 @@ export default function Footer1({
                         />
                       </Link>
                     </div>
-                   
 
                     <ul
                       className={`ms-3 tf-social-icon mt-3 ${
@@ -203,7 +202,7 @@ export default function Footer1({
                     </ul>
                     <div className="tf-collapse-content mt-3">
                       <div className="footer-newsletter">
-                      <form
+                        <form
                           onSubmit={sendEmail}
                           className={`form-newsletter subscribe-form ${
                             dark ? "style-black" : ""
@@ -252,7 +251,7 @@ export default function Footer1({
                             <p style={{ color: "red" }}>Something went wrong</p>
                           )}
                         </div>
-                       
+
                         {/* <div className="tf-cart-checkbox">
                           <div className="tf-checkbox-wrapp">
                             <input
@@ -386,29 +385,63 @@ export default function Footer1({
               </div>
             </div>
           </div> */}
-          <div className={`footer-bottom ${
-                          dark ? "bg-white" : ""
-                        }`}>
+
+         
+        </div>
+         <div className={`footer-bottom ${dark ? "bg-white" : ""}`}>
             <div className="container">
-              <div className="d-flex justify-content-center align-items-center">
-                <div className="col-12 text-center">
-                  <div className="py-3 text-center">
-                    <div className="d-flex justify-content-center align-items-center">
-                      <p
-                        className={`text-black m-0 text-center ${
-                          dark ? "text-black" : ""
-                        }`}
-                      >
-                        ©{new Date().getFullYear()} Beaubless Cosmetics. All
-                        Rights Reserved.
-                      </p>
-                    </div>
-                  </div>
+              <div className="row align-items-center py-3 text-center text-md-start">
+                {/* Left side: Copyright */}
+                <div className="col-12 col-md-6 mb-2 mb-md-0">
+                  <p className={`m-0 ${dark ? "text-black" : "text-dark"}`}>
+                    ©{new Date().getFullYear()} Beaubless Cosmetics. All Rights
+                    Reserved.
+                  </p>
+                </div>
+
+                {/* Right side: Also Available On */}
+                <div className="col-12 col-md-6 text-center text-md-end">
+                  <span
+                    className={`d-block d-md-inline ${
+                      dark ? "text-black" : "text-dark"
+                    }`}
+                  >
+                    <strong>Also Available On</strong>
+                  </span>
+                  <span
+                    className={`d-block d-md-inline ${
+                      dark ? "text-black" : "text-dark"
+                    }`}
+                  >
+                    &nbsp;
+                    <a
+                      href="https://www.amazon.com/s?k=beaubless+skincare&crid=2OEOG26JCA4X4&sprefix=baubles+skincare%2Caps%2C392&ref=nb_sb_noss_2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Amazon
+                    </a>
+                    &nbsp;|&nbsp;
+                    <a
+                      href="https://www.meesho.com/search?q=beaubless%20skincare&searchType=manual&searchIdentifier=text_search"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Meesho
+                    </a>
+                    &nbsp;|&nbsp;
+                    <a
+                      href="https://www.flipkart.com/search?q=beaubless%20skincare&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Flipkart
+                    </a>
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
       </footer>
       <ScrollTop hasPaddingBottom={hasPaddingBottom} />
       <ToolbarBottom />

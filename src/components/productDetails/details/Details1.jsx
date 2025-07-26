@@ -8,8 +8,8 @@ import { useContextElement } from "@/context/Context";
 import ProductStikyBottom from "../ProductStikyBottom";
 import { useCouponsAndShipping } from "@/hooks/useCouponsAndShipping";
 import { useProductFilters } from "@/hooks/useProductFilters";
+import DescriptionList from "../descriptions/DescriptionList";
 export default function Details1({ product }) {
-
   const {
     minPrice,
     maxPrice,
@@ -226,7 +226,10 @@ export default function Details1({ product }) {
                           {console.log(product.productType)}
                           <a
                             onClick={() => {
-                              if (product.productType === "single" || product.productType === "combo") {
+                              if (
+                                product.productType === "single" ||
+                                product.productType === "combo"
+                              ) {
                                 // Directly add to cart for single product
                                 addProductToCart(
                                   product._id,
@@ -326,40 +329,6 @@ export default function Details1({ product }) {
                           </li>
                         </ul> */}
                         <div className="tf-product-info-help">
-                          {/* <div className="tf-product-info-extra-link">
-                            <a
-                              href="#delivery_return"
-                              data-bs-toggle="modal"
-                              className="tf-product-extra-icon"
-                            >
-                              <div className="icon">
-                                <i className="icon-shipping" />
-                              </div>
-                              <p className="text-caption-1">
-                                Delivery &amp; Return
-                              </p>
-                            </a>
-                            <a
-                              href="#ask_question"
-                              data-bs-toggle="modal"
-                              className="tf-product-extra-icon"
-                            >
-                              <div className="icon">
-                                <i className="icon-question" />
-                              </div>
-                              <p className="text-caption-1">Ask A Question</p>
-                            </a>
-                            <a
-                              href="#share_social"
-                              data-bs-toggle="modal"
-                              className="tf-product-extra-icon"
-                            >
-                              <div className="icon">
-                                <i className="icon-share" />
-                              </div>
-                              <p className="text-caption-1">Share</p>
-                            </a>
-                          </div> */}
                           <div className="tf-product-info-time">
                             <div className="icon">
                               <i className="icon-timer" />
@@ -367,7 +336,7 @@ export default function Details1({ product }) {
                             <p className="text-primary">
                               Estimated Delivery:&nbsp;&nbsp;
                               {/* <span>12-26 days</span> */}
-                             <span>3-5 days</span> (India)
+                              <span>3-5 days</span> (India)
                             </p>
                           </div>
                           <div className="tf-product-info-return">
@@ -376,7 +345,6 @@ export default function Details1({ product }) {
                             </div>
                             <p className="text-primary">
                               Return within <span>7 days</span> of purchase.
-                              
                             </p>
                           </div>
                           <div className="dropdown dropdown-store-location">
@@ -407,8 +375,8 @@ export default function Details1({ product }) {
                                 </div>
                                 <div>
                                   <p>
-Skin CareRaj Nagar Extension Road, Ghaziabad, Uttar Pradesh, India, 201017
-
+                                    Skin CareRaj Nagar Extension Road,
+                                    Ghaziabad, Uttar Pradesh, India, 201017
                                   </p>
                                   <p>Ghaziabad, Uttar Pradesh, India, 201017</p>
                                 </div>
@@ -416,7 +384,7 @@ Skin CareRaj Nagar Extension Road, Ghaziabad, Uttar Pradesh, India, 201017
                             </div>
                           </div>
                         </div>
-                        <div className="tf-product-info-guranteed">
+                        {/* <div className="tf-product-info-guranteed">
                           <div className="text-title">
                             Guranteed safe checkout:
                           </div>
@@ -468,6 +436,83 @@ Skin CareRaj Nagar Extension Road, Ghaziabad, Uttar Pradesh, India, 201017
                                 width={98}
                                 height={64}
                               />
+                            </a>
+                          </div>
+                        </div> */}
+                        <div className="border  rounded-xl p-2 max-w-sm inline-block rounded-3 bg-wiite  text-center">
+                          <img
+                            src="https://res.cloudinary.com/dc2mqs3kv/image/upload/v1753521633/Surprise_Gift_1_ucqkxv.png"
+                            alt="Surprise Gift"
+                            className="rounded-lg w-full h-auto rounded-2"
+                          />
+                        </div>
+
+                        <hr />
+
+                        <DescriptionList product={product} />
+                        <div className="pt-2 share tf-product-info-help">
+                          <div className="tf-product-info-extra-link">
+                            {/* <a
+                              href="#delivery_return"
+                              data-bs-toggle="modal"
+                              className="tf-product-extra-icon"
+                            >
+                              <div className="icon">
+                                <i className="icon-shipping" />
+                              </div>
+                              <p className="text-caption-1">
+                                Delivery &amp; Return
+                              </p>
+                            </a> */}
+                            <a
+                              href="/contact-us"
+                              // data-bs-toggle="modal"
+                              className="tf-product-extra-icon"
+                            >
+                              <div className="icon">
+                                <i className="icon-question" />
+                              </div>
+                              <p className="text-caption-1">Ask A Question</p>
+                            </a>
+
+                            <a
+                              href="https://wa.me/919990531210"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="tf-product-extra-icon"
+                            >
+                              <div className="icon">
+                                <i className="icon-whatsapp" />
+                              </div>
+                              <p className="text-caption-1">Chat on WhatsApp</p>
+                            </a>
+
+                            <a
+                              href="#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                if (navigator.share) {
+                                  navigator
+                                    .share({
+                                      title: document.title,
+                                      text: "Check this out!",
+                                      url: window.location.href,
+                                    })
+                                    .catch((err) =>
+                                      console.error("Share failed:", err)
+                                    );
+                                } else {
+                                  alert(
+                                    "Sharing not supported on this browser."
+                                  );
+                                }
+                              }}
+                              className="tf-product-extra-icon"
+                            >
+                              <div className="icon">
+                                <i className="icon-share" />
+                              </div>
+                              <p className="text-caption-1">Share</p>
                             </a>
                           </div>
                         </div>

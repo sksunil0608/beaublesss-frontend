@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Pagination } from "swiper/modules";
 import { use } from "react";
 import useProducts from "@/hooks/useProducts";
+import reels from "@/data/reels";
 export default function Tiktok({ parentClass = "flat-spacing pt-0" }) {
   const {products} = useProducts();
   const videoRefs = useRef([]);
@@ -34,10 +35,10 @@ export default function Tiktok({ parentClass = "flat-spacing pt-0" }) {
 
   return (
     <section className={parentClass}>
-      <div className="container pb-0">
+      <div className="container pb-0 pt-5">
         <div className="heading-section text-center wow fadeInUp">
           <h3 className="heading text-primary text-bold">
-            ✨ Discover Beauty with Beaubless ✨
+            Discover Beauty with Beaubless
           </h3>
           <p className="subheading">
             From exclusive product launches to in-depth reviews and unboxings,
@@ -57,15 +58,15 @@ export default function Tiktok({ parentClass = "flat-spacing pt-0" }) {
           modules={[Pagination]}
           pagination={{ el: ".spd456", clickable: true }}
         >
-          {products.map((slide, index) => (
+          { reels.map((slide, index) => (
             <SwiperSlide key={index}>
               <div
-                className="collection-social hover-img wow fadeInUp"
+                className="gifting-video-wrapper hover-img wow fadeInUp"
                 data-wow-delay={slide.wowDelay}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
               >
-                <img
+                {/* <img
                   alt="poster"
                   className={`poster ${
                     activeVideoIndex === index ? "hide" : ""
@@ -73,8 +74,8 @@ export default function Tiktok({ parentClass = "flat-spacing pt-0" }) {
                   src={slide.images[0]}
                   width={450}
                   height={600}
-                />
-                {/* <video
+                /> */}
+                <video
                   className="hover-video"
                   ref={(el) => (videoRefs.current[index] = el)}
                   controls
@@ -86,17 +87,17 @@ export default function Tiktok({ parentClass = "flat-spacing pt-0" }) {
                 >
                   <source src={slide.videoSrc} type="video/mp4" />
                   Your browser does not support the video tag.
-                </video> */}
+                </video>
                 <div className="cls-content">
-                  <div className="avatar avt-60 round">
+                  {/* <div className="avatar avt-60 round">
                     <img
                       alt="avatar"
                       src={slide.images[0]}
                       width={90}
                       height={90}
                     />
-                  </div>
-                  <div className="info">
+                  </div> */}
+                  {/* <div className="info">
                     <div>
                       <Link
                         to={`/products/${slide.slug}`}
@@ -108,7 +109,7 @@ export default function Tiktok({ parentClass = "flat-spacing pt-0" }) {
                     <span className="price text-button text-white">
                       ₹{slide.offerPrice.toFixed(2)}
                     </span>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </SwiperSlide>
