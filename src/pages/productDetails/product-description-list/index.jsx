@@ -50,6 +50,7 @@ export default function ProductDescriptionListPage() {
       _id: prod._id,
       productId: prod._id,
       name: prod.name,
+      setContains:prod.setContains,
       reasonsToLove: prod.reasonsToLove || "",
       productType: prod.productType,
       slug: prod.slug || "unknown-product",

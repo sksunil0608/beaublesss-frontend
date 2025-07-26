@@ -64,7 +64,7 @@ export default function Reviews({ product }) {
           </div>
           {isReviewModalOpen && (
             <SubmitReviewModal
-              productId={product.id}
+              productId={product._id}
               onClose={closeReviewModal}
             />
           )}
@@ -85,9 +85,7 @@ export default function Reviews({ product }) {
                 <div className="image">
                   <img
                     alt="User Avatar"
-                    src={`/images/avatar/${
-                      review.uid === "anonymous" ? "user-1.jpg" : "user.jpg"
-                    }`}
+                    src={`https://res.cloudinary.com/dc2mqs3kv/image/upload/v1753523978/485194159_9569415016430916_6359721354571105804_n_1_sdmptc.jpg`}
                     width={120}
                     height={120}
                   />
@@ -97,11 +95,11 @@ export default function Reviews({ product }) {
                     <h6>
                       <a href="#" className="link">
                         {review.name} <span>{review.verifiedPurchase}</span>
-                        {review.verifiedPurchase && (
+                        {/* {review.verifiedPurchase && (
                           <div className="icon">
                             <i className="icon-check" />
                           </div>
-                        )}
+                        )} */}
                         {/* {review.comment.split(" ").slice(0, 10).join(" ")} */}
                       </a>
                     </h6>

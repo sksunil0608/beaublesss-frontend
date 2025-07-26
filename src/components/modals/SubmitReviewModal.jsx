@@ -29,34 +29,48 @@ export default function SubmitReviewModal({ productId, onClose }) {
   };
 
   // Submit review when component mounts (useEffect)
-  useEffect(() => {
-    const submitReviewData = async () => {
-      if (!productId) return;
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
 
-      setError("");
-      setSuccess("");
-
-      const reviewData = {
-        product: productId,
-        uid: "guest", // Modify if user authentication exists
-        email: formData.email,
-        name: formData.name || "Anonymous",
-        userType: "guest",
-        rating: formData.rating,
-        comment: formData.comment,
-        images: formData.images.map((file) => URL.createObjectURL(file)), // Convert images to URLs
-      };
-      try {
-        const response = await submitReview(reviewData);
-        setSuccess("Review submitted successfully!");
-        console.log("Review Submitted:", response);
-      } catch (err) {
-        setError("Something went wrong. Please try again.");
-      }
+    const reviewData = {
+      product: productId,
+      uid: "guest",
+      email: formData.email,
+      name: formData.name || "Anonymous",
+      userType: "guest",
+      rating: formData.rating,
+      comment: formData.comment,
+      images: formData.images.map((file) => URL.createObjectURL(file)),
     };
 
-    submitReviewData();
-  }, [productId]); // Runs when `productId` changes
+    try {
+      const response = await submitReview(reviewData);
+      setSuccess("Review submitted successfully!");
+      console.log("Review Submitted:", response);
+
+      setFormData({
+        name: "",
+        email: "",
+        rating: 5,
+        comment: "",
+        images: [],
+        saveDetails: false,
+      });
+
+      setTimeout(() => {
+        onClose();
+      }, 1500);
+    } catch (err) {
+      console.error(err);
+      const backendError =
+        err?.response?.data?.error ||
+        err?.message ||
+        "Something went wrong. Please try again.";
+      setError(backendError);
+    }
+  };
 
   // Close modal when the escape key is pressed
   useEffect(() => {
@@ -87,9 +101,21 @@ export default function SubmitReviewModal({ productId, onClose }) {
             </button>
           </div>
           <div className="modal-body">
-            {error && <p className="text-danger">{error}</p>}
-            {success && <p className="text-success">{success}</p>}
-            <form>
+            {success && (
+              <div className="alert-box success-alert">
+                <span className="alert-icon">✅</span>
+                <p className="alert-message">{success}</p>
+              </div>
+            )}
+
+            {error && (
+              <div className="alert-box error-alert">
+                <span className="alert-icon">❌</span>
+                <p className="alert-message">{error}</p>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmitReview}>
               <div className="mb-3">
                 <label className="form-label">Your Name</label>
                 <input

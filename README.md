@@ -77,6 +77,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v6.0.5  |Razorpay update and toolbar changed|Sunil  |
 | v6.0.6  |Checkout Changed|Sunil  |
 | v6.0.7  |Gifting Section and Product Page|Sunil  |
+| v6.0.8  |Reviews Added|Sunil  |
 ## Installation
 
 1. Clone the repository:
