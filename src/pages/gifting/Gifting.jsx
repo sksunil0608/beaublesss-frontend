@@ -19,7 +19,8 @@ export default function GiftingPage() {
       <MetaComponent meta={metadata} />
       <Topbar />
       <Header1 />
-      <section className="flat-spacing py-20 flex flex-col items-center justify-center text-center">
+      
+      {/* <section className="flat-spacing py-20 flex flex-col items-center justify-center text-center">
         <div className="offer-banner">
           <div className="banner-text">
             <span className="highlight-text">Upto 20% Off</span> + Surprise Gift
@@ -27,7 +28,7 @@ export default function GiftingPage() {
         </div>
 
         <div className="">
-          {/* Responsive Image */}
+       
           <img
             src="/images/slider/raksha-bandhan.jpg"
             alt="Gifting Coming Soon"
@@ -46,7 +47,7 @@ export default function GiftingPage() {
             </p>
           </div>
         </div>
-        {/* <GiftingReels /> */}
+       
       </section>
       <hr/>
       <div>
@@ -55,7 +56,11 @@ export default function GiftingPage() {
           parentClass="flat-spacing"
           collectionId={"68846504d967c599661ed0a1"}
         />
-      </div>
+      </div> */}
+      <section className="coming-soon-wrapper flex items-center justify-center min-h-screen bg-white">
+        <h1 className="coming-soon-text">Coming Soon</h1>
+      </section>
+
       <Footer1 />
     </>
   );

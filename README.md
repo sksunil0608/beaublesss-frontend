@@ -78,6 +78,7 @@ This project is an **E-Commerce Store** built using **React** and **Vite**, desi
 | v6.0.6  |Checkout Changed|Sunil  |
 | v6.0.7  |Gifting Section and Product Page|Sunil  |
 | v6.0.8  |Reviews Added|Sunil  |
+| v6.0.9  |Removed Gifting Page and additoinal stuff in Checkout|Sunil  |
 ## Installation
 
 1. Clone the repository:

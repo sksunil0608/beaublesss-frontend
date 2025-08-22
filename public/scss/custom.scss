@@ -609,3 +609,32 @@
     line-height: 1.6;
   }
 }
+
+// Gifting Page
+/* Center Wrapper */
+.coming-soon-wrapper {
+  text-align: center;
+}
+
+/* Typewriter Coming Soon */
+.coming-soon-text {
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ff4081; /* change color as per theme */
+  border-right: .15em solid #ff4081;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 3s steps(12, end) forwards, blink .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 11ch; } /* "Coming Soon" has 11 characters */
+}
+
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: #ff4081; }
+}
