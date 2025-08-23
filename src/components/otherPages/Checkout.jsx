@@ -12,6 +12,7 @@ import ToastNotification from "../modals/ToastNotification";
 import { useToast } from "@/context/ToastContext";
 import { useCouponsAndShipping } from "@/hooks/useCouponsAndShipping";
 import axios from "axios";
+import { apiConfig } from "@/config/apiConfig";
 
 export default function Checkout() {
   const [paymentMethods] = useState(["PhonePe", "COD"]);
@@ -258,7 +259,7 @@ useEffect(() => {
               localStorage.removeItem("cartList");
   
               // Verify payment
-              const verifyRes = await fetch(`http://143.198.56.235:5000/api/v1/order/verify-payment`, {
+              const verifyRes = await fetch(`${apiConfig.baseURL}/order/verify-payment`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ order_id }),
